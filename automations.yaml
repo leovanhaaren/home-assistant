@@ -1,0 +1,56 @@
+- id: '1761994392860'
+  alias: Kitchen auto lights on
+  description: ''
+  triggers:
+  - type: present
+    device_id: e45f04da5c7be65522b9cc461336ddfe
+    entity_id: f91c67f029f24ce0eaf5a441c0490d06
+    domain: binary_sensor
+    metadata:
+      secondary: false
+    trigger: device
+  conditions:
+  - type: is_illuminance
+    condition: device
+    device_id: e45f04da5c7be65522b9cc461336ddfe
+    entity_id: 6844d66af254ea95d59d4cf066f279ff
+    domain: sensor
+    above: 1000
+    enabled: false
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data:
+      transition: 1
+    target:
+      device_id:
+      - 43d89c36bebb4a67a7f87ac05053961d
+      - cfcbbc85eb1efdd2cf8f97c1ccc25612
+  mode: single
+- id: '1761994437461'
+  alias: Kitchen auto lights off
+  description: ''
+  triggers:
+  - type: not_present
+    device_id: e45f04da5c7be65522b9cc461336ddfe
+    entity_id: f91c67f029f24ce0eaf5a441c0490d06
+    domain: binary_sensor
+    trigger: device
+  conditions:
+  - type: is_illuminance
+    condition: device
+    device_id: e45f04da5c7be65522b9cc461336ddfe
+    entity_id: 6844d66af254ea95d59d4cf066f279ff
+    domain: sensor
+    above: 1000
+    enabled: false
+  actions:
+  - action: light.turn_off
+    metadata: {}
+    data:
+      transition: 3
+    target:
+      device_id:
+      - 43d89c36bebb4a67a7f87ac05053961d
+      - cfcbbc85eb1efdd2cf8f97c1ccc25612
+  mode: single
