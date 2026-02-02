@@ -1,49 +1,79 @@
-- id: "1761994392860"
+# Kitchen auto lights - uses S1 Pro Kitchen presence sensor
+- id: kitchen_auto_lights_on
   alias: Kitchen auto lights on
-  description: ""
+  description: Turn on kitchen lights when presence detected after sunset
   triggers:
-    - type: present
-      device_id: e45f04da5c7be65522b9cc461336ddfe
-      entity_id: f91c67f029f24ce0eaf5a441c0490d06
-      domain: binary_sensor
-      metadata:
-        secondary: false
-      trigger: device
+    - trigger: state
+      entity_id: binary_sensor.s1_pro_multi_sense_614680_any_presence
+      to: "on"
   conditions:
     - condition: sun
       after: sunset
       before: sunrise
   actions:
     - action: light.turn_on
-      metadata: {}
       data:
         transition: 1
       target:
-        device_id:
-          - 43d89c36bebb4a67a7f87ac05053961d
-          - cfcbbc85eb1efdd2cf8f97c1ccc25612
+        entity_id: light.kitchen
   mode: single
-- id: "1761994437461"
+
+- id: kitchen_auto_lights_off
   alias: Kitchen auto lights off
-  description: ""
+  description: Turn off kitchen lights when no presence detected
   triggers:
-    - type: not_present
-      device_id: e45f04da5c7be65522b9cc461336ddfe
-      entity_id: f91c67f029f24ce0eaf5a441c0490d06
-      domain: binary_sensor
-      trigger: device
+    - trigger: state
+      entity_id: binary_sensor.s1_pro_multi_sense_614680_any_presence
+      to: "off"
+      for:
+        minutes: 2
   conditions: []
   actions:
     - action: light.turn_off
-      metadata: {}
       data:
         transition: 3
       target:
-        device_id:
-          - 43d89c36bebb4a67a7f87ac05053961d
-          - cfcbbc85eb1efdd2cf8f97c1ccc25612
+        entity_id: light.kitchen
   mode: single
-- id: "1767180800145"
+
+# Office desk presence - uses S1 Pro Office presence sensor
+- id: office_desk_presence_on
+  alias: Office desk presence
+  description: Turn on office lights when presence detected
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.s1_pro_multi_sense_98a998_any_presence
+      to: "on"
+  conditions:
+    - condition: sun
+      before: sunrise
+      after: sunset
+      before_offset: "-02:00:00"
+      after_offset: "-02:00:00"
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.office
+  mode: single
+
+- id: office_desk_presence_off
+  alias: Office desk no presence
+  description: Turn off office lights when no presence
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.s1_pro_multi_sense_98a998_any_presence
+      to: "off"
+      for:
+        minutes: 5
+  conditions: []
+  actions:
+    - action: light.turn_off
+      target:
+        entity_id: light.office
+  mode: single
+
+# Vacuum automation - uses existing Dreame Z60 Ultra
+- id: clean_after_knaak_toilet
   alias: Clean after Knaak Toilet
   description: Cleans his mess
   triggers: []
@@ -51,68 +81,24 @@
   actions:
     - sequence:
         - action: select.select_option
-          metadata: {}
           data:
             option: sweeping
           target:
             entity_id: select.z60_ultra_roller_complete_cleaning_mode
         - action: dreame_vacuum.vacuum_clean_segment
-          metadata: {}
           data:
             segments: 3
           target:
-            device_id: 9d7bee49671a9d5941d7100a886d013c
+            entity_id: vacuum.z60_ultra_roller_complete
   mode: single
-- id: "1768130681874"
-  alias: Office desk presence
-  description: ""
-  triggers:
-    - type: present
-      device_id: d8d8be46496ba15a10cb8aa081d2dc01
-      entity_id: 533001694d6b1e378d4c6220d3a4e23b
-      domain: binary_sensor
-      trigger: device
-  conditions:
-    - condition: sun
-      before: sunrise
-      after: sunset
-      before_offset: -02:00:00
-      after_offset: -02:00:00
-  actions:
-    - type: turn_on
-      device_id: 49ffe7cf90548386cbbac3c435ff176f
-      entity_id: 64a5d388b6f6d46d401fee696a21f2d4
-      domain: light
-  mode: single
-- id: "1768130793932"
-  alias: Office desk no presence
-  description: ""
-  triggers:
-    - type: not_present
-      device_id: d8d8be46496ba15a10cb8aa081d2dc01
-      entity_id: 533001694d6b1e378d4c6220d3a4e23b
-      domain: binary_sensor
-      trigger: device
-      for:
-        hours: 0
-        minutes: 0
-        seconds: 5
-  conditions:
-    - condition: sun
-      before: sunset
-      after: sunrise
-  actions:
-    - type: turn_off
-      device_id: 49ffe7cf90548386cbbac3c435ff176f
-      entity_id: 64a5d388b6f6d46d401fee696a21f2d4
-      domain: light
-  mode: single
+
+# Adaptive Lighting - uses existing light.living_room
 - id: adaptive_lighting_morning
   alias: Adaptive Lighting - Morning Warm Up
   description: Gradually increase brightness and color temperature in the morning
   triggers:
     - trigger: time
-      at: 06:00:00
+      at: "06:00:00"
   conditions:
     - condition: state
       entity_id: sun.sun
@@ -124,7 +110,7 @@
       data:
         brightness_pct: 30
         kelvin: 2700
-    - delay: 00:30:00
+    - delay: "00:30:00"
     - action: light.turn_on
       target:
         entity_id: light.living_room
@@ -132,6 +118,7 @@
         brightness_pct: 70
         kelvin: 4000
   mode: single
+
 - id: adaptive_lighting_evening
   alias: Adaptive Lighting - Evening Wind Down
   description: Dim lights and warm color temperature in the evening
@@ -147,6 +134,7 @@
         kelvin: 2700
         transition: 1800
   mode: single
+
 - id: adaptive_lighting_night
   alias: Adaptive Lighting - Night Mode
   description: Very dim warm lights at night
@@ -162,318 +150,52 @@
         kelvin: 2200
         transition: 900
   mode: single
-- id: room_occupancy_living_room_off
-  alias: Room Occupancy - Living Room Off
-  description: Turn off living room devices when unoccupied
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.living_room_presence
-      to: "off"
-      for:
-        minutes: 10
-  conditions: []
-  actions:
-    - action: light.turn_off
-      target:
-        area_id: living_room
-      data:
-        transition: 5
-    - action: media_player.turn_off
-      target:
-        area_id: living_room
-  mode: single
-- id: room_occupancy_bathroom_off
-  alias: Room Occupancy - Bathroom Off
-  description: Turn off bathroom lights and fan when unoccupied
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.bathroom_presence
-      to: "off"
-      for:
-        minutes: 5
-  conditions: []
-  actions:
-    - action: light.turn_off
-      target:
-        area_id: bathroom
-    - action: fan.turn_off
-      target:
-        area_id: bathroom
-  mode: single
-- id: morning_routine
-  alias: Morning Routine
-  description: Gradual wake up routine with lights and optional notifications
-  triggers:
-    - trigger: time
-      at: 06:30:00
-  conditions:
-    - condition: time
-      weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
-  actions:
-    - action: light.turn_on
-      target:
-        entity_id: light.bedroom
-      data:
-        brightness_pct: 10
-        kelvin: 2700
-    - delay: 00:05:00
-    - action: light.turn_on
-      target:
-        entity_id: light.bedroom
-      data:
-        brightness_pct: 30
-        kelvin: 3500
-        transition: 300
-    - delay: 00:10:00
-    - action: light.turn_on
-      target:
-        entity_id: light.bedroom
-      data:
-        brightness_pct: 70
-        kelvin: 5000
-        transition: 300
-    - action: notify.mobile_app_your_phone
-      data:
-        title: Good Morning!
-        message: Time to start your day
-  mode: single
-- id: morning_routine_weekend
-  alias: Morning Routine - Weekend
-  description: Later and gentler wake up on weekends
-  triggers:
-    - trigger: time
-      at: 08:00:00
-  conditions:
-    - condition: time
-      weekday:
-        - sat
-        - sun
-  actions:
-    - action: light.turn_on
-      target:
-        entity_id: light.bedroom
-      data:
-        brightness_pct: 20
-        kelvin: 3000
-        transition: 600
-  mode: single
-- id: bedtime_routine
-  alias: Bedtime Routine
-  description: Prepare the house for sleep
-  triggers:
-    - trigger: time
-      at: "23:00:00"
-  conditions: []
-  actions:
-    - action: light.turn_off
-      target:
-        entity_id: all
-      data:
-        transition: 10
-    - action: lock.lock
-      target:
-        entity_id: lock.front_door
-    - action: cover.close_cover
-      target:
-        entity_id: cover.garage_door
-    - action: climate.set_temperature
-      target:
-        entity_id: climate.thermostat
-      data:
-        temperature: 19
-    - action: notify.mobile_app_your_phone
-      data:
-        title: Goodnight
-        message: House secured - all doors locked, lights off
-  mode: single
-- id: bedtime_routine_manual
-  alias: Bedtime Routine - Manual Trigger
-  description: Trigger bedtime routine manually via input_boolean
-  triggers:
-    - trigger: state
-      entity_id: input_boolean.bedtime_mode
-      to: "on"
-  conditions: []
-  actions:
-    - action: light.turn_off
-      target:
-        entity_id: all
-      data:
-        transition: 5
-    - action: lock.lock
-      target:
-        entity_id: lock.front_door
-    - delay: 00:00:05
-    - action: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.bedtime_mode
-  mode: single
+
+# Laundry notifications - uses existing washing machine and dryer sensors
 - id: laundry_washer_done
   alias: Laundry - Washer Finished
-  description: Notify when washing machine cycle completes (power drops)
+  description: Notify when washing machine cycle completes
   triggers:
-    - trigger: numeric_state
-      entity_id: sensor.washer_power
-      below: 5
+    - trigger: state
+      entity_id: binary_sensor.washing_machine_running
+      from: "on"
+      to: "off"
       for:
-        minutes: 3
-  conditions:
-    - condition: numeric_state
-      entity_id: sensor.washer_power
-      above: 0
+        minutes: 2
+  conditions: []
   actions:
-    - action: notify.mobile_app_your_phone
+    - action: notify.mobile_app_leos_iphone
       data:
         title: Laundry Done!
         message: The washing machine has finished. Don't forget to move clothes to dryer!
         data:
           tag: laundry_washer
-          priority: high
+          push:
+            sound:
+              name: default
+              critical: 0
   mode: single
+
 - id: laundry_dryer_done
   alias: Laundry - Dryer Finished
-  description: Notify when dryer cycle completes (power drops)
+  description: Notify when dryer cycle completes
   triggers:
-    - trigger: numeric_state
-      entity_id: sensor.dryer_power
-      below: 5
+    - trigger: state
+      entity_id: binary_sensor.dryer_running
+      from: "on"
+      to: "off"
       for:
-        minutes: 3
-  conditions:
-    - condition: numeric_state
-      entity_id: sensor.dryer_power
-      above: 0
+        minutes: 2
+  conditions: []
   actions:
-    - action: notify.mobile_app_your_phone
+    - action: notify.mobile_app_leos_iphone
       data:
         title: Dryer Done!
         message: The dryer has finished. Time to fold!
         data:
           tag: laundry_dryer
-          priority: high
-  mode: single
-- id: laundry_reminder
-  alias: Laundry - Reminder if not moved
-  description: Remind again if washer finished but clothes not moved
-  triggers:
-    - trigger: state
-      entity_id: sensor.washer_power
-      to: "0"
-      for:
-        minutes: 30
-  conditions: []
-  actions:
-    - action: notify.mobile_app_your_phone
-      data:
-        title: Laundry Reminder
-        message: Clothes are still in the washer! They might start to smell.
-        data:
-          tag: laundry_reminder
-          priority: high
-  mode: single
-- id: low_battery_alert
-  alias: Low Battery Alert
-  description: Alert when any device battery drops below 20%
-  triggers:
-    - trigger: numeric_state
-      entity_id:
-        - sensor.front_door_sensor_battery
-        - sensor.motion_sensor_battery
-        - sensor.window_sensor_battery
-      below: 20
-  conditions: []
-  actions:
-    - action: notify.mobile_app_your_phone
-      data:
-        title: Low Battery Warning
-        message:
-          "{{ trigger.to_state.attributes.friendly_name }} battery is at {{ trigger.to_state.state
-          }}%"
-        data:
-          tag: battery_{{ trigger.entity_id }}
-          priority: default
-  mode: parallel
-  max: 10
-- id: critical_battery_alert
-  alias: Critical Battery Alert
-  description: Urgent alert when any device battery drops below 10%
-  triggers:
-    - trigger: numeric_state
-      entity_id:
-        - sensor.front_door_sensor_battery
-        - sensor.motion_sensor_battery
-        - sensor.window_sensor_battery
-      below: 10
-  conditions: []
-  actions:
-    - action: notify.mobile_app_leos_iphone
-      data: {}
-    - action: persistent_notification.create
-      data:
-        title: Critical Battery
-        message: "{{ trigger.to_state.attributes.friendly_name }} needs battery replacement"
-        notification_id: battery_{{ trigger.entity_id }}
-  mode: parallel
-  max: 10
-- id: garbage_day_reminder
-  alias: Garbage Day Reminder - Night Before
-  description: Remind to take out trash the night before collection
-  triggers:
-    - trigger: time
-      at: "19:00:00"
-  conditions:
-    - condition: time
-      weekday:
-        - sun
-  actions:
-    - action: notify.mobile_app_your_phone
-      data:
-        title: Garbage Day Tomorrow!
-        message: Don't forget to take out the trash and recycling bins tonight.
-        data:
-          tag: garbage_reminder
-          priority: default
-  mode: single
-- id: garbage_day_morning_reminder
-  alias: Garbage Day Reminder - Morning
-  description: Morning reminder if bins not taken out
-  triggers:
-    - trigger: time
-      at: 07:00:00
-  conditions:
-    - condition: time
-      weekday:
-        - mon
-  actions:
-    - action: notify.mobile_app_your_phone
-      data:
-        title: Garbage Day!
-        message: Garbage truck coming today - bins should be out!
-        data:
-          tag: garbage_reminder_morning
-          priority: high
-  mode: single
-- id: recycling_day_reminder
-  alias: Recycling Day Reminder
-  description: Remind about recycling if different from garbage day
-  triggers:
-    - trigger: time
-      at: "19:00:00"
-  conditions:
-    - condition: time
-      weekday:
-        - wed
-  actions:
-    - action: notify.mobile_app_your_phone
-      data:
-        title: Recycling Day Tomorrow!
-        message: Don't forget to put out the recycling bin.
-        data:
-          tag: recycling_reminder
-          priority: default
+          push:
+            sound:
+              name: default
+              critical: 0
   mode: single
