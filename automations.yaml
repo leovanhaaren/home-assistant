@@ -624,3 +624,38 @@
         data:
           tag: vacuum_maintenance
   mode: single
+
+# Presence duration tracking - record arrival times
+- id: leo_arrived_home_tracker
+  alias: Leo Arrived Home Tracker
+  description: Record timestamp when Leo arrives home
+  triggers:
+    - trigger: state
+      entity_id: person.leo
+      from: not_home
+      to: home
+  conditions: []
+  actions:
+    - action: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.leo_arrived_home
+      data:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+  mode: single
+
+- id: kardi_arrived_home_tracker
+  alias: Kardi Arrived Home Tracker
+  description: Record timestamp when Kardi arrives home
+  triggers:
+    - trigger: state
+      entity_id: person.kardi
+      from: not_home
+      to: home
+  conditions: []
+  actions:
+    - action: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.kardi_arrived_home
+      data:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+  mode: single

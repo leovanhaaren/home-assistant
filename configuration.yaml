@@ -1,6 +1,109 @@
-
 # Loads default set of integrations. Do not remove.
 default_config:
+
+# Input datetime helpers to track when users arrive home
+input_datetime:
+  leo_arrived_home:
+    name: Leo Arrived Home
+    has_date: true
+    has_time: true
+  kardi_arrived_home:
+    name: Kardi Arrived Home
+    has_date: true
+    has_time: true
+
+# Template sensors to show presence duration
+template:
+  - sensor:
+      - name: "Leo Presence Duration"
+        unique_id: leo_presence_duration
+        state: >
+          {% if is_state('person.leo', 'home') %}
+            {% set arrived = states('input_datetime.leo_arrived_home') %}
+            {% if arrived not in ['unknown', 'unavailable', ''] %}
+              {% set arrival_time = as_datetime(arrived) %}
+              {% if arrival_time %}
+                {% set duration = now() - arrival_time %}
+                {% set hours = (duration.total_seconds() // 3600) | int %}
+                {% set minutes = ((duration.total_seconds() % 3600) // 60) | int %}
+                {% if hours > 0 %}
+                  {{ hours }}h {{ minutes }}m
+                {% else %}
+                  {{ minutes }}m
+                {% endif %}
+              {% else %}
+                Unknown
+              {% endif %}
+            {% else %}
+              Just arrived
+            {% endif %}
+          {% else %}
+            Away
+          {% endif %}
+        icon: mdi:home-clock
+        attributes:
+          arrival_time: "{{ states('input_datetime.leo_arrived_home') }}"
+          total_minutes: >
+            {% if is_state('person.leo', 'home') %}
+              {% set arrived = states('input_datetime.leo_arrived_home') %}
+              {% if arrived not in ['unknown', 'unavailable', ''] %}
+                {% set arrival_time = as_datetime(arrived) %}
+                {% if arrival_time %}
+                  {{ ((now() - arrival_time).total_seconds() / 60) | int }}
+                {% else %}
+                  0
+                {% endif %}
+              {% else %}
+                0
+              {% endif %}
+            {% else %}
+              0
+            {% endif %}
+
+      - name: "Kardi Presence Duration"
+        unique_id: kardi_presence_duration
+        state: >
+          {% if is_state('person.kardi', 'home') %}
+            {% set arrived = states('input_datetime.kardi_arrived_home') %}
+            {% if arrived not in ['unknown', 'unavailable', ''] %}
+              {% set arrival_time = as_datetime(arrived) %}
+              {% if arrival_time %}
+                {% set duration = now() - arrival_time %}
+                {% set hours = (duration.total_seconds() // 3600) | int %}
+                {% set minutes = ((duration.total_seconds() % 3600) // 60) | int %}
+                {% if hours > 0 %}
+                  {{ hours }}h {{ minutes }}m
+                {% else %}
+                  {{ minutes }}m
+                {% endif %}
+              {% else %}
+                Unknown
+              {% endif %}
+            {% else %}
+              Just arrived
+            {% endif %}
+          {% else %}
+            Away
+          {% endif %}
+        icon: mdi:home-clock
+        attributes:
+          arrival_time: "{{ states('input_datetime.kardi_arrived_home') }}"
+          total_minutes: >
+            {% if is_state('person.kardi', 'home') %}
+              {% set arrived = states('input_datetime.kardi_arrived_home') %}
+              {% if arrived not in ['unknown', 'unavailable', ''] %}
+                {% set arrival_time = as_datetime(arrived) %}
+                {% if arrival_time %}
+                  {{ ((now() - arrival_time).total_seconds() / 60) | int }}
+                {% else %}
+                  0
+                {% endif %}
+              {% else %}
+                0
+              {% endif %}
+            {% else %}
+              0
+            {% endif %}
 
 # Load frontend themes from the themes folder
 frontend:
