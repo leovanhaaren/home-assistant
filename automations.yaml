@@ -261,7 +261,6 @@
           - cover.rs100_solar_io_bedroom
           - cover.rs100_solar_io_office
           - cover.rs100_solar_io_palace
-          - cover.sunea40_solar_io_kitchen
   mode: single
 
 # Morning blinds - open blinds at sunrise
@@ -285,26 +284,6 @@
     - action: cover.open_cover
       target:
         entity_id:
-          - cover.rs100_solar_io_bedroom
-          - cover.rs100_solar_io_office
-          - cover.rs100_solar_io_palace
-          - cover.sunea40_solar_io_kitchen
-  mode: single
-
-# Evening blinds - close blinds at sunset
-- id: evening_blinds_close
-  alias: Evening - Close Blinds
-  description: Close all blinds at sunset
-  initial_state: false
-  triggers:
-    - trigger: sun
-      event: sunset
-      offset: "00:15:00"
-  conditions: []
-  actions:
-    - action: cover.close_cover
-      target:
-        entity_id:
           - cover.rs100_solar_io_attic
           - cover.rs100_solar_io_bathroom
           - cover.rs100_solar_io_bedroom
@@ -312,6 +291,27 @@
           - cover.rs100_solar_io_palace
           - cover.sunea40_solar_io_kitchen
   mode: single
+
+# Evening blinds - close blinds at sunset
+# - id: evening_blinds_close
+#   alias: Evening - Close Blinds
+#   description: Close all blinds at sunset
+#   initial_state: false
+#   triggers:
+#     - trigger: sun
+#       event: sunset
+#       offset: "00:15:00"
+#   conditions: []
+#   actions:
+#     - action: cover.close_cover
+#       target:
+#         entity_id:
+#           - cover.rs100_solar_io_attic
+#           - cover.rs100_solar_io_bathroom
+#           - cover.rs100_solar_io_bedroom
+#           - cover.rs100_solar_io_office
+#           - cover.rs100_solar_io_palace
+#   mode: single
 
 # Living room presence - turn on lights when presence detected in palace
 - id: palace_auto_lights_on
