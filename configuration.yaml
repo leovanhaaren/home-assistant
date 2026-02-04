@@ -43,7 +43,7 @@ template:
           {% if is_state('person.leo', 'home') %}
             {% set arrived = states('input_datetime.leo_arrived_home') %}
             {% if arrived not in ['unknown', 'unavailable', ''] %}
-              {% set arrival_time = as_datetime(arrived) %}
+              {% set arrival_time = as_datetime(arrived) | as_local %}
               {% if arrival_time %}
                 {% set duration = now() - arrival_time %}
                 {% set hours = (duration.total_seconds() // 3600) | int %}
@@ -69,7 +69,7 @@ template:
             {% if is_state('person.leo', 'home') %}
               {% set arrived = states('input_datetime.leo_arrived_home') %}
               {% if arrived not in ['unknown', 'unavailable', ''] %}
-                {% set arrival_time = as_datetime(arrived) %}
+                {% set arrival_time = as_datetime(arrived) | as_local %}
                 {% if arrival_time %}
                   {{ ((now() - arrival_time).total_seconds() / 60) | int }}
                 {% else %}
@@ -88,7 +88,7 @@ template:
           {% if is_state('person.kardi', 'home') %}
             {% set arrived = states('input_datetime.kardi_arrived_home') %}
             {% if arrived not in ['unknown', 'unavailable', ''] %}
-              {% set arrival_time = as_datetime(arrived) %}
+              {% set arrival_time = as_datetime(arrived) | as_local %}
               {% if arrival_time %}
                 {% set duration = now() - arrival_time %}
                 {% set hours = (duration.total_seconds() // 3600) | int %}
@@ -114,7 +114,7 @@ template:
             {% if is_state('person.kardi', 'home') %}
               {% set arrived = states('input_datetime.kardi_arrived_home') %}
               {% if arrived not in ['unknown', 'unavailable', ''] %}
-                {% set arrival_time = as_datetime(arrived) %}
+                {% set arrival_time = as_datetime(arrived) | as_local %}
                 {% if arrival_time %}
                   {{ ((now() - arrival_time).total_seconds() / 60) | int }}
                 {% else %}
