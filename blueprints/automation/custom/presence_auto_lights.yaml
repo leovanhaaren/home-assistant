@@ -134,6 +134,9 @@ actions:
       - conditions:
           - condition: trigger
             id: presence_off
+          - condition: state
+            entity_id: !input presence_sensor
+            state: "off"
         sequence:
           - action: light.turn_off
             target: !input light_target
