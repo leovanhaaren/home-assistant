@@ -29,6 +29,7 @@
   actions:
     - action: light.turn_on
       data:
+        brightness_pct: "{{ states('sensor.time_aware_brightness') | int }}"
         transition: 1
       target:
         entity_id: light.kitchen
@@ -78,6 +79,8 @@
         {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
   actions:
     - action: light.turn_on
+      data:
+        brightness_pct: "{{ states('sensor.time_aware_brightness') | int }}"
       target:
         entity_id: light.office
   mode: single
@@ -288,7 +291,7 @@
       target:
         entity_id: light.living_room
       data:
-        brightness_pct: 70
+        brightness_pct: "{{ states('sensor.time_aware_brightness') | int }}"
         kelvin: 3000
   mode: single
 
@@ -390,6 +393,7 @@
   actions:
     - action: light.turn_on
       data:
+        brightness_pct: "{{ states('sensor.time_aware_brightness') | int }}"
         transition: 1
       target:
         entity_id: light.palace
@@ -422,7 +426,7 @@
 # -----------------------------------------------------------------------------
 - id: bedroom_auto_lights_on
   alias: Bedroom auto lights on
-  description: Turn on bedroom lights when presence detected after sunset
+  description: Turn on bedroom lights when presence detected after sunset (until 10pm)
   triggers:
     - trigger: state
       entity_id: binary_sensor.s1_pro_multi_sense_96e7b0_any_presence
@@ -431,6 +435,8 @@
     - condition: state
       entity_id: input_boolean.bedroom_auto_lights
       state: "on"
+    - condition: time
+      before: "22:00:00"
     - condition: template
       value_template: >
         {% set offset = states('input_number.sunset_offset') | int %}
@@ -439,7 +445,7 @@
   actions:
     - action: light.turn_on
       data:
-        brightness_pct: 50
+        brightness_pct: "{{ [states('sensor.time_aware_brightness') | int, 70] | min }}"
         kelvin: 2700
         transition: 1
       target:
@@ -734,7 +740,7 @@
       target:
         entity_id: light.staircase
       data:
-        brightness_pct: 50
+        brightness_pct: "{{ states('sensor.time_aware_brightness') | int }}"
     - delay:
         minutes: 3
     - action: light.turn_off

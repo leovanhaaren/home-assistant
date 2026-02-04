@@ -34,9 +34,60 @@ input_datetime:
     has_date: true
     has_time: true
 
-# Template sensors to show presence duration
+# Template sensors to show presence duration and time-aware brightness
 template:
   - sensor:
+      - name: "Time Aware Brightness"
+        unique_id: time_aware_brightness
+        unit_of_measurement: "%"
+        state: >
+          {% set hour = now().hour %}
+          {% set minute = now().minute %}
+          {% set time_decimal = hour + (minute / 60) %}
+          {# Brightness curve:
+             06:00-17:00: 100% (daytime, though lights usually off due to sun)
+             17:00-19:00: 90-100% (early evening, brightest)
+             19:00-21:00: 70-90% (evening wind-down starts)
+             21:00-22:00: 50-70% (late evening)
+             22:00-23:00: 30-50% (pre-bedtime)
+             23:00-06:00: 15-30% (night mode)
+          #}
+          {% if 6 <= time_decimal < 17 %}
+            100
+          {% elif 17 <= time_decimal < 19 %}
+            {{ (100 - ((time_decimal - 17) * 5)) | round(0) }}
+          {% elif 19 <= time_decimal < 21 %}
+            {{ (90 - ((time_decimal - 19) * 10)) | round(0) }}
+          {% elif 21 <= time_decimal < 22 %}
+            {{ (70 - ((time_decimal - 21) * 20)) | round(0) }}
+          {% elif 22 <= time_decimal < 23 %}
+            {{ (50 - ((time_decimal - 22) * 20)) | round(0) }}
+          {% else %}
+            {# 23:00-06:00 night mode #}
+            {% if time_decimal >= 23 %}
+              {{ (30 - ((time_decimal - 23) * 15)) | round(0) | max(15) }}
+            {% else %}
+              15
+            {% endif %}
+          {% endif %}
+        icon: mdi:brightness-auto
+        attributes:
+          period: >
+            {% set hour = now().hour %}
+            {% if 6 <= hour < 17 %}
+              Daytime
+            {% elif 17 <= hour < 19 %}
+              Early Evening
+            {% elif 19 <= hour < 21 %}
+              Evening
+            {% elif 21 <= hour < 22 %}
+              Late Evening
+            {% elif 22 <= hour < 23 %}
+              Pre-Bedtime
+            {% else %}
+              Night
+            {% endif %}
+
       - name: "Leo Presence Duration"
         unique_id: leo_presence_duration
         state: >
