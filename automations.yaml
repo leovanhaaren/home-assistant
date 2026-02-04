@@ -606,52 +606,29 @@
         - binary_sensor.s1_pro_multi_sense_96e7b0_any_presence
         - binary_sensor.s1_pro_multi_sense_98a968_any_presence
       to: "on"
-      id: presence_on
-    - trigger: state
-      entity_id:
-        - binary_sensor.s1_pro_multi_sense_98a998_any_presence
-        - binary_sensor.s1_pro_multi_sense_614680_any_presence
-        - binary_sensor.s1_pro_multi_sense_96e7b0_any_presence
-        - binary_sensor.s1_pro_multi_sense_98a968_any_presence
-      to: "off"
-      for:
-        minutes: 5
-      id: presence_off
   conditions:
     - condition: state
       entity_id: input_boolean.staircase_transitional_light
       state: "on"
+    - condition: template
+      value_template: >
+        {% set offset = states('input_number.sunset_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
   actions:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: presence_on
-            - condition: template
-              value_template: >
-                {% set offset = states('input_number.sunset_offset') | int %}
-                {% set elevation_threshold = offset * 0.25 %}
-                {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
-          sequence:
-            - action: light.turn_on
-              target:
-                entity_id: light.staircase
-              data:
-                brightness_pct: "{{ states('sensor.time_aware_brightness') | int }}"
-        - conditions:
-            - condition: trigger
-              id: presence_off
-            - condition: template
-              value_template: >
-                {{ is_state('binary_sensor.s1_pro_multi_sense_98a998_any_presence', 'off') and
-                   is_state('binary_sensor.s1_pro_multi_sense_614680_any_presence', 'off') and
-                   is_state('binary_sensor.s1_pro_multi_sense_96e7b0_any_presence', 'off') and
-                   is_state('binary_sensor.s1_pro_multi_sense_98a968_any_presence', 'off') }}
-          sequence:
-            - action: light.turn_off
-              target:
-                entity_id: light.staircase
-              data:
-                transition: 3
+    - action: light.turn_on
+      target:
+        entity_id: light.staircase
+      data:
+        brightness_pct: "{{ states('sensor.office_ceiling_brightness') | int }}"
+        kelvin: 2700
+    - delay:
+        minutes: 5
+    - action: light.turn_off
+      target:
+        entity_id: light.staircase
+      data:
+        transition: 3
   mode: restart
 
 # -----------------------------------------------------------------------------
