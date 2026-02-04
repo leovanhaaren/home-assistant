@@ -158,27 +158,27 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "Light Off Countdowns",
+                  "heading": "Presence Light Timers",
                   "heading_style": "title",
-                  "icon": "mdi:timer-sand"
+                  "icon": "mdi:timer-outline"
                 },
                 {
-                  "type": "custom:simple-timer-card",
+                  "type": "tile",
                   "entity": "timer.kitchen_light_off",
                   "name": "Kitchen"
                 },
                 {
-                  "type": "custom:simple-timer-card",
+                  "type": "tile",
                   "entity": "timer.office_light_off",
                   "name": "Office"
                 },
                 {
-                  "type": "custom:simple-timer-card",
+                  "type": "tile",
                   "entity": "timer.palace_light_off",
                   "name": "Palace"
                 },
                 {
-                  "type": "custom:simple-timer-card",
+                  "type": "tile",
                   "entity": "timer.bedroom_light_off",
                   "name": "Bedroom"
                 }
