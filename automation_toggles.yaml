@@ -57,10 +57,10 @@ morning_blinds:
   icon: mdi:blinds-open
   initial: false
 
-# evening_blinds:
-#   name: "Evening Blinds Close"
-#   icon: mdi:blinds
-#   initial: false
+evening_blinds:
+  name: "Evening Blinds Close"
+  icon: mdi:blinds
+  initial: false
 
 # -----------------------------------------------------------------------------
 # Room Auto Lights

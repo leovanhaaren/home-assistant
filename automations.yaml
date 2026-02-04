@@ -371,6 +371,31 @@
   mode: single
 
 # -----------------------------------------------------------------------------
+# Evening Blinds
+# Toggle: input_boolean.evening_blinds (default: off)
+# -----------------------------------------------------------------------------
+- id: evening_blinds_close
+  alias: Evening - Close Blinds
+  description: Close all blinds at 9pm
+  triggers:
+    - trigger: time
+      at: "21:00:00"
+  conditions:
+    - condition: state
+      entity_id: input_boolean.evening_blinds
+      state: "on"
+  actions:
+    - action: cover.close_cover
+      target:
+        entity_id:
+          - cover.rs100_solar_io_attic
+          # - cover.rs100_solar_io_bathroom
+          - cover.rs100_solar_io_bedroom
+          - cover.rs100_solar_io_office
+          # - cover.rs100_solar_io_palace
+  mode: single
+
+# -----------------------------------------------------------------------------
 # Palace Auto Lights
 # Toggle: input_boolean.palace_auto_lights (default: off)
 # -----------------------------------------------------------------------------
