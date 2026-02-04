@@ -70,6 +70,12 @@
                   "entity": "sensor.time_aware_brightness",
                   "name": "Auto Brightness",
                   "color": "yellow"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.office_ceiling_brightness",
+                  "name": "Office Ceiling",
+                  "color": "orange"
                 }
               ]
             },
@@ -268,6 +274,11 @@
                   "type": "tile",
                   "entity": "automation.office_desk_no_presence",
                   "name": "Office Lights Off"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.office_ceiling_evening_dimming",
+                  "name": "Ceiling Evening Dim"
                 }
               ]
             },

@@ -816,3 +816,33 @@
       data:
         datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
   mode: single
+
+# -----------------------------------------------------------------------------
+# Office Ceiling Evening Dimming
+# Dims the office ceiling light twice as fast as other office lights
+# Toggle: input_boolean.office_auto_lights (uses same toggle as office auto lights)
+# -----------------------------------------------------------------------------
+- id: office_ceiling_evening_dimming
+  alias: Office Ceiling Evening Dimming
+  description: Dim office ceiling twice as fast as other office lights in the evening
+  triggers:
+    - trigger: state
+      entity_id: sensor.office_ceiling_brightness
+  conditions:
+    - condition: state
+      entity_id: input_boolean.office_auto_lights
+      state: "on"
+    - condition: state
+      entity_id: light.officeceiling
+      state: "on"
+    - condition: time
+      after: "17:00:00"
+      before: "23:00:00"
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.officeceiling
+      data:
+        brightness_pct: "{{ states('sensor.office_ceiling_brightness') | int }}"
+        transition: 60
+  mode: single
