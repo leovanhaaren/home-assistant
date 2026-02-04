@@ -21,9 +21,11 @@
     - condition: state
       entity_id: input_boolean.kitchen_auto_lights
       state: "on"
-    - condition: sun
-      after: sunset
-      before: sunrise
+    - condition: template
+      value_template: >
+        {% set offset = states('input_number.sunset_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
   actions:
     - action: light.turn_on
       data:
@@ -69,11 +71,11 @@
     - condition: state
       entity_id: input_boolean.office_auto_lights
       state: "on"
-    - condition: sun
-      before: sunrise
-      after: sunset
-      before_offset: "-02:00:00"
-      after_offset: "-02:00:00"
+    - condition: template
+      value_template: >
+        {% set offset = states('input_number.sunset_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
   actions:
     - action: light.turn_on
       target:
@@ -138,8 +140,11 @@
     - condition: state
       entity_id: input_boolean.adaptive_lighting
       state: "on"
-    - condition: sun
-      before: sunrise
+    - condition: template
+      value_template: >
+        {% set offset = states('input_number.sunrise_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
   actions:
     - action: light.turn_on
       target:
@@ -273,9 +278,11 @@
     - condition: state
       entity_id: input_boolean.welcome_home_lights
       state: "on"
-    - condition: sun
-      after: sunset
-      before: sunrise
+    - condition: template
+      value_template: >
+        {% set offset = states('input_number.sunset_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
   actions:
     - action: light.turn_on
       target:
@@ -332,9 +339,11 @@
   alias: Morning - Open Blinds
   description: Open all blinds at sunrise on weekdays
   triggers:
-    - trigger: sun
-      event: sunrise
-      offset: "00:30:00"
+    - trigger: template
+      value_template: >
+        {% set offset = states('input_number.sunrise_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float >= elevation_threshold and state_attr('sun.sun', 'rising') }}
   conditions:
     - condition: state
       entity_id: input_boolean.morning_blinds
@@ -373,9 +382,11 @@
     - condition: state
       entity_id: input_boolean.palace_auto_lights
       state: "on"
-    - condition: sun
-      after: sunset
-      before: sunrise
+    - condition: template
+      value_template: >
+        {% set offset = states('input_number.sunset_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
   actions:
     - action: light.turn_on
       data:
@@ -420,9 +431,11 @@
     - condition: state
       entity_id: input_boolean.bedroom_auto_lights
       state: "on"
-    - condition: sun
-      after: sunset
-      before: sunrise
+    - condition: template
+      value_template: >
+        {% set offset = states('input_number.sunset_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
   actions:
     - action: light.turn_on
       data:
@@ -569,9 +582,11 @@
     - condition: state
       entity_id: light.living_room
       state: "on"
-    - condition: sun
-      after: sunset
-      before: sunrise
+    - condition: template
+      value_template: >
+        {% set offset = states('input_number.sunset_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
   actions:
     - action: light.turn_on
       target:
@@ -600,9 +615,11 @@
     - condition: state
       entity_id: light.living_room
       state: "on"
-    - condition: sun
-      after: sunset
-      before: sunrise
+    - condition: template
+      value_template: >
+        {% set offset = states('input_number.sunset_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
   actions:
     - action: light.turn_on
       target:
@@ -621,9 +638,11 @@
   alias: Outdoor Lights - Sunset
   description: Turn on outdoor lights at sunset
   triggers:
-    - trigger: sun
-      event: sunset
-      offset: "-00:15:00"
+    - trigger: template
+      value_template: >
+        {% set offset = states('input_number.sunset_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float <= elevation_threshold and not state_attr('sun.sun', 'rising') }}
   conditions:
     - condition: state
       entity_id: input_boolean.outdoor_lights
@@ -702,9 +721,11 @@
     - condition: state
       entity_id: input_boolean.staircase_transitional_light
       state: "on"
-    - condition: sun
-      after: sunset
-      before: sunrise
+    - condition: template
+      value_template: >
+        {% set offset = states('input_number.sunset_offset') | int %}
+        {% set elevation_threshold = offset * 0.25 %}
+        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
     - condition: state
       entity_id: light.staircase
       state: "off"

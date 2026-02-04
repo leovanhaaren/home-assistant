@@ -16,6 +16,39 @@
               "cards": [
                 {
                   "type": "heading",
+                  "heading": "Sun Offsets",
+                  "heading_style": "title",
+                  "icon": "mdi:weather-sunset"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.sunset_offset",
+                  "name": "Sunset Offset",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ]
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.sunrise_offset",
+                  "name": "Sunrise Offset",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
                   "heading": "Special Modes",
                   "heading_style": "title",
                   "icon": "mdi:home-switch"
