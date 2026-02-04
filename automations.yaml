@@ -19,6 +19,7 @@
       light_target:
         entity_id: light.kitchen
       toggle_entity: input_boolean.kitchen_auto_lights
+      countdown_timer: timer.kitchen_light_off
       no_presence_wait: 1
       turn_on_transition: 1
       turn_off_transition: 3
@@ -33,6 +34,7 @@
       light_target:
         entity_id: light.office
       toggle_entity: input_boolean.office_auto_lights
+      countdown_timer: timer.office_light_off
       no_presence_wait: 1
       turn_on_transition: 1
       turn_off_transition: 3
@@ -47,6 +49,7 @@
       light_target:
         entity_id: light.palace
       toggle_entity: input_boolean.palace_auto_lights
+      countdown_timer: timer.palace_light_off
       no_presence_wait: 1
       turn_on_transition: 1
       turn_off_transition: 3
@@ -61,6 +64,7 @@
       light_target:
         entity_id: light.bedroom
       toggle_entity: input_boolean.bedroom_auto_lights
+      countdown_timer: timer.bedroom_light_off
       no_presence_wait: 1
       turn_on_transition: 1
       turn_off_transition: 5

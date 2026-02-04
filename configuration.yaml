@@ -4,6 +4,21 @@ default_config:
 # Automation enable/disable toggles
 input_boolean: !include automation_toggles.yaml
 
+# Timers for presence auto lights countdown
+timer:
+  kitchen_light_off:
+    name: Kitchen Light Off Timer
+    icon: mdi:timer-outline
+  office_light_off:
+    name: Office Light Off Timer
+    icon: mdi:timer-outline
+  palace_light_off:
+    name: Palace Light Off Timer
+    icon: mdi:timer-outline
+  bedroom_light_off:
+    name: Bedroom Light Off Timer
+    icon: mdi:timer-outline
+
 # Sun offset helpers for automations (in minutes, negative = before, positive = after)
 input_number:
   sunrise_offset:

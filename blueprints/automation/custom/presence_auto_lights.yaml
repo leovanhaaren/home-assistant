@@ -3,6 +3,7 @@ blueprint:
   description: >
     Turn on lights when presence is detected after sunset, turn off when no presence.
     Uses time-aware brightness and respects a toggle input_boolean.
+    Includes a countdown timer for dashboard display.
   domain: automation
   author: Leo
   input:
@@ -27,6 +28,13 @@ blueprint:
         entity:
           filter:
             domain: input_boolean
+    countdown_timer:
+      name: Countdown Timer
+      description: Timer entity to track the countdown before lights turn off
+      selector:
+        entity:
+          filter:
+            domain: timer
     no_presence_wait:
       name: No presence wait time
       description: Time to wait after no presence before turning off lights
@@ -83,6 +91,7 @@ variables:
   max_brightness_var: !input max_brightness
   color_temp_var: !input color_temp
   time_limit_var: !input time_limit_before
+  no_presence_wait_var: !input no_presence_wait
 
 mode: restart
 max_exceeded: silent
@@ -95,9 +104,12 @@ triggers:
   - trigger: state
     entity_id: !input presence_sensor
     to: "off"
-    for:
-      minutes: !input no_presence_wait
     id: presence_off
+  - trigger: event
+    event_type: timer.finished
+    event_data:
+      entity_id: !input countdown_timer
+    id: timer_finished
 
 conditions:
   - condition: state
@@ -118,6 +130,9 @@ actions:
             value_template: >
               {{ now().strftime('%H:%M:%S') < time_limit_var }}
         sequence:
+          - action: timer.cancel
+            target:
+              entity_id: !input countdown_timer
           - action: light.turn_on
             target: !input light_target
             data:
@@ -134,6 +149,16 @@ actions:
       - conditions:
           - condition: trigger
             id: presence_off
+        sequence:
+          - action: timer.start
+            target:
+              entity_id: !input countdown_timer
+            data:
+              duration:
+                minutes: "{{ no_presence_wait_var }}"
+      - conditions:
+          - condition: trigger
+            id: timer_finished
           - condition: state
             entity_id: !input presence_sensor
             state: "off"

@@ -158,6 +158,37 @@
               "cards": [
                 {
                   "type": "heading",
+                  "heading": "Light Off Countdowns",
+                  "heading_style": "title",
+                  "icon": "mdi:timer-sand"
+                },
+                {
+                  "type": "custom:simple-timer-card",
+                  "entity": "timer.kitchen_light_off",
+                  "name": "Kitchen"
+                },
+                {
+                  "type": "custom:simple-timer-card",
+                  "entity": "timer.office_light_off",
+                  "name": "Office"
+                },
+                {
+                  "type": "custom:simple-timer-card",
+                  "entity": "timer.palace_light_off",
+                  "name": "Palace"
+                },
+                {
+                  "type": "custom:simple-timer-card",
+                  "entity": "timer.bedroom_light_off",
+                  "name": "Bedroom"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
                   "heading": "Home & Away",
                   "heading_style": "title",
                   "icon": "mdi:home-account"
