@@ -123,3 +123,16 @@ phone_battery_alert:
 presence_tracking:
   name: "Presence Duration Tracking"
   icon: mdi:home-clock
+
+# -----------------------------------------------------------------------------
+# Special Modes
+# -----------------------------------------------------------------------------
+vacation_mode:
+  name: "Vacation Mode"
+  icon: mdi:airplane
+  initial: false
+
+guest_mode:
+  name: "Guest Mode"
+  icon: mdi:account-multiple
+  initial: false

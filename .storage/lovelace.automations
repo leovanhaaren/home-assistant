@@ -1,0 +1,431 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.automations",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Automations",
+          "type": "sections",
+          "max_columns": 4,
+          "icon": "mdi:robot",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Special Modes",
+                  "heading_style": "title",
+                  "icon": "mdi:home-switch"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.vacation_mode",
+                  "name": "Vacation Mode",
+                  "color": "amber"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.guest_mode",
+                  "name": "Guest Mode",
+                  "color": "cyan"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Lighting Automations",
+                  "heading_style": "title",
+                  "icon": "mdi:lightbulb-auto"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.kitchen_auto_lights",
+                  "name": "Kitchen Auto Lights"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.office_auto_lights",
+                  "name": "Office Auto Lights"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.palace_auto_lights",
+                  "name": "Palace Auto Lights"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.bedroom_auto_lights",
+                  "name": "Bedroom Auto Lights"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.staircase_transitional_light",
+                  "name": "Staircase Transitional"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.adaptive_lighting",
+                  "name": "Adaptive Lighting"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.outdoor_lights",
+                  "name": "Outdoor Lights"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.tv_movie_mode",
+                  "name": "TV Movie Mode"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Home & Away",
+                  "heading_style": "title",
+                  "icon": "mdi:home-account"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.welcome_home_lights",
+                  "name": "Welcome Home Lights"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.goodbye_all_off",
+                  "name": "Goodbye - All Off"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.morning_blinds",
+                  "name": "Morning Blinds"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.presence_tracking",
+                  "name": "Presence Tracking"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Vacuum Automations",
+                  "heading_style": "title",
+                  "icon": "mdi:robot-vacuum"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.daily_vacuum",
+                  "name": "Daily Vacuum"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.vacuum_notifications",
+                  "name": "Vacuum Notifications"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Notifications",
+                  "heading_style": "title",
+                  "icon": "mdi:bell"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.laundry_notifications",
+                  "name": "Laundry Notifications"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.phone_battery_alert",
+                  "name": "Phone Battery Alert"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Automation Status",
+          "type": "sections",
+          "max_columns": 4,
+          "icon": "mdi:list-status",
+          "path": "status",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Kitchen Automations",
+                  "heading_style": "title",
+                  "icon": "mdi:countertop"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.kitchen_auto_lights_on",
+                  "name": "Kitchen Lights On"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.kitchen_auto_lights_off",
+                  "name": "Kitchen Lights Off"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Office Automations",
+                  "heading_style": "title",
+                  "icon": "mdi:desk"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.office_desk_presence",
+                  "name": "Office Lights On"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.office_desk_no_presence",
+                  "name": "Office Lights Off"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Palace Automations",
+                  "heading_style": "title",
+                  "icon": "mdi:floor-lamp"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.palace_auto_lights_on",
+                  "name": "Palace Lights On"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.palace_auto_lights_off",
+                  "name": "Palace Lights Off"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Bedroom Automations",
+                  "heading_style": "title",
+                  "icon": "mdi:bed"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.bedroom_auto_lights_on",
+                  "name": "Bedroom Lights On"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.bedroom_auto_lights_off",
+                  "name": "Bedroom Lights Off"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Adaptive Lighting",
+                  "heading_style": "title",
+                  "icon": "mdi:theme-light-dark"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.adaptive_lighting_morning_warm_up",
+                  "name": "Morning Warm Up"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.adaptive_lighting_evening_wind_down",
+                  "name": "Evening Wind Down"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.adaptive_lighting_night_mode",
+                  "name": "Night Mode"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Home & Away",
+                  "heading_style": "title",
+                  "icon": "mdi:home-account"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.welcome_home_lights_on",
+                  "name": "Welcome Home"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.goodbye_all_off",
+                  "name": "Goodbye All Off"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.morning_open_blinds",
+                  "name": "Morning Blinds"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Staircase & Outdoor",
+                  "heading_style": "title",
+                  "icon": "mdi:stairs"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.staircase_transitional_light",
+                  "name": "Staircase Light"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.outdoor_lights_sunset",
+                  "name": "Outdoor Sunset"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.outdoor_lights_off_at_night",
+                  "name": "Outdoor Night Off"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "TV & Movie Mode",
+                  "heading_style": "title",
+                  "icon": "mdi:television"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.tv_movie_mode",
+                  "name": "TV Movie Mode"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.tv_pause_brighten_lights",
+                  "name": "TV Pause Brighten"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Vacuum Automations",
+                  "heading_style": "title",
+                  "icon": "mdi:robot-vacuum"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.daily_vacuum_when_away",
+                  "name": "Daily Vacuum"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.vacuum_error_notification",
+                  "name": "Vacuum Error"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.vacuum_maintenance_reminder",
+                  "name": "Vacuum Maintenance"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Notifications",
+                  "heading_style": "title",
+                  "icon": "mdi:bell"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.laundry_washer_finished",
+                  "name": "Washer Done"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.laundry_dryer_finished",
+                  "name": "Dryer Done"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.low_phone_battery_alert",
+                  "name": "Low Battery"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Presence Tracking",
+                  "heading_style": "title",
+                  "icon": "mdi:home-clock"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.leo_arrived_home_tracker",
+                  "name": "Leo Arrival"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.kardi_arrived_home_tracker",
+                  "name": "Kardi Arrival"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

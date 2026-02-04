@@ -5,6 +5,15 @@
   "data": {
     "items": [
       {
+        "id": "automations",
+        "icon": "mdi:robot",
+        "title": "Automations",
+        "url_path": "automations",
+        "show_in_sidebar": true,
+        "require_admin": false,
+        "mode": "storage"
+      },
+      {
         "id": "map",
         "icon": "mdi:map",
         "title": "Map",
