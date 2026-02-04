@@ -10,7 +10,8 @@ __pycache__
 
 # Directory (contents) ignores
 .cloud
-.storage
+.storage/*
+!.storage/lovelace*
 deps
 
 # Specific file ignores

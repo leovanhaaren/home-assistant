@@ -1,0 +1,556 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.devices",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Devices",
+          "type": "sections",
+          "max_columns": 4,
+          "icon": "mdi:devices",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Lights",
+                  "heading_style": "title",
+                  "icon": "mdi:lightbulb-group"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.living_room",
+                  "name": "Living Room"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.bedroom",
+                  "name": "Bedroom"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.kitchen",
+                  "name": "Kitchen"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.office",
+                  "name": "Office"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.palace",
+                  "name": "Palace"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.bathroom",
+                  "name": "Bathroom"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.attic",
+                  "name": "Attic"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.staircase",
+                  "name": "Staircase"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.couch",
+                  "name": "Couch"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.kitchen_window",
+                  "name": "Kitchen Window"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.hue_resonate_outdoor_wall_1",
+                  "name": "Outdoor Wall 1"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.hue_resonate_outdoor_wall_2",
+                  "name": "Outdoor Wall 2"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Blinds",
+                  "heading_style": "title",
+                  "icon": "mdi:blinds"
+                },
+                {
+                  "type": "tile",
+                  "entity": "cover.rs100_solar_io_attic",
+                  "name": "Attic"
+                },
+                {
+                  "type": "tile",
+                  "entity": "cover.rs100_solar_io_bathroom",
+                  "name": "Bathroom"
+                },
+                {
+                  "type": "tile",
+                  "entity": "cover.rs100_solar_io_bedroom",
+                  "name": "Bedroom"
+                },
+                {
+                  "type": "tile",
+                  "entity": "cover.rs100_solar_io_office",
+                  "name": "Office"
+                },
+                {
+                  "type": "tile",
+                  "entity": "cover.rs100_solar_io_palace",
+                  "name": "Palace"
+                },
+                {
+                  "type": "tile",
+                  "entity": "cover.sunea40_solar_io_kitchen",
+                  "name": "Kitchen"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Vacuums",
+                  "heading_style": "title",
+                  "icon": "mdi:robot-vacuum"
+                },
+                {
+                  "type": "tile",
+                  "entity": "vacuum.z60_ultra_roller_complete",
+                  "name": "Truus (Dreame Z60)"
+                },
+                {
+                  "type": "tile",
+                  "entity": "vacuum.roborock_s7_maxv",
+                  "name": "Roborock S7 MaxV"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Laundry",
+                  "heading_style": "title",
+                  "icon": "mdi:washing-machine"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.washing_machine_state",
+                  "name": "Washing Machine"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.washing_machine_program",
+                  "name": "Washer Program"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.washing_machine_time_remaining",
+                  "name": "Washer Time Left"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.dryer_state",
+                  "name": "Dryer"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.dryer_program",
+                  "name": "Dryer Program"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.dryer_time_remaining",
+                  "name": "Dryer Time Left"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Media",
+                  "heading_style": "title",
+                  "icon": "mdi:television"
+                },
+                {
+                  "type": "tile",
+                  "entity": "media_player.livingroom_tv_2",
+                  "name": "Living Room TV"
+                },
+                {
+                  "type": "tile",
+                  "entity": "media_player.av_samsung_soundbar_q990b_2",
+                  "name": "Soundbar Q990B"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Energy",
+                  "heading_style": "title",
+                  "icon": "mdi:lightning-bolt"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.p1_meter_power",
+                  "name": "Current Power"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.p1_meter_energy_import",
+                  "name": "Total Energy"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.watermeter_total_water_usage",
+                  "name": "Total Water"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.watermeter_water_usage",
+                  "name": "Current Water"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Water Leak Sensors",
+                  "heading_style": "title",
+                  "icon": "mdi:water-alert"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.watersensor1_water_leak",
+                  "name": "Water Sensor 1"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.watersensor2_water_leak",
+                  "name": "Water Sensor 2"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Motion & Presence",
+                  "heading_style": "title",
+                  "icon": "mdi:motion-sensor"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.s1_pro_multi_sense_98a968_any_presence",
+                  "name": "Palace Presence"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.s1_pro_multi_sense_614680_any_presence",
+                  "name": "Kitchen Presence"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.s1_pro_multi_sense_98a998_any_presence",
+                  "name": "Office Presence"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.s1_pro_multi_sense_96e7b0_any_presence",
+                  "name": "Bedroom Presence"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Personal Devices",
+          "type": "sections",
+          "max_columns": 4,
+          "icon": "mdi:cellphone",
+          "path": "personal",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Leo",
+                  "heading_style": "title",
+                  "icon": "mdi:account"
+                },
+                {
+                  "type": "tile",
+                  "entity": "person.leo",
+                  "name": "Leo"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.leo_presence_duration",
+                  "name": "Presence Duration"
+                },
+                {
+                  "type": "tile",
+                  "entity": "device_tracker.leos_iphone",
+                  "name": "iPhone"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.leos_iphone_battery_level",
+                  "name": "iPhone Battery"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.leos_iphone_watch_battery_level",
+                  "name": "Watch Battery"
+                },
+                {
+                  "type": "tile",
+                  "entity": "device_tracker.leos_macbook_pro",
+                  "name": "MacBook Pro"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Kardi",
+                  "heading_style": "title",
+                  "icon": "mdi:account"
+                },
+                {
+                  "type": "tile",
+                  "entity": "person.kardi",
+                  "name": "Kardi"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.kardi_presence_duration",
+                  "name": "Presence Duration"
+                },
+                {
+                  "type": "tile",
+                  "entity": "device_tracker.kardelen_iphone_u",
+                  "name": "iPhone"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.kardelen_iphone_u_battery_level",
+                  "name": "iPhone Battery"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Network",
+          "type": "sections",
+          "max_columns": 4,
+          "icon": "mdi:lan",
+          "path": "network",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "UniFi Devices",
+                  "heading_style": "title",
+                  "icon": "mdi:router-wireless"
+                },
+                {
+                  "type": "tile",
+                  "entity": "button.cloud_gateway_ultra_restart",
+                  "name": "Cloud Gateway Ultra"
+                },
+                {
+                  "type": "tile",
+                  "entity": "button.u7_pro_restart",
+                  "name": "U7 Pro Access Point"
+                },
+                {
+                  "type": "tile",
+                  "entity": "button.u7_lite_restart",
+                  "name": "U7 Lite Access Point"
+                },
+                {
+                  "type": "tile",
+                  "entity": "button.usw_flex_2_5g_5_restart",
+                  "name": "USW Flex 2.5G Switch"
+                },
+                {
+                  "type": "tile",
+                  "entity": "button.usw_flex_mini_restart",
+                  "name": "USW Flex Mini 1"
+                },
+                {
+                  "type": "tile",
+                  "entity": "button.usw_flex_mini_restart_2",
+                  "name": "USW Flex Mini 2"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Smart Home Infrastructure",
+                  "heading_style": "title",
+                  "icon": "mdi:home-automation"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.zigbee2mqtt_bridge_connection_state",
+                  "name": "Zigbee2MQTT"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.p1_meter_wi_fi_ssid",
+                  "name": "P1 Meter WiFi"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.watermeter_wi_fi_ssid",
+                  "name": "Watermeter WiFi"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "System",
+          "type": "sections",
+          "max_columns": 4,
+          "icon": "mdi:cog",
+          "path": "system",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Home Assistant Updates",
+                  "heading_style": "title",
+                  "icon": "mdi:update"
+                },
+                {
+                  "type": "tile",
+                  "entity": "update.home_assistant_core_update",
+                  "name": "HA Core"
+                },
+                {
+                  "type": "tile",
+                  "entity": "update.home_assistant_supervisor_update",
+                  "name": "Supervisor"
+                },
+                {
+                  "type": "tile",
+                  "entity": "update.home_assistant_operating_system_update",
+                  "name": "OS"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Add-on Updates",
+                  "heading_style": "title",
+                  "icon": "mdi:puzzle"
+                },
+                {
+                  "type": "tile",
+                  "entity": "update.zigbee2mqtt_update",
+                  "name": "Zigbee2MQTT"
+                },
+                {
+                  "type": "tile",
+                  "entity": "update.mosquitto_broker_update",
+                  "name": "Mosquitto"
+                },
+                {
+                  "type": "tile",
+                  "entity": "update.music_assistant_update",
+                  "name": "Music Assistant"
+                },
+                {
+                  "type": "tile",
+                  "entity": "update.matter_server_update",
+                  "name": "Matter Server"
+                },
+                {
+                  "type": "tile",
+                  "entity": "update.advanced_ssh_web_terminal_update",
+                  "name": "SSH Terminal"
+                },
+                {
+                  "type": "tile",
+                  "entity": "update.studio_code_server_update",
+                  "name": "Code Server"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Backups",
+                  "heading_style": "title",
+                  "icon": "mdi:backup-restore"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.backup_backup_manager_state",
+                  "name": "Backup State"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.backup_last_successful_automatic_backup",
+                  "name": "Last Backup"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.backup_next_scheduled_automatic_backup",
+                  "name": "Next Backup"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
