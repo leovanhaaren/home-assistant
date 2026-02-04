@@ -139,7 +139,7 @@
       entity_id: input_boolean.adaptive_lighting
       state: "on"
     - condition: sun
-      state: below_horizon
+      before: sunrise
   actions:
     - action: light.turn_on
       target:
