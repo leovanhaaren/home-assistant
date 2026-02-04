@@ -1,6 +1,9 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
+# Automation enable/disable toggles
+input_boolean: !include automation_toggles.yaml
+
 # Input datetime helpers to track when users arrive home
 input_datetime:
   leo_arrived_home:

@@ -1,4 +1,15 @@
-# Kitchen auto lights - uses S1 Pro Kitchen presence sensor
+# =============================================================================
+# AUTOMATIONS
+# =============================================================================
+# Each automation checks its toggle in input_boolean before running.
+# Enable/disable automations via Settings > Helpers or your dashboard.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Kitchen Auto Lights
+# Uses S1 Pro Kitchen presence sensor
+# Toggle: input_boolean.kitchen_auto_lights
+# -----------------------------------------------------------------------------
 - id: kitchen_auto_lights_on
   alias: Kitchen auto lights on
   description: Turn on kitchen lights when presence detected after sunset
@@ -7,6 +18,9 @@
       entity_id: binary_sensor.s1_pro_multi_sense_614680_any_presence
       to: "on"
   conditions:
+    - condition: state
+      entity_id: input_boolean.kitchen_auto_lights
+      state: "on"
     - condition: sun
       after: sunset
       before: sunrise
@@ -27,7 +41,10 @@
       to: "off"
       for:
         minutes: 2
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.kitchen_auto_lights
+      state: "on"
   actions:
     - action: light.turn_off
       data:
@@ -36,7 +53,11 @@
         entity_id: light.kitchen
   mode: single
 
-# Office desk presence - uses S1 Pro Office presence sensor
+# -----------------------------------------------------------------------------
+# Office Desk Presence
+# Uses S1 Pro Office presence sensor
+# Toggle: input_boolean.office_auto_lights
+# -----------------------------------------------------------------------------
 - id: office_desk_presence_on
   alias: Office desk presence
   description: Turn on office lights when presence detected
@@ -45,6 +66,9 @@
       entity_id: binary_sensor.s1_pro_multi_sense_98a998_any_presence
       to: "on"
   conditions:
+    - condition: state
+      entity_id: input_boolean.office_auto_lights
+      state: "on"
     - condition: sun
       before: sunrise
       after: sunset
@@ -65,14 +89,21 @@
       to: "off"
       for:
         minutes: 5
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.office_auto_lights
+      state: "on"
   actions:
     - action: light.turn_off
       target:
         entity_id: light.office
   mode: single
 
-# Vacuum automation - uses existing Dreame Z60 Ultra
+# -----------------------------------------------------------------------------
+# Vacuum Automation
+# Uses existing Dreame Z60 Ultra
+# No toggle (manual trigger only)
+# -----------------------------------------------------------------------------
 - id: clean_after_knaak_toilet
   alias: Clean after Knaak Toilet
   description: Cleans his mess
@@ -92,7 +123,11 @@
             entity_id: vacuum.z60_ultra_roller_complete
   mode: single
 
-# Adaptive Lighting - uses existing light.living_room
+# -----------------------------------------------------------------------------
+# Adaptive Lighting
+# Uses existing light.living_room
+# Toggle: input_boolean.adaptive_lighting
+# -----------------------------------------------------------------------------
 - id: adaptive_lighting_morning
   alias: Adaptive Lighting - Morning Warm Up
   description: Gradually increase brightness and color temperature in the morning
@@ -101,7 +136,9 @@
       at: "06:00:00"
   conditions:
     - condition: state
-      entity_id: sun.sun
+      entity_id: input_boolean.adaptive_lighting
+      state: "on"
+    - condition: sun
       state: below_horizon
   actions:
     - action: light.turn_on
@@ -125,6 +162,10 @@
   triggers:
     - trigger: time
       at: "20:00:00"
+  conditions:
+    - condition: state
+      entity_id: input_boolean.adaptive_lighting
+      state: "on"
   actions:
     - action: light.turn_on
       target:
@@ -141,6 +182,10 @@
   triggers:
     - trigger: time
       at: "22:00:00"
+  conditions:
+    - condition: state
+      entity_id: input_boolean.adaptive_lighting
+      state: "on"
   actions:
     - action: light.turn_on
       target:
@@ -151,7 +196,11 @@
         transition: 900
   mode: single
 
-# Laundry notifications - uses existing washing machine and dryer sensors
+# -----------------------------------------------------------------------------
+# Laundry Notifications
+# Uses existing washing machine and dryer sensors
+# Toggle: input_boolean.laundry_notifications
+# -----------------------------------------------------------------------------
 - id: laundry_washer_done
   alias: Laundry - Washer Finished
   description: Notify when washing machine cycle completes
@@ -162,7 +211,10 @@
       to: "off"
       for:
         minutes: 2
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.laundry_notifications
+      state: "on"
   actions:
     - action: notify.mobile_app_leos_iphone
       data:
@@ -186,7 +238,10 @@
       to: "off"
       for:
         minutes: 2
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.laundry_notifications
+      state: "on"
   actions:
     - action: notify.mobile_app_leos_iphone
       data:
@@ -200,15 +255,13 @@
               critical: 0
   mode: single
 
-# =============================================================================
-# RECOMMENDED AUTOMATIONS - Disabled by default
-# =============================================================================
-
-# Welcome home - turn on lights when arriving after dark
+# -----------------------------------------------------------------------------
+# Welcome Home
+# Toggle: input_boolean.welcome_home_lights (default: off)
+# -----------------------------------------------------------------------------
 - id: welcome_home_lights
   alias: Welcome Home - Lights On
   description: Turn on living room lights when someone arrives home after sunset
-  initial_state: false
   triggers:
     - trigger: state
       entity_id:
@@ -217,6 +270,9 @@
       from: not_home
       to: home
   conditions:
+    - condition: state
+      entity_id: input_boolean.welcome_home_lights
+      state: "on"
     - condition: sun
       after: sunset
       before: sunrise
@@ -229,18 +285,23 @@
         kelvin: 3000
   mode: single
 
-# Goodbye - turn off lights and close blinds when everyone leaves
+# -----------------------------------------------------------------------------
+# Goodbye - All Off
+# Toggle: input_boolean.goodbye_all_off (default: off)
+# -----------------------------------------------------------------------------
 - id: goodbye_all_off
   alias: Goodbye - All Off
   description: Turn off all lights and close blinds when everyone leaves home
-  initial_state: false
   triggers:
     - trigger: state
       entity_id: zone.home
       to: "0"
       for:
         minutes: 5
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.goodbye_all_off
+      state: "on"
   actions:
     - action: light.turn_off
       target:
@@ -263,16 +324,21 @@
           - cover.rs100_solar_io_palace
   mode: single
 
-# Morning blinds - open blinds at sunrise
+# -----------------------------------------------------------------------------
+# Morning Blinds
+# Toggle: input_boolean.morning_blinds (default: off)
+# -----------------------------------------------------------------------------
 - id: morning_blinds_open
   alias: Morning - Open Blinds
   description: Open all blinds at sunrise on weekdays
-  initial_state: false
   triggers:
     - trigger: sun
       event: sunrise
       offset: "00:30:00"
   conditions:
+    - condition: state
+      entity_id: input_boolean.morning_blinds
+      state: "on"
     - condition: time
       weekday:
         - mon
@@ -292,37 +358,21 @@
           - cover.sunea40_solar_io_kitchen
   mode: single
 
-# Evening blinds - close blinds at sunset
-# - id: evening_blinds_close
-#   alias: Evening - Close Blinds
-#   description: Close all blinds at sunset
-#   initial_state: false
-#   triggers:
-#     - trigger: sun
-#       event: sunset
-#       offset: "00:15:00"
-#   conditions: []
-#   actions:
-#     - action: cover.close_cover
-#       target:
-#         entity_id:
-#           - cover.rs100_solar_io_attic
-#           - cover.rs100_solar_io_bathroom
-#           - cover.rs100_solar_io_bedroom
-#           - cover.rs100_solar_io_office
-#           - cover.rs100_solar_io_palace
-#   mode: single
-
-# Living room presence - turn on lights when presence detected in palace
+# -----------------------------------------------------------------------------
+# Palace Auto Lights
+# Toggle: input_boolean.palace_auto_lights (default: off)
+# -----------------------------------------------------------------------------
 - id: palace_auto_lights_on
   alias: Palace auto lights on
   description: Turn on palace lights when presence detected after sunset
-  initial_state: false
   triggers:
     - trigger: state
       entity_id: binary_sensor.s1_pro_multi_sense_98a968_any_presence
       to: "on"
   conditions:
+    - condition: state
+      entity_id: input_boolean.palace_auto_lights
+      state: "on"
     - condition: sun
       after: sunset
       before: sunrise
@@ -337,14 +387,16 @@
 - id: palace_auto_lights_off
   alias: Palace auto lights off
   description: Turn off palace lights when no presence detected
-  initial_state: false
   triggers:
     - trigger: state
       entity_id: binary_sensor.s1_pro_multi_sense_98a968_any_presence
       to: "off"
       for:
         minutes: 5
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.palace_auto_lights
+      state: "on"
   actions:
     - action: light.turn_off
       data:
@@ -353,16 +405,21 @@
         entity_id: light.palace
   mode: single
 
-# Bedroom presence lights
+# -----------------------------------------------------------------------------
+# Bedroom Auto Lights
+# Toggle: input_boolean.bedroom_auto_lights (default: off)
+# -----------------------------------------------------------------------------
 - id: bedroom_auto_lights_on
   alias: Bedroom auto lights on
   description: Turn on bedroom lights when presence detected after sunset
-  initial_state: false
   triggers:
     - trigger: state
       entity_id: binary_sensor.s1_pro_multi_sense_96e7b0_any_presence
       to: "on"
   conditions:
+    - condition: state
+      entity_id: input_boolean.bedroom_auto_lights
+      state: "on"
     - condition: sun
       after: sunset
       before: sunrise
@@ -379,14 +436,16 @@
 - id: bedroom_auto_lights_off
   alias: Bedroom auto lights off
   description: Turn off bedroom lights when no presence detected
-  initial_state: false
   triggers:
     - trigger: state
       entity_id: binary_sensor.s1_pro_multi_sense_96e7b0_any_presence
       to: "off"
       for:
         minutes: 10
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.bedroom_auto_lights
+      state: "on"
   actions:
     - action: light.turn_off
       data:
@@ -395,11 +454,13 @@
         entity_id: light.bedroom
   mode: single
 
-# Daily vacuum - run vacuum when nobody is home
+# -----------------------------------------------------------------------------
+# Daily Vacuum When Away
+# Toggle: input_boolean.daily_vacuum (default: off)
+# -----------------------------------------------------------------------------
 - id: daily_vacuum_when_away
   alias: Daily Vacuum When Away
   description: Start vacuum cleaning when everyone leaves and it hasn't cleaned today
-  initial_state: false
   triggers:
     - trigger: state
       entity_id: zone.home
@@ -407,6 +468,9 @@
       for:
         minutes: 10
   conditions:
+    - condition: state
+      entity_id: input_boolean.daily_vacuum
+      state: "on"
     - condition: time
       after: "09:00:00"
       before: "18:00:00"
@@ -419,17 +483,22 @@
         entity_id: vacuum.z60_ultra_roller_complete
   mode: single
 
-# Vacuum error notification
+# -----------------------------------------------------------------------------
+# Vacuum Error Notification
+# Toggle: input_boolean.vacuum_notifications (default: off)
+# -----------------------------------------------------------------------------
 - id: vacuum_error_notification
   alias: Vacuum Error Notification
   description: Notify when vacuum encounters an error
-  initial_state: false
   triggers:
     - trigger: template
       value_template: "{{ states('sensor.z60_ultra_roller_complete_error') != 'no_error' }}"
     - trigger: template
       value_template: "{{ states('sensor.roborock_s7_maxv_vacuum_error') != 'none' }}"
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.vacuum_notifications
+      state: "on"
   actions:
     - action: notify.mobile_app_leos_iphone
       data:
@@ -444,16 +513,59 @@
           tag: vacuum_error
   mode: single
 
-# TV movie mode - dim lights when TV starts playing
+# -----------------------------------------------------------------------------
+# Vacuum Maintenance Reminder
+# Toggle: input_boolean.vacuum_notifications (default: off)
+# -----------------------------------------------------------------------------
+- id: vacuum_maintenance_reminder
+  alias: Vacuum Maintenance Reminder
+  description: Remind to clean vacuum sensors when they need attention
+  triggers:
+    - trigger: numeric_state
+      entity_id: sensor.z60_ultra_roller_complete_sensor_dirty_left
+      below: 20
+    - trigger: numeric_state
+      entity_id: sensor.z60_ultra_roller_complete_filter_left
+      below: 20
+    - trigger: numeric_state
+      entity_id: sensor.z60_ultra_roller_complete_side_brush_left
+      below: 20
+    - trigger: numeric_state
+      entity_id: sensor.z60_ultra_roller_complete_main_brush_left
+      below: 20
+  conditions:
+    - condition: state
+      entity_id: input_boolean.vacuum_notifications
+      state: "on"
+  actions:
+    - action: notify.mobile_app_leos_iphone
+      data:
+        title: Vacuum Maintenance
+        message: >
+          Truus needs attention:
+          {% if states('sensor.z60_ultra_roller_complete_sensor_dirty_left') | int < 20 %}Sensors: {{ states('sensor.z60_ultra_roller_complete_sensor_dirty_left') }}% left{% endif %}
+          {% if states('sensor.z60_ultra_roller_complete_filter_left') | int < 20 %}Filter: {{ states('sensor.z60_ultra_roller_complete_filter_left') }}% left{% endif %}
+          {% if states('sensor.z60_ultra_roller_complete_side_brush_left') | int < 20 %}Side brush: {{ states('sensor.z60_ultra_roller_complete_side_brush_left') }}% left{% endif %}
+          {% if states('sensor.z60_ultra_roller_complete_main_brush_left') | int < 20 %}Main brush: {{ states('sensor.z60_ultra_roller_complete_main_brush_left') }}% left{% endif %}
+        data:
+          tag: vacuum_maintenance
+  mode: single
+
+# -----------------------------------------------------------------------------
+# TV Movie Mode
+# Toggle: input_boolean.tv_movie_mode (default: off)
+# -----------------------------------------------------------------------------
 - id: tv_movie_mode
   alias: TV Movie Mode
   description: Dim living room lights when TV starts playing
-  initial_state: false
   triggers:
     - trigger: state
       entity_id: media_player.livingroom_tv
       to: playing
   conditions:
+    - condition: state
+      entity_id: input_boolean.tv_movie_mode
+      state: "on"
     - condition: state
       entity_id: light.living_room
       state: "on"
@@ -470,11 +582,9 @@
         transition: 3
   mode: single
 
-# TV pause - brighten lights when TV pauses
 - id: tv_pause_brighten
   alias: TV Pause - Brighten Lights
   description: Brighten living room lights when TV pauses or stops
-  initial_state: false
   triggers:
     - trigger: state
       entity_id: media_player.livingroom_tv
@@ -484,6 +594,9 @@
         - idle
         - "off"
   conditions:
+    - condition: state
+      entity_id: input_boolean.tv_movie_mode
+      state: "on"
     - condition: state
       entity_id: light.living_room
       state: "on"
@@ -500,16 +613,21 @@
         transition: 2
   mode: single
 
-# Outdoor lights at sunset
+# -----------------------------------------------------------------------------
+# Outdoor Lights
+# Toggle: input_boolean.outdoor_lights (default: off)
+# -----------------------------------------------------------------------------
 - id: outdoor_lights_sunset
   alias: Outdoor Lights - Sunset
   description: Turn on outdoor lights at sunset
-  initial_state: false
   triggers:
     - trigger: sun
       event: sunset
       offset: "-00:15:00"
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.outdoor_lights
+      state: "on"
   actions:
     - action: light.turn_on
       target:
@@ -520,15 +638,16 @@
         brightness_pct: 80
   mode: single
 
-# Outdoor lights off at night
 - id: outdoor_lights_off_night
   alias: Outdoor Lights - Off at Night
   description: Turn off outdoor lights late at night
-  initial_state: false
   triggers:
     - trigger: time
       at: "23:30:00"
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.outdoor_lights
+      state: "on"
   actions:
     - action: light.turn_off
       target:
@@ -537,16 +656,21 @@
           - light.hue_resonate_outdoor_wall_2
   mode: single
 
-# Low phone battery alert
+# -----------------------------------------------------------------------------
+# Phone Battery Alert
+# Toggle: input_boolean.phone_battery_alert (default: off)
+# -----------------------------------------------------------------------------
 - id: low_phone_battery_alert
   alias: Low Phone Battery Alert
   description: Notify when phone battery is low and not charging
-  initial_state: false
   triggers:
     - trigger: numeric_state
       entity_id: sensor.leos_iphone_battery_level
       below: 20
   conditions:
+    - condition: state
+      entity_id: input_boolean.phone_battery_alert
+      state: "on"
     - condition: state
       entity_id: sensor.leos_iphone_battery_state
       state: Not Charging
@@ -559,11 +683,13 @@
           tag: low_battery
   mode: single
 
-# Staircase motion light (if presence changes in multiple rooms)
+# -----------------------------------------------------------------------------
+# Staircase Transitional Light
+# Toggle: input_boolean.staircase_transitional_light (default: off)
+# -----------------------------------------------------------------------------
 - id: staircase_transitional_light
   alias: Staircase Transitional Light
   description: Turn on staircase light briefly when transitioning between floors
-  initial_state: false
   triggers:
     - trigger: state
       entity_id:
@@ -573,6 +699,9 @@
         - binary_sensor.s1_pro_multi_sense_98a968_any_presence
       to: "on"
   conditions:
+    - condition: state
+      entity_id: input_boolean.staircase_transitional_light
+      state: "on"
     - condition: sun
       after: sunset
       before: sunrise
@@ -592,40 +721,10 @@
         entity_id: light.staircase
   mode: restart
 
-# Vacuum maintenance reminder
-- id: vacuum_maintenance_reminder
-  alias: Vacuum Maintenance Reminder
-  description: Remind to clean vacuum sensors when they need attention
-  initial_state: false
-  triggers:
-    - trigger: numeric_state
-      entity_id: sensor.z60_ultra_roller_complete_sensor_dirty_left
-      below: 20
-    - trigger: numeric_state
-      entity_id: sensor.z60_ultra_roller_complete_filter_left
-      below: 20
-    - trigger: numeric_state
-      entity_id: sensor.z60_ultra_roller_complete_side_brush_left
-      below: 20
-    - trigger: numeric_state
-      entity_id: sensor.z60_ultra_roller_complete_main_brush_left
-      below: 20
-  conditions: []
-  actions:
-    - action: notify.mobile_app_leos_iphone
-      data:
-        title: Vacuum Maintenance
-        message: >
-          Truus needs attention:
-          {% if states('sensor.z60_ultra_roller_complete_sensor_dirty_left') | int < 20 %}Sensors: {{ states('sensor.z60_ultra_roller_complete_sensor_dirty_left') }}% left{% endif %}
-          {% if states('sensor.z60_ultra_roller_complete_filter_left') | int < 20 %}Filter: {{ states('sensor.z60_ultra_roller_complete_filter_left') }}% left{% endif %}
-          {% if states('sensor.z60_ultra_roller_complete_side_brush_left') | int < 20 %}Side brush: {{ states('sensor.z60_ultra_roller_complete_side_brush_left') }}% left{% endif %}
-          {% if states('sensor.z60_ultra_roller_complete_main_brush_left') | int < 20 %}Main brush: {{ states('sensor.z60_ultra_roller_complete_main_brush_left') }}% left{% endif %}
-        data:
-          tag: vacuum_maintenance
-  mode: single
-
-# Presence duration tracking - record arrival times
+# -----------------------------------------------------------------------------
+# Presence Duration Tracking
+# Toggle: input_boolean.presence_tracking
+# -----------------------------------------------------------------------------
 - id: leo_arrived_home_tracker
   alias: Leo Arrived Home Tracker
   description: Record timestamp when Leo arrives home
@@ -634,7 +733,10 @@
       entity_id: person.leo
       from: not_home
       to: home
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.presence_tracking
+      state: "on"
   actions:
     - action: input_datetime.set_datetime
       target:
@@ -651,7 +753,10 @@
       entity_id: person.kardi
       from: not_home
       to: home
-  conditions: []
+  conditions:
+    - condition: state
+      entity_id: input_boolean.presence_tracking
+      state: "on"
   actions:
     - action: input_datetime.set_datetime
       target:
