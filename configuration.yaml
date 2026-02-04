@@ -238,21 +238,21 @@ template:
         unique_id: bedroom_co2
         unit_of_measurement: "ppm"
         device_class: carbon_dioxide
-        state: "{{ states('sensor.s1_pro_multi_sense_96e7b0_scd40_co2_concentration') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_96e7b0_scd40_co2_concentration') | round(0) }}"
         icon: mdi:molecule-co2
 
       - name: "Bedroom Temperature"
         unique_id: bedroom_temperature
         unit_of_measurement: "°C"
         device_class: temperature
-        state: "{{ states('sensor.s1_pro_multi_sense_96e7b0_scd40_temperature') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_96e7b0_scd40_temperature') | round(1) }}"
         icon: mdi:thermometer
 
       - name: "Bedroom Humidity"
         unique_id: bedroom_humidity
         unit_of_measurement: "%"
         device_class: humidity
-        state: "{{ states('sensor.s1_pro_multi_sense_96e7b0_scd40_humidity') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_96e7b0_scd40_humidity') | round(0) }}"
         icon: mdi:water-percent
 
       # Office (98a998)
@@ -260,21 +260,21 @@ template:
         unique_id: office_co2
         unit_of_measurement: "ppm"
         device_class: carbon_dioxide
-        state: "{{ states('sensor.s1_pro_multi_sense_98a998_scd40_co2_concentration') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_98a998_scd40_co2_concentration') | round(0) }}"
         icon: mdi:molecule-co2
 
       - name: "Office Temperature"
         unique_id: office_temperature
         unit_of_measurement: "°C"
         device_class: temperature
-        state: "{{ states('sensor.s1_pro_multi_sense_98a998_scd40_temperature') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_98a998_scd40_temperature') | round(1) }}"
         icon: mdi:thermometer
 
       - name: "Office Humidity"
         unique_id: office_humidity
         unit_of_measurement: "%"
         device_class: humidity
-        state: "{{ states('sensor.s1_pro_multi_sense_98a998_scd40_humidity') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_98a998_scd40_humidity') | round(0) }}"
         icon: mdi:water-percent
 
       # Kitchen (614680)
@@ -282,21 +282,21 @@ template:
         unique_id: kitchen_co2
         unit_of_measurement: "ppm"
         device_class: carbon_dioxide
-        state: "{{ states('sensor.s1_pro_multi_sense_614680_scd40_co2_concentration') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_614680_scd40_co2_concentration') | round(0) }}"
         icon: mdi:molecule-co2
 
       - name: "Kitchen Temperature"
         unique_id: kitchen_temperature
         unit_of_measurement: "°C"
         device_class: temperature
-        state: "{{ states('sensor.s1_pro_multi_sense_614680_scd40_temperature') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_614680_scd40_temperature') | round(1) }}"
         icon: mdi:thermometer
 
       - name: "Kitchen Humidity"
         unique_id: kitchen_humidity
         unit_of_measurement: "%"
         device_class: humidity
-        state: "{{ states('sensor.s1_pro_multi_sense_614680_scd40_humidity') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_614680_scd40_humidity') | round(0) }}"
         icon: mdi:water-percent
 
       # Palace (98a968)
@@ -304,21 +304,21 @@ template:
         unique_id: palace_co2
         unit_of_measurement: "ppm"
         device_class: carbon_dioxide
-        state: "{{ states('sensor.s1_pro_multi_sense_98a968_scd40_co2_concentration') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_98a968_scd40_co2_concentration') | round(0) }}"
         icon: mdi:molecule-co2
 
       - name: "Palace Temperature"
         unique_id: palace_temperature
         unit_of_measurement: "°C"
         device_class: temperature
-        state: "{{ states('sensor.s1_pro_multi_sense_98a968_scd40_temperature') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_98a968_scd40_temperature') | round(1) }}"
         icon: mdi:thermometer
 
       - name: "Palace Humidity"
         unique_id: palace_humidity
         unit_of_measurement: "%"
         device_class: humidity
-        state: "{{ states('sensor.s1_pro_multi_sense_98a968_scd40_humidity') }}"
+        state: "{{ states('sensor.s1_pro_multi_sense_98a968_scd40_humidity') | round(0) }}"
         icon: mdi:water-percent
 
 # Load frontend themes from the themes folder
