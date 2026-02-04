@@ -30,7 +30,7 @@ blueprint:
     no_presence_wait:
       name: No presence wait time
       description: Time to wait after no presence before turning off lights
-      default: 5
+      default: 1
       selector:
         number:
           min: 1
