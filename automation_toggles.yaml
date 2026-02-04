@@ -42,12 +42,10 @@ laundry_notifications:
 welcome_home_lights:
   name: "Welcome Home Lights"
   icon: mdi:home-import-outline
-  initial: false
 
 goodbye_all_off:
   name: "Goodbye - All Off"
   icon: mdi:home-export-outline
-  initial: false
 
 # -----------------------------------------------------------------------------
 # Blinds Automations
@@ -55,12 +53,10 @@ goodbye_all_off:
 morning_blinds:
   name: "Morning Blinds Open"
   icon: mdi:blinds-open
-  initial: false
 
 evening_blinds:
   name: "Evening Blinds Close"
   icon: mdi:blinds
-  initial: false
 
 # -----------------------------------------------------------------------------
 # Room Auto Lights
@@ -68,17 +64,14 @@ evening_blinds:
 palace_auto_lights:
   name: "Palace Auto Lights"
   icon: mdi:floor-lamp
-  initial: false
 
 bedroom_auto_lights:
   name: "Bedroom Auto Lights"
   icon: mdi:bed
-  initial: false
 
 staircase_transitional_light:
   name: "Staircase Transitional Light"
   icon: mdi:stairs
-  initial: false
 
 # -----------------------------------------------------------------------------
 # Vacuum Automations
@@ -86,12 +79,10 @@ staircase_transitional_light:
 daily_vacuum:
   name: "Daily Vacuum When Away"
   icon: mdi:robot-vacuum
-  initial: false
 
 vacuum_notifications:
   name: "Vacuum Notifications"
   icon: mdi:robot-vacuum-alert
-  initial: false
 
 # -----------------------------------------------------------------------------
 # TV Mode
@@ -99,7 +90,6 @@ vacuum_notifications:
 tv_movie_mode:
   name: "TV Movie Mode"
   icon: mdi:television-ambient-light
-  initial: false
 
 # -----------------------------------------------------------------------------
 # Outdoor Lights
@@ -107,7 +97,6 @@ tv_movie_mode:
 outdoor_lights:
   name: "Outdoor Lights"
   icon: mdi:outdoor-lamp
-  initial: false
 
 # -----------------------------------------------------------------------------
 # Phone Battery Alert
@@ -115,7 +104,6 @@ outdoor_lights:
 phone_battery_alert:
   name: "Phone Battery Alert"
   icon: mdi:battery-alert
-  initial: false
 
 # -----------------------------------------------------------------------------
 # Presence Duration Tracking
@@ -130,9 +118,7 @@ presence_tracking:
 vacation_mode:
   name: "Vacation Mode"
   icon: mdi:airplane
-  initial: false
 
 guest_mode:
   name: "Guest Mode"
   icon: mdi:account-multiple
-  initial: false
