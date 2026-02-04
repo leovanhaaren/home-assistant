@@ -549,6 +549,327 @@
               ]
             }
           ]
+        },
+        {
+          "title": "Environment",
+          "type": "sections",
+          "max_columns": 4,
+          "icon": "mdi:molecule-co2",
+          "path": "environment",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "CO2 Levels",
+                  "heading_style": "title",
+                  "icon": "mdi:molecule-co2"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.living_room_co2",
+                  "name": "Living Room"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.bedroom_co2",
+                  "name": "Bedroom"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.office_co2",
+                  "name": "Office"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.kitchen_co2",
+                  "name": "Kitchen"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Humidity",
+                  "heading_style": "title",
+                  "icon": "mdi:water-percent"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.living_room_humidity",
+                  "name": "Living Room"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.bedroom_humidity",
+                  "name": "Bedroom"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.office_humidity",
+                  "name": "Office"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.kitchen_humidity",
+                  "name": "Kitchen"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.bathroom_humidity",
+                  "name": "Bathroom"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Temperature",
+                  "heading_style": "title",
+                  "icon": "mdi:thermometer"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.living_room_temperature",
+                  "name": "Living Room"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.bedroom_temperature",
+                  "name": "Bedroom"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.office_temperature",
+                  "name": "Office"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.kitchen_temperature",
+                  "name": "Kitchen"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.bathroom_temperature",
+                  "name": "Bathroom"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Energy",
+          "type": "sections",
+          "max_columns": 4,
+          "icon": "mdi:lightning-bolt",
+          "path": "energy",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Power Consumption",
+                  "heading_style": "title",
+                  "icon": "mdi:flash"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.p1_meter_power",
+                  "name": "Current Power"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.p1_meter_energy_import",
+                  "name": "Total Energy Import"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Water Usage",
+                  "heading_style": "title",
+                  "icon": "mdi:water"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.watermeter_water_usage",
+                  "name": "Current Flow"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.watermeter_total_water_usage",
+                  "name": "Total Usage"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Security",
+          "type": "sections",
+          "max_columns": 4,
+          "icon": "mdi:shield-home",
+          "path": "security",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Water Leak Detection",
+                  "heading_style": "title",
+                  "icon": "mdi:water-alert"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.watersensor1_water_leak",
+                  "name": "Water Sensor 1"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.watersensor2_water_leak",
+                  "name": "Water Sensor 2"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Presence Detection",
+                  "heading_style": "title",
+                  "icon": "mdi:motion-sensor"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.s1_pro_multi_sense_98a968_any_presence",
+                  "name": "Palace"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.s1_pro_multi_sense_614680_any_presence",
+                  "name": "Kitchen"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.s1_pro_multi_sense_98a998_any_presence",
+                  "name": "Office"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.s1_pro_multi_sense_96e7b0_any_presence",
+                  "name": "Bedroom"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "People",
+                  "heading_style": "title",
+                  "icon": "mdi:account-group"
+                },
+                {
+                  "type": "tile",
+                  "entity": "person.leo",
+                  "name": "Leo"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.leo_presence_duration",
+                  "name": "Leo Home Duration"
+                },
+                {
+                  "type": "tile",
+                  "entity": "person.kardi",
+                  "name": "Kardi"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.kardi_presence_duration",
+                  "name": "Kardi Home Duration"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Maintenance",
+          "type": "sections",
+          "max_columns": 4,
+          "icon": "mdi:wrench",
+          "path": "maintenance",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Dreame Z60 Ultra",
+                  "heading_style": "title",
+                  "icon": "mdi:robot-vacuum"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.z60_ultra_roller_complete_filter_left",
+                  "name": "Filter Life"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.z60_ultra_roller_complete_main_brush_left",
+                  "name": "Main Brush Life"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.z60_ultra_roller_complete_side_brush_left",
+                  "name": "Side Brush Life"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.z60_ultra_roller_complete_sensor_dirty_left",
+                  "name": "Sensor Cleanliness"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.z60_ultra_roller_complete_error",
+                  "name": "Error Status"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.z60_ultra_roller_complete_last_clean_begin",
+                  "name": "Last Clean"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Roborock S7 MaxV",
+                  "heading_style": "title",
+                  "icon": "mdi:robot-vacuum"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.roborock_s7_maxv_vacuum_error",
+                  "name": "Error Status"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
