@@ -1,0 +1,141 @@
+blueprint:
+  name: Presence Auto Lights
+  description: >
+    Turn on lights when presence is detected after sunset, turn off when no presence.
+    Uses time-aware brightness and respects a toggle input_boolean.
+  domain: automation
+  author: Leo
+  input:
+    presence_sensor:
+      name: Presence Sensor
+      description: The presence sensor to monitor
+      selector:
+        entity:
+          filter:
+            domain: binary_sensor
+    light_target:
+      name: Light
+      description: The light(s) to control
+      selector:
+        target:
+          entity:
+            domain: light
+    toggle_entity:
+      name: Toggle
+      description: Input boolean to enable/disable this automation
+      selector:
+        entity:
+          filter:
+            domain: input_boolean
+    no_presence_wait:
+      name: No presence wait time
+      description: Time to wait after no presence before turning off lights
+      default: 5
+      selector:
+        number:
+          min: 1
+          max: 30
+          unit_of_measurement: minutes
+    turn_on_transition:
+      name: Turn on transition
+      description: Transition time when turning on lights
+      default: 1
+      selector:
+        number:
+          min: 0
+          max: 10
+          unit_of_measurement: seconds
+    turn_off_transition:
+      name: Turn off transition
+      description: Transition time when turning off lights
+      default: 3
+      selector:
+        number:
+          min: 0
+          max: 10
+          unit_of_measurement: seconds
+    max_brightness:
+      name: Maximum brightness
+      description: Maximum brightness percentage (0 = no limit, use time-aware brightness)
+      default: 0
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: "%"
+    color_temp:
+      name: Color temperature
+      description: Color temperature in Kelvin (0 = don't set)
+      default: 0
+      selector:
+        number:
+          min: 0
+          max: 6500
+          unit_of_measurement: K
+    time_limit_before:
+      name: Time limit (before)
+      description: Only turn on lights before this time (empty = no limit)
+      default: "23:59:59"
+      selector:
+        time:
+
+variables:
+  max_brightness_var: !input max_brightness
+  color_temp_var: !input color_temp
+  time_limit_var: !input time_limit_before
+
+mode: restart
+max_exceeded: silent
+
+triggers:
+  - trigger: state
+    entity_id: !input presence_sensor
+    to: "on"
+    id: presence_on
+  - trigger: state
+    entity_id: !input presence_sensor
+    to: "off"
+    for:
+      minutes: !input no_presence_wait
+    id: presence_off
+
+conditions:
+  - condition: state
+    entity_id: !input toggle_entity
+    state: "on"
+
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: presence_on
+          - condition: template
+            value_template: >
+              {% set offset = states('input_number.sunset_offset') | int %}
+              {% set elevation_threshold = offset * 0.25 %}
+              {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
+          - condition: template
+            value_template: >
+              {{ now().strftime('%H:%M:%S') < time_limit_var }}
+        sequence:
+          - action: light.turn_on
+            target: !input light_target
+            data:
+              brightness_pct: >
+                {% set time_bright = states('sensor.time_aware_brightness') | int %}
+                {% if max_brightness_var > 0 %}
+                  {{ [time_bright, max_brightness_var] | min }}
+                {% else %}
+                  {{ time_bright }}
+                {% endif %}
+              transition: !input turn_on_transition
+              kelvin: >
+                {{ color_temp_var if color_temp_var > 0 else 3000 }}
+      - conditions:
+          - condition: trigger
+            id: presence_off
+        sequence:
+          - action: light.turn_off
+            target: !input light_target
+            data:
+              transition: !input turn_off_transition

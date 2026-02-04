@@ -1,0 +1,48 @@
+blueprint:
+  name: Arrived Home Tracker
+  description: >
+    Record timestamp when a person arrives home.
+  domain: automation
+  author: Leo
+  input:
+    person_entity:
+      name: Person
+      description: The person to track
+      selector:
+        entity:
+          filter:
+            domain: person
+    datetime_entity:
+      name: DateTime Helper
+      description: Input datetime to store the arrival timestamp
+      selector:
+        entity:
+          filter:
+            domain: input_datetime
+    toggle_entity:
+      name: Toggle
+      description: Input boolean to enable/disable this automation
+      selector:
+        entity:
+          filter:
+            domain: input_boolean
+
+mode: single
+
+triggers:
+  - trigger: state
+    entity_id: !input person_entity
+    from: not_home
+    to: home
+
+conditions:
+  - condition: state
+    entity_id: !input toggle_entity
+    state: "on"
+
+actions:
+  - action: input_datetime.set_datetime
+    target:
+      entity_id: !input datetime_entity
+    data:
+      datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"

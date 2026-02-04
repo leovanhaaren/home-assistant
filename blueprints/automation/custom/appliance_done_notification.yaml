@@ -1,0 +1,79 @@
+blueprint:
+  name: Appliance Done Notification
+  description: >
+    Send a notification when an appliance (washer, dryer, etc.) finishes its cycle.
+  domain: automation
+  author: Leo
+  input:
+    running_sensor:
+      name: Running Sensor
+      description: Binary sensor that indicates when the appliance is running
+      selector:
+        entity:
+          filter:
+            domain: binary_sensor
+    toggle_entity:
+      name: Toggle
+      description: Input boolean to enable/disable this automation
+      selector:
+        entity:
+          filter:
+            domain: input_boolean
+    notify_service:
+      name: Notification Service
+      description: The notification service to use (e.g., notify.mobile_app_leos_iphone)
+      default: notify.mobile_app_leos_iphone
+      selector:
+        text:
+    notification_title:
+      name: Notification Title
+      description: Title for the notification
+      selector:
+        text:
+    notification_message:
+      name: Notification Message
+      description: Message body for the notification
+      selector:
+        text:
+          multiline: true
+    notification_tag:
+      name: Notification Tag
+      description: Tag to group/replace notifications
+      selector:
+        text:
+    wait_after_off:
+      name: Wait after off
+      description: Time to wait after sensor turns off before sending notification
+      default: 2
+      selector:
+        number:
+          min: 0
+          max: 10
+          unit_of_measurement: minutes
+
+mode: single
+
+triggers:
+  - trigger: state
+    entity_id: !input running_sensor
+    from: "on"
+    to: "off"
+    for:
+      minutes: !input wait_after_off
+
+conditions:
+  - condition: state
+    entity_id: !input toggle_entity
+    state: "on"
+
+actions:
+  - action: !input notify_service
+    data:
+      title: !input notification_title
+      message: !input notification_message
+      data:
+        tag: !input notification_tag
+        push:
+          sound:
+            name: default
+            critical: 0

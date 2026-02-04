@@ -6,103 +6,123 @@
 # =============================================================================
 
 # -----------------------------------------------------------------------------
-# Kitchen Auto Lights
-# Uses S1 Pro Kitchen presence sensor
-# Toggle: input_boolean.kitchen_auto_lights
+# Presence Auto Lights (Blueprint-based)
+# Uses custom/presence_auto_lights blueprint
 # -----------------------------------------------------------------------------
-- id: kitchen_auto_lights_on
-  alias: Kitchen auto lights on
-  description: Turn on kitchen lights when presence detected after sunset
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.s1_pro_multi_sense_614680_any_presence
-      to: "on"
-  conditions:
-    - condition: state
-      entity_id: input_boolean.kitchen_auto_lights
-      state: "on"
-    - condition: template
-      value_template: >
-        {% set offset = states('input_number.sunset_offset') | int %}
-        {% set elevation_threshold = offset * 0.25 %}
-        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
-  actions:
-    - action: light.turn_on
-      data:
-        brightness_pct: "{{ states('sensor.time_aware_brightness') | int }}"
-        transition: 1
-      target:
+- id: kitchen_auto_lights
+  alias: Kitchen Auto Lights
+  description: Turn on/off kitchen lights based on presence
+  use_blueprint:
+    path: custom/presence_auto_lights.yaml
+    input:
+      presence_sensor: binary_sensor.s1_pro_multi_sense_614680_any_presence
+      light_target:
         entity_id: light.kitchen
-  mode: single
+      toggle_entity: input_boolean.kitchen_auto_lights
+      no_presence_wait: 2
+      turn_on_transition: 1
+      turn_off_transition: 3
 
-- id: kitchen_auto_lights_off
-  alias: Kitchen auto lights off
-  description: Turn off kitchen lights when no presence detected
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.s1_pro_multi_sense_614680_any_presence
-      to: "off"
-      for:
-        minutes: 2
-  conditions:
-    - condition: state
-      entity_id: input_boolean.kitchen_auto_lights
-      state: "on"
-  actions:
-    - action: light.turn_off
-      data:
-        transition: 3
-      target:
-        entity_id: light.kitchen
-  mode: single
+- id: office_auto_lights
+  alias: Office Auto Lights
+  description: Turn on/off office lights based on presence
+  use_blueprint:
+    path: custom/presence_auto_lights.yaml
+    input:
+      presence_sensor: binary_sensor.s1_pro_multi_sense_98a998_any_presence
+      light_target:
+        entity_id: light.office
+      toggle_entity: input_boolean.office_auto_lights
+      no_presence_wait: 5
+      turn_on_transition: 1
+      turn_off_transition: 3
+
+- id: palace_auto_lights
+  alias: Palace Auto Lights
+  description: Turn on/off palace lights based on presence
+  use_blueprint:
+    path: custom/presence_auto_lights.yaml
+    input:
+      presence_sensor: binary_sensor.s1_pro_multi_sense_98a968_any_presence
+      light_target:
+        entity_id: light.palace
+      toggle_entity: input_boolean.palace_auto_lights
+      no_presence_wait: 5
+      turn_on_transition: 1
+      turn_off_transition: 3
+
+- id: bedroom_auto_lights
+  alias: Bedroom Auto Lights
+  description: Turn on/off bedroom lights based on presence (until 10pm)
+  use_blueprint:
+    path: custom/presence_auto_lights.yaml
+    input:
+      presence_sensor: binary_sensor.s1_pro_multi_sense_96e7b0_any_presence
+      light_target:
+        entity_id: light.bedroom
+      toggle_entity: input_boolean.bedroom_auto_lights
+      no_presence_wait: 10
+      turn_on_transition: 1
+      turn_off_transition: 5
+      max_brightness: 70
+      color_temp: 2700
+      time_limit_before: "22:00:00"
 
 # -----------------------------------------------------------------------------
-# Office Desk Presence
-# Uses S1 Pro Office presence sensor
-# Toggle: input_boolean.office_auto_lights
+# Arrived Home Trackers (Blueprint-based)
+# Uses custom/arrived_home_tracker blueprint
 # -----------------------------------------------------------------------------
-- id: office_desk_presence_on
-  alias: Office desk presence
-  description: Turn on office lights when presence detected
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.s1_pro_multi_sense_98a998_any_presence
-      to: "on"
-  conditions:
-    - condition: state
-      entity_id: input_boolean.office_auto_lights
-      state: "on"
-    - condition: template
-      value_template: >
-        {% set offset = states('input_number.sunset_offset') | int %}
-        {% set elevation_threshold = offset * 0.25 %}
-        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
-  actions:
-    - action: light.turn_on
-      data:
-        brightness_pct: "{{ states('sensor.time_aware_brightness') | int }}"
-      target:
-        entity_id: light.office
-  mode: single
+- id: leo_arrived_home_tracker
+  alias: Leo Arrived Home Tracker
+  description: Record timestamp when Leo arrives home
+  use_blueprint:
+    path: custom/arrived_home_tracker.yaml
+    input:
+      person_entity: person.leo
+      datetime_entity: input_datetime.leo_arrived_home
+      toggle_entity: input_boolean.presence_tracking
 
-- id: office_desk_presence_off
-  alias: Office desk no presence
-  description: Turn off office lights when no presence
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.s1_pro_multi_sense_98a998_any_presence
-      to: "off"
-      for:
-        minutes: 5
-  conditions:
-    - condition: state
-      entity_id: input_boolean.office_auto_lights
-      state: "on"
-  actions:
-    - action: light.turn_off
-      target:
-        entity_id: light.office
-  mode: single
+- id: kardi_arrived_home_tracker
+  alias: Kardi Arrived Home Tracker
+  description: Record timestamp when Kardi arrives home
+  use_blueprint:
+    path: custom/arrived_home_tracker.yaml
+    input:
+      person_entity: person.kardi
+      datetime_entity: input_datetime.kardi_arrived_home
+      toggle_entity: input_boolean.presence_tracking
+
+# -----------------------------------------------------------------------------
+# Laundry Notifications (Blueprint-based)
+# Uses custom/appliance_done_notification blueprint
+# -----------------------------------------------------------------------------
+- id: laundry_washer_done
+  alias: Laundry - Washer Finished
+  description: Notify when washing machine cycle completes
+  use_blueprint:
+    path: custom/appliance_done_notification.yaml
+    input:
+      running_sensor: binary_sensor.washing_machine_running
+      toggle_entity: input_boolean.laundry_notifications
+      notify_service: notify.mobile_app_leos_iphone
+      notification_title: "Laundry Done!"
+      notification_message: "The washing machine has finished. Don't forget to move clothes to dryer!"
+      notification_tag: laundry_washer
+      wait_after_off: 2
+
+- id: laundry_dryer_done
+  alias: Laundry - Dryer Finished
+  description: Notify when dryer cycle completes
+  use_blueprint:
+    path: custom/appliance_done_notification.yaml
+    input:
+      running_sensor: binary_sensor.dryer_running
+      toggle_entity: input_boolean.laundry_notifications
+      notify_service: notify.mobile_app_leos_iphone
+      notification_title: "Dryer Done!"
+      notification_message: "The dryer has finished. Time to fold!"
+      notification_tag: laundry_dryer
+      wait_after_off: 2
 
 # -----------------------------------------------------------------------------
 # Vacuum Automation
@@ -202,65 +222,6 @@
         brightness_pct: 20
         kelvin: 2200
         transition: 900
-  mode: single
-
-# -----------------------------------------------------------------------------
-# Laundry Notifications
-# Uses existing washing machine and dryer sensors
-# Toggle: input_boolean.laundry_notifications
-# -----------------------------------------------------------------------------
-- id: laundry_washer_done
-  alias: Laundry - Washer Finished
-  description: Notify when washing machine cycle completes
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.washing_machine_running
-      from: "on"
-      to: "off"
-      for:
-        minutes: 2
-  conditions:
-    - condition: state
-      entity_id: input_boolean.laundry_notifications
-      state: "on"
-  actions:
-    - action: notify.mobile_app_leos_iphone
-      data:
-        title: Laundry Done!
-        message: The washing machine has finished. Don't forget to move clothes to dryer!
-        data:
-          tag: laundry_washer
-          push:
-            sound:
-              name: default
-              critical: 0
-  mode: single
-
-- id: laundry_dryer_done
-  alias: Laundry - Dryer Finished
-  description: Notify when dryer cycle completes
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.dryer_running
-      from: "on"
-      to: "off"
-      for:
-        minutes: 2
-  conditions:
-    - condition: state
-      entity_id: input_boolean.laundry_notifications
-      state: "on"
-  actions:
-    - action: notify.mobile_app_leos_iphone
-      data:
-        title: Dryer Done!
-        message: The dryer has finished. Time to fold!
-        data:
-          tag: laundry_dryer
-          push:
-            sound:
-              name: default
-              critical: 0
   mode: single
 
 # -----------------------------------------------------------------------------
@@ -393,109 +354,6 @@
           - cover.rs100_solar_io_bedroom
           - cover.rs100_solar_io_office
           # - cover.rs100_solar_io_palace
-  mode: single
-
-# -----------------------------------------------------------------------------
-# Palace Auto Lights
-# Toggle: input_boolean.palace_auto_lights (default: off)
-# -----------------------------------------------------------------------------
-- id: palace_auto_lights_on
-  alias: Palace auto lights on
-  description: Turn on palace lights when presence detected after sunset
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.s1_pro_multi_sense_98a968_any_presence
-      to: "on"
-  conditions:
-    - condition: state
-      entity_id: input_boolean.palace_auto_lights
-      state: "on"
-    - condition: template
-      value_template: >
-        {% set offset = states('input_number.sunset_offset') | int %}
-        {% set elevation_threshold = offset * 0.25 %}
-        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
-  actions:
-    - action: light.turn_on
-      data:
-        brightness_pct: "{{ states('sensor.time_aware_brightness') | int }}"
-        transition: 1
-      target:
-        entity_id: light.palace
-  mode: single
-
-- id: palace_auto_lights_off
-  alias: Palace auto lights off
-  description: Turn off palace lights when no presence detected
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.s1_pro_multi_sense_98a968_any_presence
-      to: "off"
-      for:
-        minutes: 5
-  conditions:
-    - condition: state
-      entity_id: input_boolean.palace_auto_lights
-      state: "on"
-  actions:
-    - action: light.turn_off
-      data:
-        transition: 3
-      target:
-        entity_id: light.palace
-  mode: single
-
-# -----------------------------------------------------------------------------
-# Bedroom Auto Lights
-# Toggle: input_boolean.bedroom_auto_lights (default: off)
-# -----------------------------------------------------------------------------
-- id: bedroom_auto_lights_on
-  alias: Bedroom auto lights on
-  description: Turn on bedroom lights when presence detected after sunset (until 10pm)
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.s1_pro_multi_sense_96e7b0_any_presence
-      to: "on"
-  conditions:
-    - condition: state
-      entity_id: input_boolean.bedroom_auto_lights
-      state: "on"
-    - condition: time
-      before: "22:00:00"
-    - condition: template
-      value_template: >
-        {% set offset = states('input_number.sunset_offset') | int %}
-        {% set elevation_threshold = offset * 0.25 %}
-        {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
-  actions:
-    - action: light.turn_on
-      data:
-        brightness_pct: "{{ [states('sensor.time_aware_brightness') | int, 70] | min }}"
-        kelvin: 2700
-        transition: 1
-      target:
-        entity_id: light.bedroom
-  mode: single
-
-- id: bedroom_auto_lights_off
-  alias: Bedroom auto lights off
-  description: Turn off bedroom lights when no presence detected
-  triggers:
-    - trigger: state
-      entity_id: binary_sensor.s1_pro_multi_sense_96e7b0_any_presence
-      to: "off"
-      for:
-        minutes: 10
-  conditions:
-    - condition: state
-      entity_id: input_boolean.bedroom_auto_lights
-      state: "on"
-  actions:
-    - action: light.turn_off
-      data:
-        transition: 5
-      target:
-        entity_id: light.bedroom
   mode: single
 
 # -----------------------------------------------------------------------------
@@ -772,50 +630,6 @@
       target:
         entity_id: light.staircase
   mode: restart
-
-# -----------------------------------------------------------------------------
-# Presence Duration Tracking
-# Toggle: input_boolean.presence_tracking
-# -----------------------------------------------------------------------------
-- id: leo_arrived_home_tracker
-  alias: Leo Arrived Home Tracker
-  description: Record timestamp when Leo arrives home
-  triggers:
-    - trigger: state
-      entity_id: person.leo
-      from: not_home
-      to: home
-  conditions:
-    - condition: state
-      entity_id: input_boolean.presence_tracking
-      state: "on"
-  actions:
-    - action: input_datetime.set_datetime
-      target:
-        entity_id: input_datetime.leo_arrived_home
-      data:
-        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
-  mode: single
-
-- id: kardi_arrived_home_tracker
-  alias: Kardi Arrived Home Tracker
-  description: Record timestamp when Kardi arrives home
-  triggers:
-    - trigger: state
-      entity_id: person.kardi
-      from: not_home
-      to: home
-  conditions:
-    - condition: state
-      entity_id: input_boolean.presence_tracking
-      state: "on"
-  actions:
-    - action: input_datetime.set_datetime
-      target:
-        entity_id: input_datetime.kardi_arrived_home
-      data:
-        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
-  mode: single
 
 # -----------------------------------------------------------------------------
 # Office Ceiling Evening Dimming
