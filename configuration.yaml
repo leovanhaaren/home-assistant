@@ -37,6 +37,30 @@ input_datetime:
 # Template sensors to show presence duration and time-aware brightness
 template:
   - sensor:
+      - name: "Next Sunrise"
+        unique_id: next_sunrise_with_offset
+        device_class: timestamp
+        state: >
+          {% set offset = states('input_number.sunrise_offset') | int %}
+          {% set sunrise = state_attr('sun.sun', 'next_rising') | as_datetime %}
+          {{ (sunrise + timedelta(minutes=offset)).isoformat() }}
+        icon: mdi:weather-sunset-up
+        attributes:
+          offset_minutes: "{{ states('input_number.sunrise_offset') | int }}"
+          base_time: "{{ state_attr('sun.sun', 'next_rising') }}"
+
+      - name: "Next Sunset"
+        unique_id: next_sunset_with_offset
+        device_class: timestamp
+        state: >
+          {% set offset = states('input_number.sunset_offset') | int %}
+          {% set sunset = state_attr('sun.sun', 'next_setting') | as_datetime %}
+          {{ (sunset + timedelta(minutes=offset)).isoformat() }}
+        icon: mdi:weather-sunset-down
+        attributes:
+          offset_minutes: "{{ states('input_number.sunset_offset') | int }}"
+          base_time: "{{ state_attr('sun.sun', 'next_setting') }}"
+
       - name: "Time Aware Brightness"
         unique_id: time_aware_brightness
         unit_of_measurement: "%"

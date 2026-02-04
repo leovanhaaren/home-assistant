@@ -16,20 +16,15 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "Sun Offsets",
+                  "heading": "Sun Schedule",
                   "heading_style": "title",
                   "icon": "mdi:weather-sunset"
                 },
                 {
                   "type": "tile",
-                  "entity": "input_number.sunset_offset",
-                  "name": "Sunset Offset",
-                  "features": [
-                    {
-                      "type": "numeric-input",
-                      "style": "slider"
-                    }
-                  ]
+                  "entity": "sensor.next_sunrise",
+                  "name": "Next Sunrise",
+                  "color": "amber"
                 },
                 {
                   "type": "tile",
@@ -41,6 +36,40 @@
                       "style": "slider"
                     }
                   ]
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.next_sunset",
+                  "name": "Next Sunset",
+                  "color": "orange"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.sunset_offset",
+                  "name": "Sunset Offset",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Brightness",
+                  "heading_style": "title",
+                  "icon": "mdi:brightness-auto"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.time_aware_brightness",
+                  "name": "Auto Brightness",
+                  "color": "yellow"
                 }
               ]
             },
