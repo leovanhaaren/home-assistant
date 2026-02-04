@@ -568,11 +568,6 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.living_room_co2",
-                  "name": "Living Room"
-                },
-                {
-                  "type": "tile",
                   "entity": "sensor.bedroom_co2",
                   "name": "Bedroom"
                 },
@@ -585,6 +580,11 @@
                   "type": "tile",
                   "entity": "sensor.kitchen_co2",
                   "name": "Kitchen"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.palace_co2",
+                  "name": "Palace"
                 }
               ]
             },
@@ -596,11 +596,6 @@
                   "heading": "Humidity",
                   "heading_style": "title",
                   "icon": "mdi:water-percent"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.living_room_humidity",
-                  "name": "Living Room"
                 },
                 {
                   "type": "tile",
@@ -619,8 +614,8 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.bathroom_humidity",
-                  "name": "Bathroom"
+                  "entity": "sensor.palace_humidity",
+                  "name": "Palace"
                 }
               ]
             },
@@ -632,11 +627,6 @@
                   "heading": "Temperature",
                   "heading_style": "title",
                   "icon": "mdi:thermometer"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.living_room_temperature",
-                  "name": "Living Room"
                 },
                 {
                   "type": "tile",
@@ -655,8 +645,8 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.bathroom_temperature",
-                  "name": "Bathroom"
+                  "entity": "sensor.palace_temperature",
+                  "name": "Palace"
                 }
               ]
             }
