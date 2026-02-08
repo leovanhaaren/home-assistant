@@ -55,7 +55,8 @@ ssh root@192.168.1.134 "ha core logs"
 
 - Each automation should have a unique `id` and descriptive `alias`
 - Use `automation_toggles.yaml` to create enable/disable switches for automations
-- Test automations after deployment using Developer Tools > Services
+- Each automation should have a toggle on the automation dashboard
+- Test automations after deployment using Developer Tools > Services, this can take up to a minute to reflect changes.
 
 ### YAML Syntax
 
