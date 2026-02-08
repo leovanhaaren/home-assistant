@@ -497,8 +497,8 @@
       target:
         entity_id: light.living_room
       data:
-        brightness_pct: "{{ states('sensor.auto_brightness_low') | int }}"
-        kelvin: "{{ states('sensor.auto_kelvin_low') | int }}"
+        brightness_pct: "{{ states('sensor.auto_brightness_medium') | int }}"
+        kelvin: "{{ states('sensor.auto_kelvin_medium') | int }}"
         transition: 3
   mode: single
 
