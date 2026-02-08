@@ -1,6 +1,12 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
+recorder:
+  exclude:
+    entities:
+      - sensor.leo_presence_duration
+      - sensor.kardi_presence_duration
+
 # Automation enable/disable toggles
 input_boolean: !include automation_toggles.yaml
 
