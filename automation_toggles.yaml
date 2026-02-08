@@ -69,6 +69,10 @@ bedroom_auto_lights:
   name: "Bedroom Auto Lights"
   icon: mdi:bed
 
+toilet_auto_lights:
+  name: "Toilet Auto Lights"
+  icon: mdi:toilet
+
 staircase_transitional_light:
   name: "Staircase Transitional Light"
   icon: mdi:stairs

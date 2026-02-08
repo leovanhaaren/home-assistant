@@ -86,12 +86,19 @@ blueprint:
       default: "23:59:59"
       selector:
         time:
+    ignore_sun:
+      name: Ignore sun elevation
+      description: Always turn on lights regardless of sun position (useful for windowless rooms like toilets)
+      default: false
+      selector:
+        boolean:
 
 variables:
   max_brightness_var: !input max_brightness
   color_temp_var: !input color_temp
   time_limit_var: !input time_limit_before
   no_presence_wait_var: !input no_presence_wait
+  ignore_sun_var: !input ignore_sun
 
 mode: restart
 max_exceeded: silent
@@ -123,9 +130,13 @@ actions:
             id: presence_on
           - condition: template
             value_template: >
-              {% set offset = states('input_number.sunset_offset') | int %}
-              {% set elevation_threshold = offset * 0.25 %}
-              {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
+              {% if ignore_sun_var %}
+                true
+              {% else %}
+                {% set offset = states('input_number.sunset_offset') | int %}
+                {% set elevation_threshold = offset * 0.25 %}
+                {{ state_attr('sun.sun', 'elevation') | float < elevation_threshold }}
+              {% endif %}
           - condition: template
             value_template: >
               {{ now().strftime('%H:%M:%S') < time_limit_var }}
