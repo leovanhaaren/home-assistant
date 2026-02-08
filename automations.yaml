@@ -674,5 +674,6 @@
         entity_id: light.officeceiling
       data:
         brightness_pct: "{{ states('sensor.auto_brightness_medium') | int }}"
+        kelvin: "{{ states('sensor.auto_kelvin_low') | int }}"
         transition: 60
   mode: single
