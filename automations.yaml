@@ -102,13 +102,13 @@
 # -----------------------------------------------------------------------------
 - id: laundry_washer_done
   alias: Laundry - Washer Finished
-  description: Notify when washing machine cycle completes
+  description: Notify all phones when washing machine cycle completes
   use_blueprint:
     path: custom/appliance_done_notification.yaml
     input:
       running_sensor: binary_sensor.washing_machine_running
       toggle_entity: input_boolean.laundry_notifications
-      notify_service: notify.mobile_app_leos_iphone
+      notify_service: notify.notify
       notification_title: "Laundry Done!"
       notification_message: "The washing machine has finished. Don't forget to move clothes to dryer!"
       notification_tag: laundry_washer
@@ -116,13 +116,13 @@
 
 - id: laundry_dryer_done
   alias: Laundry - Dryer Finished
-  description: Notify when dryer cycle completes
+  description: Notify all phones when dryer cycle completes
   use_blueprint:
     path: custom/appliance_done_notification.yaml
     input:
       running_sensor: binary_sensor.dryer_running
       toggle_entity: input_boolean.laundry_notifications
-      notify_service: notify.mobile_app_leos_iphone
+      notify_service: notify.notify
       notification_title: "Dryer Done!"
       notification_message: "The dryer has finished. Time to fold!"
       notification_tag: laundry_dryer
