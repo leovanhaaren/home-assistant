@@ -79,40 +79,38 @@ template:
           offset_minutes: "{{ states('input_number.sunset_offset') | int }}"
           base_time: "{{ state_attr('sun.sun', 'next_setting') }}"
 
-      - name: "Time Aware Brightness"
-        unique_id: time_aware_brightness
+      - name: "Auto Brightness High"
+        unique_id: auto_brightness_high
         unit_of_measurement: "%"
         state: >
           {% set hour = now().hour %}
           {% set minute = now().minute %}
           {% set time_decimal = hour + (minute / 60) %}
-          {# Brightness curve:
-             06:00-17:00: 100% (daytime, though lights usually off due to sun)
-             17:00-19:00: 90-100% (early evening, brightest)
-             19:00-21:00: 70-90% (evening wind-down starts)
-             21:00-22:00: 50-70% (late evening)
-             22:00-23:00: 30-50% (pre-bedtime)
-             23:00-06:00: 15-30% (night mode)
+          {# High brightness curve: 80 down to 25
+             06:00-17:00: 80% (daytime max)
+             17:00-19:00: 71-80% (early evening)
+             19:00-21:00: 48-71% (evening wind-down)
+             21:00-22:00: 36-48% (late evening)
+             22:00-23:00: 25-36% (pre-bedtime)
+             23:00-06:00: 25% (night mode)
           #}
+          {% set max_val = 80 %}
+          {% set min_val = 25 %}
+          {% set range = max_val - min_val %}
           {% if 6 <= time_decimal < 17 %}
-            100
+            {{ max_val }}
           {% elif 17 <= time_decimal < 19 %}
-            {{ (100 - ((time_decimal - 17) * 5)) | round(0) }}
+            {{ (max_val - ((time_decimal - 17) * (range * 0.16 / 2))) | round(0) }}
           {% elif 19 <= time_decimal < 21 %}
-            {{ (90 - ((time_decimal - 19) * 10)) | round(0) }}
+            {{ (max_val - (range * 0.16) - ((time_decimal - 19) * (range * 0.21 / 2))) | round(0) }}
           {% elif 21 <= time_decimal < 22 %}
-            {{ (70 - ((time_decimal - 21) * 20)) | round(0) }}
+            {{ (max_val - (range * 0.58) - ((time_decimal - 21) * (range * 0.22))) | round(0) }}
           {% elif 22 <= time_decimal < 23 %}
-            {{ (50 - ((time_decimal - 22) * 20)) | round(0) }}
+            {{ (max_val - (range * 0.80) - ((time_decimal - 22) * (range * 0.20))) | round(0) | max(min_val) }}
           {% else %}
-            {# 23:00-06:00 night mode #}
-            {% if time_decimal >= 23 %}
-              {{ (30 - ((time_decimal - 23) * 15)) | round(0) | max(15) }}
-            {% else %}
-              15
-            {% endif %}
+            {{ min_val }}
           {% endif %}
-        icon: mdi:brightness-auto
+        icon: mdi:brightness-7
         attributes:
           period: >
             {% set hour = now().hour %}
@@ -130,35 +128,170 @@ template:
               Night
             {% endif %}
 
-      - name: "Office Ceiling Brightness"
-        unique_id: office_ceiling_brightness
+      - name: "Auto Brightness Medium"
+        unique_id: auto_brightness_medium
         unit_of_measurement: "%"
         state: >
           {% set hour = now().hour %}
           {% set minute = now().minute %}
           {% set time_decimal = hour + (minute / 60) %}
-          {# Office ceiling dims 2x faster in the evening:
-             06:00-17:00: 100% (daytime)
-             17:00-18:00: 80-100% (early evening, 2x faster drop)
-             18:00-20:00: 40-80% (evening wind-down, 2x faster)
-             20:00-20:30: 30-40% (late evening, 2x faster)
-             20:30-21:00: 15-30% (pre-bedtime, 2x faster)
-             21:00-06:00: 15% (night mode)
+          {# Medium brightness curve: 60 down to 20
+             06:00-17:00: 60% (daytime max)
+             17:00-19:00: 54-60% (early evening)
+             19:00-21:00: 37-54% (evening wind-down)
+             21:00-22:00: 28-37% (late evening)
+             22:00-23:00: 20-28% (pre-bedtime)
+             23:00-06:00: 20% (night mode)
           #}
+          {% set max_val = 60 %}
+          {% set min_val = 20 %}
+          {% set range = max_val - min_val %}
           {% if 6 <= time_decimal < 17 %}
-            100
-          {% elif 17 <= time_decimal < 18 %}
-            {{ (100 - ((time_decimal - 17) * 20)) | round(0) }}
-          {% elif 18 <= time_decimal < 20 %}
-            {{ (80 - ((time_decimal - 18) * 20)) | round(0) }}
-          {% elif 20 <= time_decimal < 20.5 %}
-            {{ (40 - ((time_decimal - 20) * 20)) | round(0) }}
-          {% elif 20.5 <= time_decimal < 21 %}
-            {{ (30 - ((time_decimal - 20.5) * 30)) | round(0) | max(15) }}
+            {{ max_val }}
+          {% elif 17 <= time_decimal < 19 %}
+            {{ (max_val - ((time_decimal - 17) * (range * 0.16 / 2))) | round(0) }}
+          {% elif 19 <= time_decimal < 21 %}
+            {{ (max_val - (range * 0.16) - ((time_decimal - 19) * (range * 0.21 / 2))) | round(0) }}
+          {% elif 21 <= time_decimal < 22 %}
+            {{ (max_val - (range * 0.58) - ((time_decimal - 21) * (range * 0.22))) | round(0) }}
+          {% elif 22 <= time_decimal < 23 %}
+            {{ (max_val - (range * 0.80) - ((time_decimal - 22) * (range * 0.20))) | round(0) | max(min_val) }}
           {% else %}
-            15
+            {{ min_val }}
           {% endif %}
-        icon: mdi:ceiling-light
+        icon: mdi:brightness-6
+
+      - name: "Auto Brightness Low"
+        unique_id: auto_brightness_low
+        unit_of_measurement: "%"
+        state: >
+          {% set hour = now().hour %}
+          {% set minute = now().minute %}
+          {% set time_decimal = hour + (minute / 60) %}
+          {# Low brightness curve: 40 down to 15
+             06:00-17:00: 40% (daytime max)
+             17:00-19:00: 36-40% (early evening)
+             19:00-21:00: 25-36% (evening wind-down)
+             21:00-22:00: 19-25% (late evening)
+             22:00-23:00: 15-19% (pre-bedtime)
+             23:00-06:00: 15% (night mode)
+          #}
+          {% set max_val = 40 %}
+          {% set min_val = 15 %}
+          {% set range = max_val - min_val %}
+          {% if 6 <= time_decimal < 17 %}
+            {{ max_val }}
+          {% elif 17 <= time_decimal < 19 %}
+            {{ (max_val - ((time_decimal - 17) * (range * 0.16 / 2))) | round(0) }}
+          {% elif 19 <= time_decimal < 21 %}
+            {{ (max_val - (range * 0.16) - ((time_decimal - 19) * (range * 0.21 / 2))) | round(0) }}
+          {% elif 21 <= time_decimal < 22 %}
+            {{ (max_val - (range * 0.58) - ((time_decimal - 21) * (range * 0.22))) | round(0) }}
+          {% elif 22 <= time_decimal < 23 %}
+            {{ (max_val - (range * 0.80) - ((time_decimal - 22) * (range * 0.20))) | round(0) | max(min_val) }}
+          {% else %}
+            {{ min_val }}
+          {% endif %}
+        icon: mdi:brightness-5
+
+      - name: "Auto Kelvin High"
+        unique_id: auto_kelvin_high
+        unit_of_measurement: "K"
+        state: >
+          {% set hour = now().hour %}
+          {% set minute = now().minute %}
+          {% set time_decimal = hour + (minute / 60) %}
+          {# High kelvin curve: 4000K down to 2700K
+             06:00-17:00: 4000K (daytime, cool white)
+             17:00-19:00: 3792-4000K (early evening)
+             19:00-21:00: 3519-3792K (evening wind-down)
+             21:00-22:00: 3233-3519K (late evening)
+             22:00-23:00: 2700-3233K (pre-bedtime)
+             23:00-06:00: 2700K (night mode)
+          #}
+          {% set max_val = 4000 %}
+          {% set min_val = 2700 %}
+          {% set range = max_val - min_val %}
+          {% if 6 <= time_decimal < 17 %}
+            {{ max_val }}
+          {% elif 17 <= time_decimal < 19 %}
+            {{ (max_val - ((time_decimal - 17) * (range * 0.16 / 2))) | round(0) }}
+          {% elif 19 <= time_decimal < 21 %}
+            {{ (max_val - (range * 0.16) - ((time_decimal - 19) * (range * 0.21 / 2))) | round(0) }}
+          {% elif 21 <= time_decimal < 22 %}
+            {{ (max_val - (range * 0.58) - ((time_decimal - 21) * (range * 0.22))) | round(0) }}
+          {% elif 22 <= time_decimal < 23 %}
+            {{ (max_val - (range * 0.80) - ((time_decimal - 22) * (range * 0.20))) | round(0) | max(min_val) }}
+          {% else %}
+            {{ min_val }}
+          {% endif %}
+        icon: mdi:sun-thermometer
+
+      - name: "Auto Kelvin Medium"
+        unique_id: auto_kelvin_medium
+        unit_of_measurement: "K"
+        state: >
+          {% set hour = now().hour %}
+          {% set minute = now().minute %}
+          {% set time_decimal = hour + (minute / 60) %}
+          {# Medium kelvin curve: 3500K down to 2500K
+             06:00-17:00: 3500K (daytime, warm neutral)
+             17:00-19:00: 3340-3500K (early evening)
+             19:00-21:00: 3130-3340K (evening wind-down)
+             21:00-22:00: 2910-3130K (late evening)
+             22:00-23:00: 2500-2910K (pre-bedtime)
+             23:00-06:00: 2500K (night mode)
+          #}
+          {% set max_val = 3500 %}
+          {% set min_val = 2500 %}
+          {% set range = max_val - min_val %}
+          {% if 6 <= time_decimal < 17 %}
+            {{ max_val }}
+          {% elif 17 <= time_decimal < 19 %}
+            {{ (max_val - ((time_decimal - 17) * (range * 0.16 / 2))) | round(0) }}
+          {% elif 19 <= time_decimal < 21 %}
+            {{ (max_val - (range * 0.16) - ((time_decimal - 19) * (range * 0.21 / 2))) | round(0) }}
+          {% elif 21 <= time_decimal < 22 %}
+            {{ (max_val - (range * 0.58) - ((time_decimal - 21) * (range * 0.22))) | round(0) }}
+          {% elif 22 <= time_decimal < 23 %}
+            {{ (max_val - (range * 0.80) - ((time_decimal - 22) * (range * 0.20))) | round(0) | max(min_val) }}
+          {% else %}
+            {{ min_val }}
+          {% endif %}
+        icon: mdi:sun-thermometer-outline
+
+      - name: "Auto Kelvin Low"
+        unique_id: auto_kelvin_low
+        unit_of_measurement: "K"
+        state: >
+          {% set hour = now().hour %}
+          {% set minute = now().minute %}
+          {% set time_decimal = hour + (minute / 60) %}
+          {# Low kelvin curve: 3000K down to 2200K
+             06:00-17:00: 3000K (daytime, warm)
+             17:00-19:00: 2872-3000K (early evening)
+             19:00-21:00: 2704-2872K (evening wind-down)
+             21:00-22:00: 2528-2704K (late evening)
+             22:00-23:00: 2200-2528K (pre-bedtime)
+             23:00-06:00: 2200K (night mode)
+          #}
+          {% set max_val = 3000 %}
+          {% set min_val = 2200 %}
+          {% set range = max_val - min_val %}
+          {% if 6 <= time_decimal < 17 %}
+            {{ max_val }}
+          {% elif 17 <= time_decimal < 19 %}
+            {{ (max_val - ((time_decimal - 17) * (range * 0.16 / 2))) | round(0) }}
+          {% elif 19 <= time_decimal < 21 %}
+            {{ (max_val - (range * 0.16) - ((time_decimal - 19) * (range * 0.21 / 2))) | round(0) }}
+          {% elif 21 <= time_decimal < 22 %}
+            {{ (max_val - (range * 0.58) - ((time_decimal - 21) * (range * 0.22))) | round(0) }}
+          {% elif 22 <= time_decimal < 23 %}
+            {{ (max_val - (range * 0.80) - ((time_decimal - 22) * (range * 0.20))) | round(0) | max(min_val) }}
+          {% else %}
+            {{ min_val }}
+          {% endif %}
+        icon: mdi:thermometer
 
       - name: "Leo Presence Duration"
         unique_id: leo_presence_duration

@@ -67,15 +67,50 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.time_aware_brightness",
-                  "name": "Auto Brightness",
+                  "entity": "sensor.auto_brightness_high",
+                  "name": "High",
                   "color": "yellow"
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.office_ceiling_brightness",
-                  "name": "Office Ceiling",
+                  "entity": "sensor.auto_brightness_medium",
+                  "name": "Medium",
                   "color": "orange"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.auto_brightness_low",
+                  "name": "Low",
+                  "color": "red"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Color Temperature",
+                  "heading_style": "title",
+                  "icon": "mdi:sun-thermometer"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.auto_kelvin_high",
+                  "name": "High",
+                  "color": "blue"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.auto_kelvin_medium",
+                  "name": "Medium",
+                  "color": "orange"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.auto_kelvin_low",
+                  "name": "Low",
+                  "color": "red"
                 }
               ]
             },

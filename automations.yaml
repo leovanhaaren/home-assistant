@@ -194,14 +194,14 @@
         entity_id: light.living_room
       data:
         brightness_pct: 30
-        kelvin: 2700
+        kelvin: "{{ states('sensor.auto_kelvin_medium') | int }}"
     - delay: "00:30:00"
     - action: light.turn_on
       target:
         entity_id: light.living_room
       data:
         brightness_pct: 70
-        kelvin: 4000
+        kelvin: "{{ states('sensor.auto_kelvin_high') | int }}"
   mode: single
 
 - id: adaptive_lighting_evening
@@ -220,7 +220,7 @@
         entity_id: light.living_room
       data:
         brightness_pct: 50
-        kelvin: 2700
+        kelvin: "{{ states('sensor.auto_kelvin_medium') | int }}"
         transition: 1800
   mode: single
 
@@ -240,7 +240,7 @@
         entity_id: light.living_room
       data:
         brightness_pct: 20
-        kelvin: 2200
+        kelvin: "{{ states('sensor.auto_kelvin_low') | int }}"
         transition: 900
   mode: single
 
@@ -272,8 +272,8 @@
       target:
         entity_id: light.living_room
       data:
-        brightness_pct: "{{ states('sensor.time_aware_brightness') | int }}"
-        kelvin: 3000
+        brightness_pct: "{{ states('sensor.auto_brightness_high') | int }}"
+        kelvin: "{{ states('sensor.auto_kelvin_high') | int }}"
   mode: single
 
 # -----------------------------------------------------------------------------
@@ -501,8 +501,8 @@
       target:
         entity_id: light.living_room
       data:
-        brightness_pct: 15
-        kelvin: 2200
+        brightness_pct: "{{ states('sensor.auto_brightness_low') | int }}"
+        kelvin: "{{ states('sensor.auto_kelvin_low') | int }}"
         transition: 3
   mode: single
 
@@ -534,8 +534,8 @@
       target:
         entity_id: light.living_room
       data:
-        brightness_pct: 60
-        kelvin: 3000
+        brightness_pct: "{{ states('sensor.auto_brightness_high') | int }}"
+        kelvin: "{{ states('sensor.auto_kelvin_high') | int }}"
         transition: 2
   mode: single
 
@@ -640,8 +640,8 @@
       target:
         entity_id: light.staircase
       data:
-        brightness_pct: "{{ states('sensor.office_ceiling_brightness') | int }}"
-        kelvin: 2700
+        brightness_pct: "{{ states('sensor.auto_brightness_medium') | int }}"
+        kelvin: "{{ states('sensor.auto_kelvin_medium') | int }}"
     - delay:
         minutes: 5
     - action: light.turn_off
@@ -661,7 +661,7 @@
   description: Dim office ceiling twice as fast as other office lights in the evening
   triggers:
     - trigger: state
-      entity_id: sensor.office_ceiling_brightness
+      entity_id: sensor.auto_brightness_medium
   conditions:
     - condition: state
       entity_id: input_boolean.office_auto_lights
@@ -677,6 +677,6 @@
       target:
         entity_id: light.officeceiling
       data:
-        brightness_pct: "{{ states('sensor.office_ceiling_brightness') | int }}"
+        brightness_pct: "{{ states('sensor.auto_brightness_medium') | int }}"
         transition: 60
   mode: single
