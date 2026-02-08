@@ -32,13 +32,19 @@ mode: single
 triggers:
   - trigger: state
     entity_id: !input person_entity
-    from: not_home
     to: home
+    not_from:
+      - home
+  - trigger: homeassistant
+    event: start
 
 conditions:
   - condition: state
     entity_id: !input toggle_entity
     state: "on"
+  - condition: state
+    entity_id: !input person_entity
+    state: home
 
 actions:
   - action: input_datetime.set_datetime
