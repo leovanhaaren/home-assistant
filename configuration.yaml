@@ -40,6 +40,14 @@ input_number:
     step: 5
     unit_of_measurement: min
     mode: slider
+  evening_blinds_bedroom_position:
+    name: Bedroom Closing Position
+    icon: mdi:blinds
+    min: 0
+    max: 100
+    step: 5
+    unit_of_measurement: "%"
+    mode: slider
 
 # Input datetime helpers to track when users arrive home
 input_datetime:
@@ -50,6 +58,14 @@ input_datetime:
   kardi_arrived_home:
     name: Kardi Arrived Home
     has_date: true
+    has_time: true
+  morning_blinds_open_time:
+    name: Morning Blinds Open Time
+    has_date: false
+    has_time: true
+  evening_blinds_close_time:
+    name: Evening Blinds Close Time
+    has_date: false
     has_time: true
 
 # Template sensors to show presence duration and time-aware brightness

@@ -255,8 +255,45 @@
                 },
                 {
                   "type": "tile",
+                  "entity": "input_boolean.evening_blinds",
+                  "name": "Evening Blinds"
+                },
+                {
+                  "type": "tile",
                   "entity": "input_boolean.presence_tracking",
                   "name": "Presence Tracking"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Blinds Schedule",
+                  "heading_style": "title",
+                  "icon": "mdi:blinds"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.morning_blinds_open_time",
+                  "name": "Morning Open"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.evening_blinds_close_time",
+                  "name": "Evening Close"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.evening_blinds_bedroom_position",
+                  "name": "Bedroom Position",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ]
                 }
               ]
             },
@@ -449,6 +486,11 @@
                   "type": "tile",
                   "entity": "automation.morning_open_blinds",
                   "name": "Morning Blinds"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.evening_blinds_close",
+                  "name": "Evening Blinds"
                 }
               ]
             },

@@ -305,14 +305,14 @@
           - light.palace
           - light.attic
           - light.staircase
-    - action: cover.close_cover
-      target:
-        entity_id:
-          - cover.rs100_solar_io_attic
-          - cover.rs100_solar_io_bathroom
-          - cover.rs100_solar_io_bedroom
-          - cover.rs100_solar_io_office
-          - cover.rs100_solar_io_palace
+    # - action: cover.close_cover
+    #   target:
+    #     entity_id:
+    #       - cover.rs100_solar_io_attic
+    #       - cover.rs100_solar_io_bathroom
+    #       - cover.rs100_solar_io_bedroom
+    #       - cover.rs100_solar_io_office
+    #       - cover.rs100_solar_io_palace
   mode: single
 
 # -----------------------------------------------------------------------------
@@ -323,11 +323,8 @@
   alias: Morning - Open Blinds
   description: Open all blinds at sunrise on weekdays
   triggers:
-    - trigger: template
-      value_template: >
-        {% set offset = states('input_number.sunrise_offset') | int %}
-        {% set elevation_threshold = offset * 0.25 %}
-        {{ state_attr('sun.sun', 'elevation') | float >= elevation_threshold and state_attr('sun.sun', 'rising') }}
+    - trigger: time
+      at: input_datetime.morning_blinds_open_time
   conditions:
     - condition: state
       entity_id: input_boolean.morning_blinds
@@ -344,11 +341,8 @@
       target:
         entity_id:
           - cover.rs100_solar_io_attic
-          - cover.rs100_solar_io_bathroom
           - cover.rs100_solar_io_bedroom
           - cover.rs100_solar_io_office
-          - cover.rs100_solar_io_palace
-          - cover.sunea40_solar_io_kitchen
   mode: single
 
 # -----------------------------------------------------------------------------
@@ -360,7 +354,7 @@
   description: Close all blinds at 9pm
   triggers:
     - trigger: time
-      at: "21:00:00"
+      at: input_datetime.evening_blinds_close_time
   conditions:
     - condition: state
       entity_id: input_boolean.evening_blinds
@@ -370,10 +364,12 @@
       target:
         entity_id:
           - cover.rs100_solar_io_attic
-          # - cover.rs100_solar_io_bathroom
-          - cover.rs100_solar_io_bedroom
           - cover.rs100_solar_io_office
-          # - cover.rs100_solar_io_palace
+    - action: cover.set_cover_position
+      target:
+        entity_id: cover.rs100_solar_io_bedroom
+      data:
+        position: "{{ states('input_number.evening_blinds_bedroom_position') | int }}"
   mode: single
 
 # -----------------------------------------------------------------------------
