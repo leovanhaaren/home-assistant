@@ -336,6 +336,42 @@
                   "type": "tile",
                   "entity": "input_boolean.phone_battery_alert",
                   "name": "Phone Battery Alert"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.prenatal_vitamin_reminder",
+                  "name": "Prenatal Vitamin Reminder"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Vitamin Schedule",
+                  "heading_style": "title",
+                  "icon": "mdi:pill"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.prenatal_vitamin_time_1",
+                  "name": "Reminder 1"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.prenatal_vitamin_time_2",
+                  "name": "Reminder 2"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.prenatal_vitamin_time_3",
+                  "name": "Reminder 3"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.prenatal_vitamin_time_4",
+                  "name": "Reminder 4"
                 }
               ]
             }
@@ -590,6 +626,11 @@
                   "type": "tile",
                   "entity": "automation.low_phone_battery_alert",
                   "name": "Low Battery"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.prenatal_vitamin_reminder",
+                  "name": "Vitamin Reminder"
                 }
               ]
             },

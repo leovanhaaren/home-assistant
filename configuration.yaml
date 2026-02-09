@@ -73,6 +73,22 @@ input_datetime:
     name: Evening Blinds Close Time
     has_date: false
     has_time: true
+  prenatal_vitamin_time_1:
+    name: Prenatal Vitamin Time 1
+    has_date: false
+    has_time: true
+  prenatal_vitamin_time_2:
+    name: Prenatal Vitamin Time 2
+    has_date: false
+    has_time: true
+  prenatal_vitamin_time_3:
+    name: Prenatal Vitamin Time 3
+    has_date: false
+    has_time: true
+  prenatal_vitamin_time_4:
+    name: Prenatal Vitamin Time 4
+    has_date: false
+    has_time: true
 
 # Template sensors to show presence duration and time-aware brightness
 template:
