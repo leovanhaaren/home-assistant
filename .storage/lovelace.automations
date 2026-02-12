@@ -198,6 +198,27 @@
               "cards": [
                 {
                   "type": "heading",
+                  "heading": "Bedtime Schedule",
+                  "heading_style": "title",
+                  "icon": "mdi:bed-clock"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.bedtime_start",
+                  "name": "Bedtime Start"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.bedtime_end",
+                  "name": "Bedtime End"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
                   "heading": "Presence Light Timers",
                   "heading_style": "title",
                   "icon": "mdi:timer-outline"

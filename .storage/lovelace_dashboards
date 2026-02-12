@@ -31,15 +31,7 @@
         "mode": "storage",
         "url_path": "dashboard-home"
       },
-      {
-        "id": "dashboard_areas",
-        "show_in_sidebar": true,
-        "icon": "mdi:texture-box",
-        "title": "Areas",
-        "require_admin": false,
-        "mode": "storage",
-        "url_path": "dashboard-areas"
-      },
+
       {
         "id": "air_quality",
         "show_in_sidebar": true,
