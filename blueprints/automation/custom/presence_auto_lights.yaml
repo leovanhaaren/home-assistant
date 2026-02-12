@@ -82,10 +82,20 @@ blueprint:
           unit_of_measurement: K
     time_limit_before:
       name: Time limit (before)
-      description: Only turn on lights before this time (empty = no limit)
+      description: >
+        Only turn on lights before this time.
+        Accepts a static time (e.g. "22:00:00") or an input_datetime entity ID.
       default: "23:59:59"
       selector:
-        time:
+        text:
+    time_limit_after:
+      name: Time limit (after)
+      description: >
+        Only turn on lights after this time.
+        Accepts a static time (e.g. "07:00:00") or an input_datetime entity ID.
+      default: "00:00:00"
+      selector:
+        text:
     ignore_sun:
       name: Ignore sun elevation
       description: Always turn on lights regardless of sun position (useful for windowless rooms like toilets)
@@ -96,7 +106,12 @@ blueprint:
 variables:
   max_brightness_var: !input max_brightness
   color_temp_var: !input color_temp
-  time_limit_var: !input time_limit_before
+  time_limit_before_raw: !input time_limit_before
+  time_limit_after_raw: !input time_limit_after
+  time_limit_var: >
+    {{ states(time_limit_before_raw) if time_limit_before_raw.startswith('input_datetime.') else time_limit_before_raw }}
+  time_limit_after_var: >
+    {{ states(time_limit_after_raw) if time_limit_after_raw.startswith('input_datetime.') else time_limit_after_raw }}
   no_presence_wait_var: !input no_presence_wait
   ignore_sun_var: !input ignore_sun
 
@@ -139,7 +154,10 @@ actions:
               {% endif %}
           - condition: template
             value_template: >
-              {{ now().strftime('%H:%M:%S') < time_limit_var }}
+              {% set current = now().strftime('%H:%M:%S') %}
+              {% set t_after = time_limit_after_var | trim %}
+              {% set t_before = time_limit_var | trim %}
+              {{ current >= t_after and current < t_before }}
         sequence:
           - action: timer.cancel
             target:

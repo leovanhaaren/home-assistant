@@ -26,7 +26,7 @@
 
 - id: office_auto_lights
   alias: Office Auto Lights
-  description: Turn on/off office lights based on presence
+  description: Turn on/off office lights based on presence (bedtime aware)
   use_blueprint:
     path: custom/presence_auto_lights.yaml
     input:
@@ -38,6 +38,8 @@
       no_presence_wait: 1
       turn_on_transition: 1
       turn_off_transition: 3
+      time_limit_before: input_datetime.bedtime_start
+      time_limit_after: input_datetime.bedtime_end
 
 - id: palace_auto_lights
   alias: Palace Auto Lights
@@ -697,7 +699,9 @@
       state: "on"
     - condition: time
       after: "17:00:00"
-      before: "23:00:00"
+    - condition: template
+      value_template: >
+        {{ now().strftime('%H:%M:%S') < states('input_datetime.bedtime_start') }}
   actions:
     - action: light.turn_on
       target:

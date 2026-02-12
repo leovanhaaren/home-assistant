@@ -89,6 +89,14 @@ input_datetime:
     name: Prenatal Vitamin Time 4
     has_date: false
     has_time: true
+  bedtime_start:
+    name: Bedtime Start
+    has_date: false
+    has_time: true
+  bedtime_end:
+    name: Bedtime End
+    has_date: false
+    has_time: true
 
 # Template sensors to show presence duration and time-aware brightness
 template:
