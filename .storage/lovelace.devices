@@ -288,6 +288,32 @@
                   "name": "Bedroom Presence"
                 }
               ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Device Health",
+                  "heading_style": "title",
+                  "icon": "mdi:heart-pulse"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.device_health_alerts",
+                  "name": "Device Health Alerts"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.device_health_low_battery_alert",
+                  "name": "Low Battery Alert"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.device_health_unavailable_alert",
+                  "name": "Unavailable Alert"
+                }
+              ]
             }
           ]
         },
@@ -840,7 +866,10 @@
                       "showticklabels": false,
                       "zeroline": false,
                       "showline": false,
-                      "range": [-580, 580],
+                      "range": [
+                        -580,
+                        580
+                      ],
                       "constrain": "domain"
                     },
                     "yaxis": {
@@ -853,7 +882,10 @@
                       "showticklabels": false,
                       "zeroline": false,
                       "showline": false,
-                      "range": [600, 0],
+                      "range": [
+                        600,
+                        0
+                      ],
                       "scaleanchor": "x",
                       "scaleratio": 1
                     }
@@ -1108,7 +1140,10 @@
                       "showticklabels": false,
                       "zeroline": false,
                       "showline": false,
-                      "range": [-580, 580],
+                      "range": [
+                        -580,
+                        580
+                      ],
                       "constrain": "domain"
                     },
                     "yaxis": {
@@ -1121,7 +1156,10 @@
                       "showticklabels": false,
                       "zeroline": false,
                       "showline": false,
-                      "range": [600, 0],
+                      "range": [
+                        600,
+                        0
+                      ],
                       "scaleanchor": "x",
                       "scaleratio": 1
                     }
@@ -1376,7 +1414,10 @@
                       "showticklabels": false,
                       "zeroline": false,
                       "showline": false,
-                      "range": [-580, 580],
+                      "range": [
+                        -580,
+                        580
+                      ],
                       "constrain": "domain"
                     },
                     "yaxis": {
@@ -1389,7 +1430,10 @@
                       "showticklabels": false,
                       "zeroline": false,
                       "showline": false,
-                      "range": [600, 0],
+                      "range": [
+                        600,
+                        0
+                      ],
                       "scaleanchor": "x",
                       "scaleratio": 1
                     }
@@ -1644,7 +1688,10 @@
                       "showticklabels": false,
                       "zeroline": false,
                       "showline": false,
-                      "range": [-580, 580],
+                      "range": [
+                        -580,
+                        580
+                      ],
                       "constrain": "domain"
                     },
                     "yaxis": {
@@ -1657,7 +1704,10 @@
                       "showticklabels": false,
                       "zeroline": false,
                       "showline": false,
-                      "range": [600, 0],
+                      "range": [
+                        600,
+                        0
+                      ],
                       "scaleanchor": "x",
                       "scaleratio": 1
                     }

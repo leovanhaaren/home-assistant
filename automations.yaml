@@ -611,6 +611,85 @@
   mode: single
 
 # -----------------------------------------------------------------------------
+# Device Health
+# Toggle: input_boolean.device_health_alerts (default: off)
+# -----------------------------------------------------------------------------
+- id: device_health_low_battery_alert
+  alias: Device Health - Low Battery
+  description: Notify when any battery entity drops to 20% or lower
+  triggers:
+    - trigger: event
+      event_type: state_changed
+  conditions:
+    - condition: state
+      entity_id: input_boolean.device_health_alerts
+      state: "on"
+    - condition: template
+      value_template: >
+        {% set entity_id = trigger.event.data.entity_id %}
+        {% set new_state = trigger.event.data.new_state %}
+        {% set old_state = trigger.event.data.old_state %}
+        {% if entity_id in ['sensor.leos_iphone_battery_level'] or new_state is none %}
+          false
+        {% else %}
+          {% set value = new_state.state %}
+          {% set old_value = old_state.state if old_state is not none else none %}
+          {% set has_battery_signature = 'battery' in entity_id or new_state.attributes.device_class == 'battery' %}
+          {% set level = value | float(default=999) %}
+          {% set old_level = old_value | float(default=999) if old_value is not none else 999 %}
+          {{ has_battery_signature and value not in ['unknown', 'unavailable'] and level <= 20 and old_level > 20 }}
+        {% endif %}
+  actions:
+    - variables:
+        entity_id: "{{ trigger.event.data.entity_id }}"
+        battery_level: "{{ trigger.event.data.new_state.state }}"
+        battery_name: >
+          {{ trigger.event.data.new_state.name if trigger.event.data.new_state is not none else trigger.event.data.entity_id }}
+    - action: notify.mobile_app_leos_iphone
+      data:
+        title: "Device Health: Low Battery"
+        message: "{{ battery_name }} is at {{ battery_level }}% battery."
+        data:
+          tag: "device_health_low_battery_{{ entity_id | replace('.', '_') }}"
+  mode: queued
+  max: 25
+
+- id: device_health_unavailable_alert
+  alias: Device Health - Device Unavailable
+  description: Notify when a key device/entity is unavailable for 10 minutes
+  triggers:
+    - trigger: event
+      event_type: state_changed
+  conditions:
+    - condition: state
+      entity_id: input_boolean.device_health_alerts
+      state: "on"
+    - condition: template
+      value_template: >
+        {% set entity_id = trigger.event.data.entity_id %}
+        {% set domain = entity_id.split('.')[0] if '.' in entity_id else '' %}
+        {% set new_state = trigger.event.data.new_state %}
+        {% set old_state = trigger.event.data.old_state %}
+        {% set allowed_domains = ['binary_sensor', 'button', 'climate', 'cover', 'device_tracker', 'fan', 'light', 'lock', 'media_player', 'number', 'person', 'remote', 'select', 'sensor', 'switch', 'update', 'vacuum'] %}
+        {{ new_state is not none and old_state is not none and domain in allowed_domains and old_state.state != 'unavailable' and new_state.state == 'unavailable' }}
+  actions:
+    - variables:
+        entity_id: "{{ trigger.event.data.entity_id }}"
+        entity_name: >
+          {{ trigger.event.data.new_state.name if trigger.event.data.new_state is not none else trigger.event.data.entity_id }}
+    - delay: "00:10:00"
+    - condition: template
+      value_template: "{{ states(entity_id) == 'unavailable' }}"
+    - action: notify.mobile_app_leos_iphone
+      data:
+        title: "Device Health: Unavailable"
+        message: "{{ entity_name }} ({{ entity_id }}) has been unavailable for 10+ minutes."
+        data:
+          tag: "device_health_unavailable_{{ entity_id | replace('.', '_') }}"
+  mode: parallel
+  max: 50
+
+# -----------------------------------------------------------------------------
 # Staircase Transitional Light
 # Toggle: input_boolean.staircase_transitional_light (default: off)
 # -----------------------------------------------------------------------------
