@@ -88,6 +88,7 @@
       no_presence_wait: 1
       turn_on_transition: 1
       turn_off_transition: 3
+      min_brightness: 25
       ignore_sun: true
 
 # -----------------------------------------------------------------------------

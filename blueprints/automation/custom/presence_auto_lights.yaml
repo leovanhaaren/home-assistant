@@ -71,6 +71,15 @@ blueprint:
           min: 0
           max: 100
           unit_of_measurement: "%"
+    min_brightness:
+      name: Minimum brightness
+      description: Minimum brightness percentage (0 = no minimum)
+      default: 0
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: "%"
     color_temp:
       name: Color temperature
       description: Color temperature in Kelvin (0 = don't set)
@@ -105,6 +114,7 @@ blueprint:
 
 variables:
   max_brightness_var: !input max_brightness
+  min_brightness_var: !input min_brightness
   color_temp_var: !input color_temp
   time_limit_before_raw: !input time_limit_before
   time_limit_after_raw: !input time_limit_after
@@ -166,11 +176,15 @@ actions:
             target: !input light_target
             data:
               brightness_pct: >
-                {% set time_bright = states('sensor.auto_brightness_high') | int %}
-                {% if max_brightness_var > 0 %}
-                  {{ [time_bright, max_brightness_var] | min }}
+                {% set time_bright = states('sensor.auto_brightness_high') | int(0) %}
+                {% set max_b = max_brightness_var | int(0) %}
+                {% set min_b = min_brightness_var | int(0) %}
+                {% set capped = [time_bright, max_b] | min if max_b > 0 else time_bright %}
+                {% if min_b > 0 %}
+                  {% set floor = [min_b, max_b] | min if max_b > 0 else min_b %}
+                  {{ [capped, floor] | max }}
                 {% else %}
-                  {{ time_bright }}
+                  {{ capped }}
                 {% endif %}
               transition: !input turn_on_transition
               kelvin: >
