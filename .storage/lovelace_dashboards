@@ -23,16 +23,6 @@
         "mode": "storage"
       },
       {
-        "id": "dashboard_home",
-        "show_in_sidebar": true,
-        "icon": "mdi:home",
-        "title": "Home",
-        "require_admin": false,
-        "mode": "storage",
-        "url_path": "dashboard-home"
-      },
-
-      {
         "id": "air_quality",
         "show_in_sidebar": true,
         "icon": "mdi:head-lightbulb-outline",

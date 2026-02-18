@@ -611,6 +611,26 @@
                   "type": "tile",
                   "entity": "sensor.palace_co2",
                   "name": "Palace"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_carbon_dioxide",
+                  "name": "Alpstuga 1"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_carbon_dioxide_2",
+                  "name": "Alpstuga 2"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_carbon_dioxide_3",
+                  "name": "Alpstuga 3"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_carbon_dioxide_4",
+                  "name": "Alpstuga 4"
                 }
               ]
             },
@@ -642,6 +662,26 @@
                   "type": "tile",
                   "entity": "sensor.palace_humidity",
                   "name": "Palace"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_humidity",
+                  "name": "Alpstuga 1"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_humidity_2",
+                  "name": "Alpstuga 2"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_humidity_3",
+                  "name": "Alpstuga 3"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_humidity_4",
+                  "name": "Alpstuga 4"
                 }
               ]
             },
@@ -673,6 +713,155 @@
                   "type": "tile",
                   "entity": "sensor.palace_temperature",
                   "name": "Palace"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_temperature",
+                  "name": "Alpstuga 1"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_temperature_2",
+                  "name": "Alpstuga 2"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_temperature_3",
+                  "name": "Alpstuga 3"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_temperature_4",
+                  "name": "Alpstuga 4"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "PM2.5 & Air Quality",
+                  "heading_style": "title",
+                  "icon": "mdi:air-filter"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_pm2_5",
+                  "name": "Alpstuga 1 PM2.5"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_pm2_5_2",
+                  "name": "Alpstuga 2 PM2.5"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_pm2_5_3",
+                  "name": "Alpstuga 3 PM2.5"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_pm2_5_4",
+                  "name": "Alpstuga 4 PM2.5"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_air_quality",
+                  "name": "Alpstuga 1 AQI"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_air_quality_2",
+                  "name": "Alpstuga 2 AQI"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_air_quality_3",
+                  "name": "Alpstuga 3 AQI"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.alpstuga_air_quality_monitor_air_quality_4",
+                  "name": "Alpstuga 4 AQI"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Trends (24h)",
+                  "heading_style": "title",
+                  "icon": "mdi:chart-line"
+                },
+                {
+                  "type": "history-graph",
+                  "title": "CO2 Trend",
+                  "hours_to_show": 24,
+                  "entities": [
+                    "sensor.bedroom_co2",
+                    "sensor.office_co2",
+                    "sensor.kitchen_co2",
+                    "sensor.palace_co2",
+                    "sensor.alpstuga_air_quality_monitor_carbon_dioxide",
+                    "sensor.alpstuga_air_quality_monitor_carbon_dioxide_2",
+                    "sensor.alpstuga_air_quality_monitor_carbon_dioxide_3",
+                    "sensor.alpstuga_air_quality_monitor_carbon_dioxide_4"
+                  ]
+                },
+                {
+                  "type": "history-graph",
+                  "title": "Humidity Trend",
+                  "hours_to_show": 24,
+                  "entities": [
+                    "sensor.bedroom_humidity",
+                    "sensor.office_humidity",
+                    "sensor.kitchen_humidity",
+                    "sensor.palace_humidity",
+                    "sensor.alpstuga_air_quality_monitor_humidity",
+                    "sensor.alpstuga_air_quality_monitor_humidity_2",
+                    "sensor.alpstuga_air_quality_monitor_humidity_3",
+                    "sensor.alpstuga_air_quality_monitor_humidity_4"
+                  ]
+                },
+                {
+                  "type": "history-graph",
+                  "title": "Temperature Trend",
+                  "hours_to_show": 24,
+                  "entities": [
+                    "sensor.bedroom_temperature",
+                    "sensor.office_temperature",
+                    "sensor.kitchen_temperature",
+                    "sensor.palace_temperature",
+                    "sensor.alpstuga_air_quality_monitor_temperature",
+                    "sensor.alpstuga_air_quality_monitor_temperature_2",
+                    "sensor.alpstuga_air_quality_monitor_temperature_3",
+                    "sensor.alpstuga_air_quality_monitor_temperature_4"
+                  ]
+                },
+                {
+                  "type": "history-graph",
+                  "title": "PM2.5 Trend",
+                  "hours_to_show": 24,
+                  "entities": [
+                    "sensor.alpstuga_air_quality_monitor_pm2_5",
+                    "sensor.alpstuga_air_quality_monitor_pm2_5_2",
+                    "sensor.alpstuga_air_quality_monitor_pm2_5_3",
+                    "sensor.alpstuga_air_quality_monitor_pm2_5_4"
+                  ]
+                },
+                {
+                  "type": "history-graph",
+                  "title": "Air Quality Trend",
+                  "hours_to_show": 24,
+                  "entities": [
+                    "sensor.alpstuga_air_quality_monitor_air_quality",
+                    "sensor.alpstuga_air_quality_monitor_air_quality_2",
+                    "sensor.alpstuga_air_quality_monitor_air_quality_3",
+                    "sensor.alpstuga_air_quality_monitor_air_quality_4"
+                  ]
                 }
               ]
             }
