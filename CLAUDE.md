@@ -27,7 +27,7 @@ This repository contains Home Assistant configuration files managed via git. The
 ssh root@192.168.1.134 "cd /config && git checkout -- . && git pull"
 
 # Reload automations (no restart needed)
-ssh root@192.168.1.134 "curl -s -X POST http://supervisor/core/api/services/automation/reload -H 'Authorization: Bearer \$SUPERVISOR_TOKEN'"
+ssh root@192.168.1.134 'curl -s -X POST http://supervisor/core/api/services/automation/reload -H "Authorization: Bearer $SUPERVISOR_TOKEN"'
 
 # Restart Home Assistant (if reload isn't sufficient)
 ssh root@192.168.1.134 "ha core restart"
