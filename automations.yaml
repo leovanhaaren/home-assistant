@@ -353,7 +353,7 @@
   description: Open all blinds at 8:00 on weekends
   triggers:
     - trigger: time
-      at: "08:00:00"
+      at: input_datetime.weekend_blinds_open_time
   conditions:
     - condition: state
       entity_id: input_boolean.morning_blinds

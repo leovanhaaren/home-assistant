@@ -17,17 +17,17 @@ This repository contains Home Assistant configuration files managed via git. The
 5. **Push** - Push to the remote repository
 6. **Deploy** - Update the server by running:
    ```bash
-   ssh root@192.168.1.134 "cd /config && git pull"
+   ssh root@192.168.1.134 "cd /config && git checkout -- . && git pull"
    ```
 
 ### Server Commands
 
 ```bash
-# Pull latest changes to server
-ssh root@192.168.1.134 "cd /config && git pull"
+# Pull latest changes to server (resets HA editor formatting first)
+ssh root@192.168.1.134 "cd /config && git checkout -- . && git pull"
 
 # Reload automations (no restart needed)
-ssh root@192.168.1.134 "ha core reload"
+ssh root@192.168.1.134 "curl -s -X POST http://supervisor/core/api/services/automation/reload -H 'Authorization: Bearer \$SUPERVISOR_TOKEN'"
 
 # Restart Home Assistant (if reload isn't sufficient)
 ssh root@192.168.1.134 "ha core restart"

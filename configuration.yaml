@@ -69,6 +69,10 @@ input_datetime:
     name: Morning Blinds Open Time
     has_date: false
     has_time: true
+  weekend_blinds_open_time:
+    name: Weekend Blinds Open Time
+    has_date: false
+    has_time: true
   evening_blinds_close_time:
     name: Evening Blinds Close Time
     has_date: false

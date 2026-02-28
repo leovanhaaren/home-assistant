@@ -302,6 +302,11 @@
                 },
                 {
                   "type": "tile",
+                  "entity": "input_datetime.weekend_blinds_open_time",
+                  "name": "Weekend Open"
+                },
+                {
+                  "type": "tile",
                   "entity": "input_datetime.evening_blinds_close_time",
                   "name": "Evening Close"
                 },
