@@ -898,7 +898,7 @@
               - light.staircase
           data:
             hs_color: [0, 100]
-            brightness_pct: 80
+            brightness_pct: 50
   mode: single
 
 - id: bilresa_red_brightness_up
