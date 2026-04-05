@@ -415,6 +415,22 @@
                   "name": "Reminder 4"
                 }
               ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "BILRESA Buttons",
+                  "heading_style": "title",
+                  "icon": "mdi:remote"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.bilresa_red_toggle_red_lights",
+                  "name": "Red: Toggle Red Lights"
+                }
+              ]
             }
           ]
         },
