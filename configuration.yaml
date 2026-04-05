@@ -55,6 +55,26 @@ input_number:
     unit_of_measurement: "%"
     mode: slider
 
+  # Energy tariff configuration
+  electricity_tariff:
+    name: Electricity Tariff
+    icon: mdi:lightning-bolt
+    min: 0
+    max: 2
+    step: 0.01
+    unit_of_measurement: "€/kWh"
+    mode: box
+    initial: 0.26
+  water_tariff:
+    name: Water Tariff
+    icon: mdi:water
+    min: 0
+    max: 10
+    step: 0.01
+    unit_of_measurement: "€/m³"
+    mode: box
+    initial: 1.34
+
 # Input datetime helpers to track when users arrive home
 input_datetime:
   leo_arrived_home:
@@ -350,6 +370,15 @@ template:
             {{ min_val }}
           {% endif %}
         icon: mdi:thermometer
+
+      - name: "Electricity Cost Rate"
+        unique_id: electricity_cost_rate
+        unit_of_measurement: "€/h"
+        state: >
+          {% set power_w = states('sensor.p1_meter_power') | float(0) %}
+          {% set tariff = states('input_number.electricity_tariff') | float(0.26) %}
+          {{ (power_w / 1000 * tariff) | round(3) }}
+        icon: mdi:currency-eur
 
       - name: "Leo Presence Duration"
         unique_id: leo_presence_duration
