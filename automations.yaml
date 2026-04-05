@@ -879,13 +879,12 @@
         - conditions:
             - condition: template
               value_template: >
-                {{ is_state('light.bedroom', 'on') or is_state('light.office', 'on') or is_state('light.palace', 'on') or is_state('light.staircase', 'on') }}
+                {{ is_state('light.bedroom', 'on') or is_state('light.palace', 'on') or is_state('light.staircase', 'on') }}
           sequence:
             - action: light.turn_off
               target:
                 entity_id:
                   - light.bedroom
-                  - light.office
                   - light.palace
                   - light.staircase
       default:
@@ -893,7 +892,6 @@
           target:
             entity_id:
               - light.bedroom
-              - light.office
               - light.palace
               - light.staircase
           data:
@@ -903,7 +901,7 @@
 
 - id: bilresa_red_brightness_up
   alias: "BILRESA Red: Brightness Up"
-  description: Increase brightness of bedroom, office, palace and staircase lights
+  description: Increase brightness of bedroom, palace and staircase lights
   triggers:
     - trigger: state
       entity_id: event.bilresa_scroll_wheel_button_1_2
@@ -916,7 +914,6 @@
       target:
         entity_id:
           - light.bedroom
-          - light.office
           - light.palace
           - light.staircase
       data:
@@ -925,7 +922,7 @@
 
 - id: bilresa_red_brightness_down
   alias: "BILRESA Red: Brightness Down"
-  description: Decrease brightness of bedroom, office, palace and staircase lights
+  description: Decrease brightness of bedroom, palace and staircase lights
   triggers:
     - trigger: state
       entity_id: event.bilresa_scroll_wheel_button_2_2
@@ -938,7 +935,6 @@
       target:
         entity_id:
           - light.bedroom
-          - light.office
           - light.palace
           - light.staircase
       data:
