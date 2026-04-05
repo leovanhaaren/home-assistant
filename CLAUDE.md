@@ -57,6 +57,31 @@ ssh root@192.168.1.134 "ha core logs"
 - Use `automation_toggles.yaml` to create enable/disable switches for automations
 - Each automation should have a toggle on the automation dashboard
 - Test automations after deployment using Developer Tools > Services, this can take up to a minute to reflect changes.
+- **Always make trigger times configurable** — never hardcode times in automations. Define an `input_datetime` helper in `configuration.yaml` and reference it in the trigger (`at: input_datetime.your_helper`). Add the helper to the relevant dashboard section and document it in the Entities Reference at the bottom of this file.
+
+### Dashboard Updates
+
+When adding new automations or configuration, update the relevant dashboards in `.storage/`:
+
+- **`lovelace.automations`** — Add a toggle tile (`type: tile`) for the new `input_boolean` toggle. Group it under an existing section heading if it fits (e.g. "Lighting Automations", "Special Modes"), or add a new section. Each automation should be represented by its toggle here.
+- **`lovelace.devices`** — Add tiles for new physical devices (lights, sensors, switches, etc.) to the appropriate section in the "Devices" view (e.g. "Lights", "Motion & Presence"). New views or sections may be added for device categories that don't fit existing ones.
+
+Always present dashboard changes alongside the automation/config diff for user review before committing.
+
+### Guest Mode
+
+`input_boolean.guest_mode` is available for automations that may be disruptive or unwanted when guests are present. **Not every automation needs to check guest mode** — use judgement:
+
+- **Good candidates to disable in guest mode:** presence-triggered automations (welcome/goodbye lights, away detection), personal notifications, automations tied to specific people's routines (bedtime, vitamins), vacuum scheduling.
+- **Leave unaffected:** safety automations, ambient/comfort automations (blinds, auto lights), TV mode, outdoor lights.
+
+To add guest mode awareness, include a condition:
+```yaml
+conditions:
+  - condition: state
+    entity_id: input_boolean.guest_mode
+    state: "off"
+```
 
 ### YAML Syntax
 

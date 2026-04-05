@@ -130,6 +130,10 @@ prenatal_vitamin_reminder:
   name: "Prenatal Vitamin Reminder"
   icon: mdi:pill
 
+bedtime_reminders:
+  name: "Bedtime Reminders"
+  icon: mdi:bell-sleep
+
 # -----------------------------------------------------------------------------
 # Special Modes
 # -----------------------------------------------------------------------------
@@ -140,3 +144,10 @@ vacation_mode:
 guest_mode:
   name: "Guest Mode"
   icon: mdi:account-multiple
+
+# -----------------------------------------------------------------------------
+# BILRESA Button Automations
+# -----------------------------------------------------------------------------
+bilresa_red_toggle_red_lights:
+  name: "BILRESA Red: Toggle Red Lights"
+  icon: mdi:lightbulb-on

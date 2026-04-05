@@ -101,6 +101,14 @@ input_datetime:
     name: Bedtime End
     has_date: false
     has_time: true
+  bedtime_reminder_early:
+    name: Bedtime Reminder (Early)
+    has_date: false
+    has_time: true
+  bedtime_reminder_late:
+    name: Bedtime Reminder (Late)
+    has_date: false
+    has_time: true
 
 # Template sensors to show presence duration and time-aware brightness
 template:

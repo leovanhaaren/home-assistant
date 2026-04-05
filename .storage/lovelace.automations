@@ -211,6 +211,21 @@
                   "type": "tile",
                   "entity": "input_datetime.bedtime_end",
                   "name": "Bedtime End"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.bedtime_reminders",
+                  "name": "Bedtime Reminders"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.bedtime_reminder_early",
+                  "name": "Reminder (Early)"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.bedtime_reminder_late",
+                  "name": "Reminder (Late)"
                 }
               ]
             },
