@@ -429,6 +429,11 @@
                   "type": "tile",
                   "entity": "input_boolean.bilresa_red_toggle_red_lights",
                   "name": "Red: Toggle Red Lights"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.bilresa_red_brightness_controls",
+                  "name": "Red: Brightness Controls"
                 }
               ]
             }

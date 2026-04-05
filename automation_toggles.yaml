@@ -151,3 +151,7 @@ guest_mode:
 bilresa_red_toggle_red_lights:
   name: "BILRESA Red: Toggle Red Lights"
   icon: mdi:lightbulb-on
+
+bilresa_red_brightness_controls:
+  name: "BILRESA Red: Brightness Controls"
+  icon: mdi:brightness-6
