@@ -172,10 +172,8 @@ actions:
           - action: timer.cancel
             target:
               entity_id: !input countdown_timer
-          - action: light.turn_on
-            target: !input light_target
-            data:
-              brightness_pct: >
+          - variables:
+              target_brightness: >
                 {% set time_bright = states('sensor.auto_brightness_high') | int(0) %}
                 {% set max_b = max_brightness_var | int(0) %}
                 {% set min_b = min_brightness_var | int(0) %}
@@ -186,9 +184,39 @@ actions:
                 {% else %}
                   {{ capped }}
                 {% endif %}
-              transition: !input turn_on_transition
-              color_temp_kelvin: >
+              target_color_temp: >
                 {{ color_temp_var if color_temp_var > 0 else states('sensor.auto_kelvin_medium') | int }}
+          - action: light.turn_on
+            target: !input light_target
+            data:
+              brightness_pct: "{{ target_brightness }}"
+              transition: !input turn_on_transition
+              color_temp_kelvin: "{{ target_color_temp }}"
+          - delay:
+              seconds: 1
+          - variables:
+              light_value_wrong: >
+                {% set t = namespace(wrong=false) %}
+                {% if light_target is mapping and 'entity_id' in light_target %}
+                  {% set ids = light_target.entity_id %}
+                  {% if ids is string %}{% set ids = [ids] %}{% endif %}
+                  {% for id in ids %}
+                    {% if states(id) != 'on' %}
+                      {% set t.wrong = true %}
+                    {% elif (state_attr(id, 'brightness') | int(0) / 255 * 100 - target_brightness | int) | abs > 2 %}
+                      {% set t.wrong = true %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+                {{ t.wrong }}
+          - condition: template
+            value_template: "{{ light_value_wrong }}"
+          - action: light.turn_on
+            target: !input light_target
+            data:
+              brightness_pct: "{{ target_brightness }}"
+              transition: !input turn_on_transition
+              color_temp_kelvin: "{{ target_color_temp }}"
       - conditions:
           - condition: trigger
             id: presence_off
