@@ -2747,8 +2747,8 @@
                                         "sensor.alpstuga_air_quality_monitor_temperature_3"
                                     ],
                                     "grid_options": {
-                                        "columns": 4,
-                                        "rows": 8
+                                        "columns": 12,
+                                        "rows": 6
                                     }
                                 },
                                 {
@@ -2759,8 +2759,8 @@
                                         "sensor.alpstuga_air_quality_monitor_humidity_3"
                                     ],
                                     "grid_options": {
-                                        "columns": 4,
-                                        "rows": 8
+                                        "columns": 12,
+                                        "rows": 6
                                     }
                                 },
                                 {
@@ -2771,8 +2771,8 @@
                                         "sensor.alpstuga_air_quality_monitor_carbon_dioxide_3"
                                     ],
                                     "grid_options": {
-                                        "columns": 4,
-                                        "rows": 8
+                                        "columns": 12,
+                                        "rows": 6
                                     }
                                 }
                             ]
