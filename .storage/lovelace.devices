@@ -2669,7 +2669,11 @@
                                     "entity": "camera.e1_zoom_fluent",
                                     "camera_view": "live",
                                     "show_state": false,
-                                    "show_name": false
+                                    "show_name": false,
+                                    "grid_options": {
+                                        "columns": 12,
+                                        "rows": 6
+                                    }
                                 },
                                 {
                                     "type": "tile",
@@ -2686,7 +2690,8 @@
                                     "entity": "binary_sensor.e1_zoom_baby_crying",
                                     "name": "Baby Crying"
                                 }
-                            ]
+                            ],
+                            "column_span": 2
                         },
                         {
                             "type": "grid",
@@ -2730,6 +2735,14 @@
                                         "sensor.alpstuga_air_quality_monitor_temperature_3",
                                         "sensor.alpstuga_air_quality_monitor_humidity_3"
                                     ]
+                                },
+                                {
+                                    "type": "history-graph",
+                                    "title": "CO2 (24h)",
+                                    "hours_to_show": 24,
+                                    "entities": [
+                                        "sensor.alpstuga_air_quality_monitor_carbon_dioxide_3"
+                                    ]
                                 }
                             ]
                         },
@@ -2756,6 +2769,19 @@
                                     "type": "tile",
                                     "entity": "cover.rs100_solar_io_bedroom",
                                     "name": "Bedroom Blind"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "cover.rs100_solar_io_bedroom",
+                                    "name": "Blind 10%",
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.set_cover_position",
+                                        "service_data": {
+                                            "entity_id": "cover.rs100_solar_io_bedroom",
+                                            "position": 10
+                                        }
+                                    }
                                 }
                             ]
                         },
