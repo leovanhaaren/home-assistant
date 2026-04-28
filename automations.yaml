@@ -940,3 +940,37 @@
       data:
         brightness_step_pct: -5
   mode: single
+
+# =============================================================================
+# Baby Monitoring
+# =============================================================================
+
+- id: baby_sleep_start_record
+  alias: "Baby: Record Sleep Start Time"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.baby_sleeping
+      to: "on"
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.baby_sleep_start
+      data:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+
+- id: baby_counter_reset
+  alias: "Baby: Reset Daily Counters at Midnight"
+  trigger:
+    - platform: time
+      at: "00:00:00"
+  condition:
+    - condition: state
+      entity_id: input_boolean.baby_counter_reset
+      state: "on"
+  action:
+    - service: counter.reset
+      target:
+        entity_id:
+          - counter.feeding_count
+          - counter.diaper_count
+  mode: single

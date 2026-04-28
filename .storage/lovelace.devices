@@ -2648,6 +2648,201 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "title": "Baby",
+                    "icon": "mdi:baby-face-outline",
+                    "type": "sections",
+                    "max_columns": 4,
+                    "sections": [
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Camera",
+                                    "heading_style": "title",
+                                    "icon": "mdi:cctv"
+                                },
+                                {
+                                    "type": "picture-entity",
+                                    "entity": "camera.reolink_zoom",
+                                    "camera_view": "live",
+                                    "show_state": false,
+                                    "show_name": false
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "binary_sensor.reolink_zoom_motion",
+                                    "name": "Motion"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "binary_sensor.reolink_zoom_person",
+                                    "name": "Person Detected"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "binary_sensor.reolink_zoom_visitor",
+                                    "name": "Sound Alert"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Room",
+                                    "heading_style": "title",
+                                    "icon": "mdi:thermometer-lines"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "sensor.bedroom_temperature",
+                                    "name": "Temperature"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "sensor.bedroom_humidity",
+                                    "name": "Humidity"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "sensor.bedroom_co2",
+                                    "name": "CO2"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "binary_sensor.s1_pro_multi_sense_96e7b0_any_presence",
+                                    "name": "Presence"
+                                },
+                                {
+                                    "type": "history-graph",
+                                    "title": "Temperature & Humidity (24h)",
+                                    "hours_to_show": 24,
+                                    "entities": [
+                                        "sensor.bedroom_temperature",
+                                        "sensor.bedroom_humidity"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Lights & Blinds",
+                                    "heading_style": "title",
+                                    "icon": "mdi:lightbulb-night"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "script.night_mode_bedroom",
+                                    "name": "Night Mode"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "light.bedroom",
+                                    "name": "Bedroom Light"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "cover.rs100_solar_io_bedroom",
+                                    "name": "Bedroom Blind"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Sleep",
+                                    "heading_style": "title",
+                                    "icon": "mdi:sleep"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "input_boolean.baby_sleeping",
+                                    "name": "Baby Sleeping"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "sensor.baby_sleep_duration",
+                                    "name": "Duration"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Today",
+                                    "heading_style": "title",
+                                    "icon": "mdi:calendar-today"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "counter.feeding_count",
+                                    "name": "Feedings",
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "counter.increment",
+                                        "service_data": {
+                                            "entity_id": "counter.feeding_count"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "counter.diaper_count",
+                                    "name": "Diapers",
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "counter.increment",
+                                        "service_data": {
+                                            "entity_id": "counter.diaper_count"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Growth",
+                                    "heading_style": "title",
+                                    "icon": "mdi:chart-line-variant"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "input_number.baby_weight",
+                                    "name": "Weight (kg)"
+                                },
+                                {
+                                    "type": "statistics-graph",
+                                    "title": "Weight History (30 days)",
+                                    "entities": [
+                                        {
+                                            "entity": "input_number.baby_weight",
+                                            "name": "Weight (kg)"
+                                        }
+                                    ],
+                                    "chart_type": "line",
+                                    "period": "day",
+                                    "days_to_show": 30,
+                                    "stat_types": [
+                                        "mean"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
