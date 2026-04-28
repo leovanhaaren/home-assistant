@@ -2699,31 +2699,36 @@
                                 },
                                 {
                                     "type": "tile",
-                                    "entity": "sensor.bedroom_temperature",
+                                    "entity": "sensor.alpstuga_air_quality_monitor_temperature_3",
                                     "name": "Temperature"
                                 },
                                 {
                                     "type": "tile",
-                                    "entity": "sensor.bedroom_humidity",
+                                    "entity": "sensor.alpstuga_air_quality_monitor_humidity_3",
                                     "name": "Humidity"
                                 },
                                 {
                                     "type": "tile",
-                                    "entity": "sensor.bedroom_co2",
+                                    "entity": "sensor.alpstuga_air_quality_monitor_carbon_dioxide_3",
                                     "name": "CO2"
                                 },
                                 {
                                     "type": "tile",
-                                    "entity": "binary_sensor.s1_pro_multi_sense_96e7b0_any_presence",
-                                    "name": "Presence"
+                                    "entity": "sensor.alpstuga_air_quality_monitor_pm2_5_3",
+                                    "name": "PM2.5"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "sensor.alpstuga_air_quality_monitor_air_quality_3",
+                                    "name": "Air Quality"
                                 },
                                 {
                                     "type": "history-graph",
                                     "title": "Temperature & Humidity (24h)",
                                     "hours_to_show": 24,
                                     "entities": [
-                                        "sensor.bedroom_temperature",
-                                        "sensor.bedroom_humidity"
+                                        "sensor.alpstuga_air_quality_monitor_temperature_3",
+                                        "sensor.alpstuga_air_quality_monitor_humidity_3"
                                     ]
                                 }
                             ]
