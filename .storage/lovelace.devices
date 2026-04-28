@@ -2748,7 +2748,7 @@
                                     ],
                                     "grid_options": {
                                         "columns": 4,
-                                        "rows": 4
+                                        "rows": 8
                                     }
                                 },
                                 {
@@ -2760,7 +2760,7 @@
                                     ],
                                     "grid_options": {
                                         "columns": 4,
-                                        "rows": 4
+                                        "rows": 8
                                     }
                                 },
                                 {
@@ -2772,7 +2772,7 @@
                                     ],
                                     "grid_options": {
                                         "columns": 4,
-                                        "rows": 4
+                                        "rows": 8
                                     }
                                 }
                             ]
