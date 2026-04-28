@@ -2666,25 +2666,25 @@
                                 },
                                 {
                                     "type": "picture-entity",
-                                    "entity": "camera.reolink_zoom",
+                                    "entity": "camera.e1_zoom_fluent",
                                     "camera_view": "live",
                                     "show_state": false,
                                     "show_name": false
                                 },
                                 {
                                     "type": "tile",
-                                    "entity": "binary_sensor.reolink_zoom_motion",
+                                    "entity": "binary_sensor.e1_zoom_motion",
                                     "name": "Motion"
                                 },
                                 {
                                     "type": "tile",
-                                    "entity": "binary_sensor.reolink_zoom_person",
+                                    "entity": "binary_sensor.e1_zoom_person",
                                     "name": "Person Detected"
                                 },
                                 {
                                     "type": "tile",
-                                    "entity": "binary_sensor.reolink_zoom_visitor",
-                                    "name": "Sound Alert"
+                                    "entity": "binary_sensor.e1_zoom_baby_crying",
+                                    "name": "Baby Crying"
                                 }
                             ]
                         },
