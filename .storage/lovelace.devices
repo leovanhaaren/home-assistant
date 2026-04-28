@@ -2726,15 +2726,42 @@
                                     "type": "tile",
                                     "entity": "sensor.alpstuga_air_quality_monitor_air_quality_3",
                                     "name": "Air Quality"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "column_span": 4,
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Environment History",
+                                    "heading_style": "title",
+                                    "icon": "mdi:chart-line"
                                 },
                                 {
                                     "type": "history-graph",
-                                    "title": "Temperature & Humidity (24h)",
+                                    "title": "Temperature (24h)",
                                     "hours_to_show": 24,
                                     "entities": [
-                                        "sensor.alpstuga_air_quality_monitor_temperature_3",
+                                        "sensor.alpstuga_air_quality_monitor_temperature_3"
+                                    ],
+                                    "grid_options": {
+                                        "columns": 4,
+                                        "rows": 4
+                                    }
+                                },
+                                {
+                                    "type": "history-graph",
+                                    "title": "Humidity (24h)",
+                                    "hours_to_show": 24,
+                                    "entities": [
                                         "sensor.alpstuga_air_quality_monitor_humidity_3"
-                                    ]
+                                    ],
+                                    "grid_options": {
+                                        "columns": 4,
+                                        "rows": 4
+                                    }
                                 },
                                 {
                                     "type": "history-graph",
@@ -2742,7 +2769,11 @@
                                     "hours_to_show": 24,
                                     "entities": [
                                         "sensor.alpstuga_air_quality_monitor_carbon_dioxide_3"
-                                    ]
+                                    ],
+                                    "grid_options": {
+                                        "columns": 4,
+                                        "rows": 4
+                                    }
                                 }
                             ]
                         },
@@ -2871,7 +2902,8 @@
                                         "mean"
                                     ]
                                 }
-                            ]
+                            ],
+                            "column_span": 2
                         }
                     ]
                 }
