@@ -675,12 +675,12 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "automation.blinds_east_sun_tracking",
+                  "entity": "automation.blinds_east_side_sun_tracking",
                   "name": "East Sun Tracking"
                 },
                 {
                   "type": "tile",
-                  "entity": "automation.blinds_west_sun_tracking",
+                  "entity": "automation.blinds_west_side_sun_tracking",
                   "name": "West Sun Tracking"
                 }
               ]
