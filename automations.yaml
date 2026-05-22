@@ -425,8 +425,8 @@
     - action: cover.set_cover_position
       target:
         entity_id:
-          - cover.rs100_solar_io_palace
-          - cover.rs100_solar_io_bathroom
+          - cover.rs100_solar_io_palace_low_speed
+          - cover.rs100_solar_io_bathroom_low_speed
           - cover.sunea40_solar_io_kitchen
       data:
         position: >
@@ -462,9 +462,9 @@
     - action: cover.set_cover_position
       target:
         entity_id:
-          - cover.rs100_solar_io_bedroom
-          - cover.rs100_solar_io_office
-          - cover.rs100_solar_io_attic
+          - cover.rs100_solar_io_bedroom_low_speed
+          - cover.rs100_solar_io_office_low_speed
+          - cover.rs100_solar_io_attic_low_speed
       data:
         position: >
           {% if is_state('binary_sensor.west_side_sunny', 'on') %}
