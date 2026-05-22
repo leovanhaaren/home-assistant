@@ -100,3 +100,11 @@ conditions:
 - `input_datetime.kardi_arrived_home`
 - `sensor.leo_presence_duration`
 - `sensor.kardi_presence_duration`
+
+### Blinds
+- East side covers (morning sun): `cover.rs100_solar_io_palace`, `cover.rs100_solar_io_bathroom`, `cover.sunea40_solar_io_kitchen`
+- West side covers (afternoon sun): `cover.rs100_solar_io_bedroom`, `cover.rs100_solar_io_office`, `cover.rs100_solar_io_attic`
+- Per-blind luminance sensors follow `sensor.<cover_slug>_luminance` (e.g. `sensor.rs100_solar_io_palace_luminance`)
+- Sun-tracking toggle: `input_boolean.sun_blinds`
+- Sun-tracking config: `input_number.blinds_luminance_threshold`, `input_number.blinds_east_sunny_position`, `input_number.blinds_east_shaded_position`, `input_number.blinds_west_sunny_position`, `input_number.blinds_west_shaded_position`
+- Computed "side is sunny" sensors (5 min on / 10 min off debounce): `binary_sensor.east_side_sunny`, `binary_sensor.west_side_sunny`

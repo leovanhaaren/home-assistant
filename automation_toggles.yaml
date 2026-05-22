@@ -58,6 +58,10 @@ evening_blinds:
   name: "Evening Blinds Close"
   icon: mdi:blinds
 
+sun_blinds:
+  name: "Sun-Tracking Blinds"
+  icon: mdi:weather-sunny
+
 # -----------------------------------------------------------------------------
 # Room Auto Lights
 # -----------------------------------------------------------------------------

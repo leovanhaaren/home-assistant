@@ -296,6 +296,11 @@
                 },
                 {
                   "type": "tile",
+                  "entity": "input_boolean.sun_blinds",
+                  "name": "Sun-Tracking Blinds"
+                },
+                {
+                  "type": "tile",
                   "entity": "input_boolean.presence_tracking",
                   "name": "Presence Tracking"
                 }
@@ -329,6 +334,84 @@
                   "type": "tile",
                   "entity": "input_number.evening_blinds_bedroom_position",
                   "name": "Bedroom Position",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Sun-Tracking Blinds",
+                  "heading_style": "title",
+                  "icon": "mdi:weather-sunny"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.east_side_sunny",
+                  "name": "East Sunny",
+                  "color": "amber"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.west_side_sunny",
+                  "name": "West Sunny",
+                  "color": "orange"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.blinds_luminance_threshold",
+                  "name": "Luminance Threshold",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ]
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.blinds_east_sunny_position",
+                  "name": "East — Sunny %",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ]
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.blinds_east_shaded_position",
+                  "name": "East — Shaded %",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ]
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.blinds_west_sunny_position",
+                  "name": "West — Sunny %",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ]
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.blinds_west_shaded_position",
+                  "name": "West — Shaded %",
                   "features": [
                     {
                       "type": "numeric-input",
@@ -589,6 +672,16 @@
                   "type": "tile",
                   "entity": "automation.evening_blinds_close",
                   "name": "Evening Blinds"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.blinds_east_sun_tracking",
+                  "name": "East Sun Tracking"
+                },
+                {
+                  "type": "tile",
+                  "entity": "automation.blinds_west_sun_tracking",
+                  "name": "West Sun Tracking"
                 }
               ]
             },

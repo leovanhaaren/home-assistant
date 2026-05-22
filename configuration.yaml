@@ -68,6 +68,55 @@ input_number:
     unit_of_measurement: "%"
     mode: slider
 
+  # Sun-tracking blinds (input_boolean.sun_blinds)
+  # East side = palace, bathroom, kitchen (sun in morning, azimuth 45-180°)
+  # West side = bedroom, office, attic (sun in afternoon, azimuth 180-315°)
+  blinds_luminance_threshold:
+    name: Blinds Luminance Threshold
+    icon: mdi:brightness-6
+    min: 0
+    max: 80000
+    step: 1000
+    unit_of_measurement: lx
+    mode: slider
+    initial: 20000
+  blinds_east_sunny_position:
+    name: East Sunny Position
+    icon: mdi:blinds
+    min: 0
+    max: 100
+    step: 5
+    unit_of_measurement: "%"
+    mode: slider
+    initial: 30
+  blinds_east_shaded_position:
+    name: East Shaded Position
+    icon: mdi:blinds-open
+    min: 0
+    max: 100
+    step: 5
+    unit_of_measurement: "%"
+    mode: slider
+    initial: 100
+  blinds_west_sunny_position:
+    name: West Sunny Position
+    icon: mdi:blinds
+    min: 0
+    max: 100
+    step: 5
+    unit_of_measurement: "%"
+    mode: slider
+    initial: 30
+  blinds_west_shaded_position:
+    name: West Shaded Position
+    icon: mdi:blinds-open
+    min: 0
+    max: 100
+    step: 5
+    unit_of_measurement: "%"
+    mode: slider
+    initial: 100
+
   baby_weight:
     name: Baby Weight
     icon: mdi:scale
@@ -603,6 +652,66 @@ template:
             Awake
           {% endif %}
         icon: mdi:sleep
+
+  # Sun-tracking blinds: determine whether each side is currently "sunny"
+  # based on sun position and the max luminance reading from that side's blinds.
+  # delay_on/delay_off debounce cloud flicker so blinds don't whip back and forth.
+  - binary_sensor:
+      - name: "East Side Sunny"
+        unique_id: east_side_sunny
+        icon: mdi:weather-sunny
+        delay_on:
+          minutes: 5
+        delay_off:
+          minutes: 10
+        state: >
+          {% set elev = state_attr('sun.sun', 'elevation') | float(0) %}
+          {% set az = state_attr('sun.sun', 'azimuth') | float(0) %}
+          {% set thr = states('input_number.blinds_luminance_threshold') | float(20000) %}
+          {% set lums = [
+            states('sensor.rs100_solar_io_palace_luminance') | float(0),
+            states('sensor.rs100_solar_io_bathroom_luminance') | float(0),
+            states('sensor.sunea40_solar_io_kitchen_luminance') | float(0)
+          ] %}
+          {{ elev > 5 and 45 <= az <= 180 and (lums | max) > thr }}
+        attributes:
+          max_luminance: >
+            {{ [
+              states('sensor.rs100_solar_io_palace_luminance') | float(0),
+              states('sensor.rs100_solar_io_bathroom_luminance') | float(0),
+              states('sensor.sunea40_solar_io_kitchen_luminance') | float(0)
+            ] | max }}
+          threshold: "{{ states('input_number.blinds_luminance_threshold') }}"
+          azimuth: "{{ state_attr('sun.sun', 'azimuth') }}"
+          elevation: "{{ state_attr('sun.sun', 'elevation') }}"
+
+      - name: "West Side Sunny"
+        unique_id: west_side_sunny
+        icon: mdi:weather-sunny
+        delay_on:
+          minutes: 5
+        delay_off:
+          minutes: 10
+        state: >
+          {% set elev = state_attr('sun.sun', 'elevation') | float(0) %}
+          {% set az = state_attr('sun.sun', 'azimuth') | float(0) %}
+          {% set thr = states('input_number.blinds_luminance_threshold') | float(20000) %}
+          {% set lums = [
+            states('sensor.rs100_solar_io_bedroom_luminance') | float(0),
+            states('sensor.rs100_solar_io_office_luminance') | float(0),
+            states('sensor.rs100_solar_io_attic_luminance') | float(0)
+          ] %}
+          {{ elev > 5 and 180 <= az <= 315 and (lums | max) > thr }}
+        attributes:
+          max_luminance: >
+            {{ [
+              states('sensor.rs100_solar_io_bedroom_luminance') | float(0),
+              states('sensor.rs100_solar_io_office_luminance') | float(0),
+              states('sensor.rs100_solar_io_attic_luminance') | float(0)
+            ] | max }}
+          threshold: "{{ states('input_number.blinds_luminance_threshold') }}"
+          azimuth: "{{ state_attr('sun.sun', 'azimuth') }}"
+          elevation: "{{ state_attr('sun.sun', 'elevation') }}"
 
 # Load frontend themes from the themes folder
 frontend:

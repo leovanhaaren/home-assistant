@@ -399,6 +399,82 @@
   mode: single
 
 # -----------------------------------------------------------------------------
+# Sun-Tracking Blinds — East Side (palace, bathroom, kitchen)
+# Toggle: input_boolean.sun_blinds (default: off)
+# Closes east-facing blinds when sun is on the east side and bright enough;
+# opens them otherwise. Only acts while sun is above horizon.
+# -----------------------------------------------------------------------------
+- id: blinds_east_sun_tracking
+  alias: Blinds - East Side Sun Tracking
+  description: Position east-side blinds based on sun azimuth and luminance
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.east_side_sunny
+    - trigger: state
+      entity_id: input_boolean.sun_blinds
+      to: "on"
+  conditions:
+    - condition: state
+      entity_id: input_boolean.sun_blinds
+      state: "on"
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: 5
+  actions:
+    - action: cover.set_cover_position
+      target:
+        entity_id:
+          - cover.rs100_solar_io_palace
+          - cover.rs100_solar_io_bathroom
+          - cover.sunea40_solar_io_kitchen
+      data:
+        position: >
+          {% if is_state('binary_sensor.east_side_sunny', 'on') %}
+            {{ states('input_number.blinds_east_sunny_position') | int }}
+          {% else %}
+            {{ states('input_number.blinds_east_shaded_position') | int }}
+          {% endif %}
+  mode: single
+
+# -----------------------------------------------------------------------------
+# Sun-Tracking Blinds — West Side (bedroom, office, attic)
+# Toggle: input_boolean.sun_blinds (default: off)
+# -----------------------------------------------------------------------------
+- id: blinds_west_sun_tracking
+  alias: Blinds - West Side Sun Tracking
+  description: Position west-side blinds based on sun azimuth and luminance
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.west_side_sunny
+    - trigger: state
+      entity_id: input_boolean.sun_blinds
+      to: "on"
+  conditions:
+    - condition: state
+      entity_id: input_boolean.sun_blinds
+      state: "on"
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: 5
+  actions:
+    - action: cover.set_cover_position
+      target:
+        entity_id:
+          - cover.rs100_solar_io_bedroom
+          - cover.rs100_solar_io_office
+          - cover.rs100_solar_io_attic
+      data:
+        position: >
+          {% if is_state('binary_sensor.west_side_sunny', 'on') %}
+            {{ states('input_number.blinds_west_sunny_position') | int }}
+          {% else %}
+            {{ states('input_number.blinds_west_shaded_position') | int }}
+          {% endif %}
+  mode: single
+
+# -----------------------------------------------------------------------------
 # Daily Vacuum When Away
 # Toggle: input_boolean.daily_vacuum (default: off)
 # -----------------------------------------------------------------------------
