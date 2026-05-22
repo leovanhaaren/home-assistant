@@ -669,17 +669,15 @@ template:
           {% set az = state_attr('sun.sun', 'azimuth') | float(0) %}
           {% set thr = states('input_number.blinds_luminance_threshold') | float(20000) %}
           {% set lums = [
-            states('sensor.rs100_solar_io_palace_luminance') | float(0),
-            states('sensor.rs100_solar_io_bathroom_luminance') | float(0),
-            states('sensor.sunea40_solar_io_kitchen_luminance') | float(0)
+            states('sensor.rs100_solar_io_palace_rs100_solar_io_palace_luminance') | float(0),
+            states('sensor.rs100_solar_io_bathroom_rs100_solar_io_bathroom_luminance') | float(0)
           ] %}
           {{ elev > 5 and 45 <= az <= 180 and (lums | max) > thr }}
         attributes:
           max_luminance: >
             {{ [
-              states('sensor.rs100_solar_io_palace_luminance') | float(0),
-              states('sensor.rs100_solar_io_bathroom_luminance') | float(0),
-              states('sensor.sunea40_solar_io_kitchen_luminance') | float(0)
+              states('sensor.rs100_solar_io_palace_rs100_solar_io_palace_luminance') | float(0),
+              states('sensor.rs100_solar_io_bathroom_rs100_solar_io_bathroom_luminance') | float(0)
             ] | max }}
           threshold: "{{ states('input_number.blinds_luminance_threshold') }}"
           azimuth: "{{ state_attr('sun.sun', 'azimuth') }}"
@@ -697,17 +695,17 @@ template:
           {% set az = state_attr('sun.sun', 'azimuth') | float(0) %}
           {% set thr = states('input_number.blinds_luminance_threshold') | float(20000) %}
           {% set lums = [
-            states('sensor.rs100_solar_io_bedroom_luminance') | float(0),
-            states('sensor.rs100_solar_io_office_luminance') | float(0),
-            states('sensor.rs100_solar_io_attic_luminance') | float(0)
+            states('sensor.rs100_solar_io_bedroom_rs100_solar_io_bedroom_luminance') | float(0),
+            states('sensor.rs100_solar_io_office_rs100_solar_io_office_luminance') | float(0),
+            states('sensor.rs100_solar_io_attic_rs100_solar_io_attic_luminance') | float(0)
           ] %}
           {{ elev > 5 and 180 <= az <= 315 and (lums | max) > thr }}
         attributes:
           max_luminance: >
             {{ [
-              states('sensor.rs100_solar_io_bedroom_luminance') | float(0),
-              states('sensor.rs100_solar_io_office_luminance') | float(0),
-              states('sensor.rs100_solar_io_attic_luminance') | float(0)
+              states('sensor.rs100_solar_io_bedroom_rs100_solar_io_bedroom_luminance') | float(0),
+              states('sensor.rs100_solar_io_office_rs100_solar_io_office_luminance') | float(0),
+              states('sensor.rs100_solar_io_attic_rs100_solar_io_attic_luminance') | float(0)
             ] | max }}
           threshold: "{{ states('input_number.blinds_luminance_threshold') }}"
           azimuth: "{{ state_attr('sun.sun', 'azimuth') }}"
