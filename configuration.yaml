@@ -37,9 +37,6 @@ timer:
   bedroom_light_off:
     name: Bedroom Light Off Timer
     icon: mdi:timer-outline
-  toilet_light_off:
-    name: Toilet Light Off Timer
-    icon: mdi:timer-outline
 
 # Sun offset helpers for automations (in minutes, negative = before, positive = after)
 input_number:

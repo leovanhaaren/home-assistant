@@ -76,20 +76,37 @@
 
 - id: toilet_auto_lights
   alias: Toilet Auto Lights
-  description: Turn on/off toilet lights based on mmwave presence (24/7, ignores sun)
-  use_blueprint:
-    path: custom/presence_auto_lights.yaml
-    input:
-      presence_sensor: binary_sensor.presence_sensor_f5ce_occupancy
-      light_target:
-        entity_id: light.toilet
-      toggle_entity: input_boolean.toilet_auto_lights
-      countdown_timer: timer.toilet_light_off
-      no_presence_wait: 1
-      turn_on_transition: 1
-      turn_off_transition: 3
-      min_brightness: 40
-      ignore_sun: true
+  description: Turn toilet light on/off based on toilet presence
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.presence_sensor_f5ce_occupancy
+      to: "on"
+      id: presence_on
+    - trigger: state
+      entity_id: binary_sensor.presence_sensor_f5ce_occupancy
+      to: "off"
+      id: presence_off
+  conditions:
+    - condition: state
+      entity_id: input_boolean.toilet_auto_lights
+      state: "on"
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: presence_on
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.toilet
+        - conditions:
+            - condition: trigger
+              id: presence_off
+          sequence:
+            - action: light.turn_off
+              target:
+                entity_id: light.toilet
+  mode: single
 
 # -----------------------------------------------------------------------------
 # Arrived Home Trackers (Blueprint-based)

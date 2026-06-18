@@ -257,11 +257,6 @@
                   "type": "tile",
                   "entity": "timer.bedroom_light_off",
                   "name": "Bedroom"
-                },
-                {
-                  "type": "tile",
-                  "entity": "timer.toilet_light_off",
-                  "name": "Toilet"
                 }
               ]
             },
