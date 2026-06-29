@@ -41,7 +41,7 @@
                                 {
                                     "type": "tile",
                                     "entity": "media_player.unnamed_room_unnamed_room",
-                                    "name": "Unnamed Room Sonos",
+                                    "name": "Bedroom Sonos",
                                     "features": [
                                         {
                                             "type": "media-player-playback-buttons"
@@ -54,7 +54,225 @@
                                 {
                                     "type": "media-control",
                                     "entity": "media_player.unnamed_room_unnamed_room",
-                                    "name": "Unnamed Room Now Playing"
+                                    "name": "Bedroom Now Playing"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Living Room Volume",
+                                    "heading_style": "title",
+                                    "icon": "mdi:volume-high"
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "4%",
+                                    "icon": "mdi:volume-low",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "volume_level": 0.04
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "6%",
+                                    "icon": "mdi:volume-low",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "volume_level": 0.06
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "10%",
+                                    "icon": "mdi:volume-medium",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "volume_level": 0.1
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "15%",
+                                    "icon": "mdi:volume-medium",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "volume_level": 0.15
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "20%",
+                                    "icon": "mdi:volume-high",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "volume_level": 0.2
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "25%",
+                                    "icon": "mdi:volume-high",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "volume_level": 0.25
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "30%",
+                                    "icon": "mdi:volume-high",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "volume_level": 0.3
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Bedroom Volume",
+                                    "heading_style": "title",
+                                    "icon": "mdi:volume-high"
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "4%",
+                                    "icon": "mdi:volume-low",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "volume_level": 0.04
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "6%",
+                                    "icon": "mdi:volume-low",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "volume_level": 0.06
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "10%",
+                                    "icon": "mdi:volume-medium",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "volume_level": 0.1
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "15%",
+                                    "icon": "mdi:volume-medium",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "volume_level": 0.15
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "20%",
+                                    "icon": "mdi:volume-high",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "volume_level": 0.2
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "25%",
+                                    "icon": "mdi:volume-high",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "volume_level": 0.25
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "30%",
+                                    "icon": "mdi:volume-high",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.volume_set",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "volume_level": 0.3
+                                        }
+                                    }
                                 }
                             ]
                         },
@@ -214,7 +432,7 @@
                             "cards": [
                                 {
                                     "type": "heading",
-                                    "heading": "Unnamed Room Presets",
+                                    "heading": "Bedroom Presets",
                                     "heading_style": "title",
                                     "icon": "mdi:speaker"
                                 },
@@ -358,7 +576,8 @@
                                         }
                                     }
                                 }
-                            ]
+                            ],
+                            "column_span": 4
                         },
                         {
                             "type": "grid",
