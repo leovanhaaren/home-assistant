@@ -39,6 +39,15 @@
         "require_admin": false,
         "mode": "storage",
         "url_path": "devices"
+      },
+      {
+        "id": "speakers_blinds",
+        "show_in_sidebar": true,
+        "icon": "mdi:speaker-wireless",
+        "title": "Speakers & Blinds",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "speakers-blinds"
       }
     ]
   }

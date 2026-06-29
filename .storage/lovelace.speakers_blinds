@@ -1,0 +1,768 @@
+{
+    "version": 1,
+    "minor_version": 1,
+    "key": "lovelace.speakers_blinds",
+    "data": {
+        "config": {
+            "views": [
+                {
+                    "title": "Speakers & Blinds",
+                    "type": "sections",
+                    "max_columns": 4,
+                    "icon": "mdi:speaker-wireless",
+                    "sections": [
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Sonos Controls",
+                                    "heading_style": "title",
+                                    "icon": "mdi:speaker-multiple"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "media_player.living_room_living_room",
+                                    "name": "Living Room Sonos",
+                                    "features": [
+                                        {
+                                            "type": "media-player-playback-buttons"
+                                        },
+                                        {
+                                            "type": "media-player-volume-slider"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "media-control",
+                                    "entity": "media_player.living_room_living_room",
+                                    "name": "Living Room Now Playing"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "media_player.unnamed_room_unnamed_room",
+                                    "name": "Unnamed Room Sonos",
+                                    "features": [
+                                        {
+                                            "type": "media-player-playback-buttons"
+                                        },
+                                        {
+                                            "type": "media-player-volume-slider"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "media-control",
+                                    "entity": "media_player.unnamed_room_unnamed_room",
+                                    "name": "Unnamed Room Now Playing"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Living Room Presets",
+                                    "heading_style": "title",
+                                    "icon": "mdi:speaker"
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "White Noise",
+                                    "icon": "mdi:waves",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "source": "Baby Sleep White Noise:  Ultimate Album to Help Babies Sleep Through the Night"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Chicago House",
+                                    "icon": "mdi:music",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "source": "Chicago House"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Come Thou Fount",
+                                    "icon": "mdi:music-clef-treble",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "source": "Come, Thou Fount of Every Blessing"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Disney Baby",
+                                    "icon": "mdi:baby-face-outline",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "source": "Disney Baby"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Anjunadeep",
+                                    "icon": "mdi:music-circle",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "source": "Label Focus: Anjunadeep"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Baby Hymns",
+                                    "icon": "mdi:cradle",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "source": "Lullaby Baby Hymns, Vol. 2"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "My Supermix",
+                                    "icon": "mdi:playlist-music",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "source": "My Supermix"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Pop Lullabies",
+                                    "icon": "mdi:sleep",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "source": "Pop Lullabies"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Saama",
+                                    "icon": "mdi:meditation",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "source": "Saama"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Zen Garden",
+                                    "icon": "mdi:flower",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.living_room_living_room",
+                                            "source": "Zen Garden"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Unnamed Room Presets",
+                                    "heading_style": "title",
+                                    "icon": "mdi:speaker"
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "White Noise",
+                                    "icon": "mdi:waves",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "source": "Baby Sleep White Noise:  Ultimate Album to Help Babies Sleep Through the Night"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Chicago House",
+                                    "icon": "mdi:music",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "source": "Chicago House"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Come Thou Fount",
+                                    "icon": "mdi:music-clef-treble",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "source": "Come, Thou Fount of Every Blessing"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Disney Baby",
+                                    "icon": "mdi:baby-face-outline",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "source": "Disney Baby"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Anjunadeep",
+                                    "icon": "mdi:music-circle",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "source": "Label Focus: Anjunadeep"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Baby Hymns",
+                                    "icon": "mdi:cradle",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "source": "Lullaby Baby Hymns, Vol. 2"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "My Supermix",
+                                    "icon": "mdi:playlist-music",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "source": "My Supermix"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Pop Lullabies",
+                                    "icon": "mdi:sleep",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "source": "Pop Lullabies"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Saama",
+                                    "icon": "mdi:meditation",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "source": "Saama"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "Zen Garden",
+                                    "icon": "mdi:flower",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "media_player.select_source",
+                                        "service_data": {
+                                            "entity_id": "media_player.unnamed_room_unnamed_room",
+                                            "source": "Zen Garden"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Curtain & Blind Groups",
+                                    "heading_style": "title",
+                                    "icon": "mdi:blinds"
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "All Open",
+                                    "icon": "mdi:blinds-open",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.open_cover",
+                                        "service_data": {
+                                            "entity_id": [
+                                                "cover.rs100_solar_io_attic",
+                                                "cover.rs100_solar_io_bathroom",
+                                                "cover.rs100_solar_io_bedroom",
+                                                "cover.rs100_solar_io_office",
+                                                "cover.rs100_solar_io_palace",
+                                                "cover.sunea40_solar_io_kitchen"
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "All Close",
+                                    "icon": "mdi:blinds",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.close_cover",
+                                        "service_data": {
+                                            "entity_id": [
+                                                "cover.rs100_solar_io_attic",
+                                                "cover.rs100_solar_io_bathroom",
+                                                "cover.rs100_solar_io_bedroom",
+                                                "cover.rs100_solar_io_office",
+                                                "cover.rs100_solar_io_palace",
+                                                "cover.sunea40_solar_io_kitchen"
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "All 25%",
+                                    "icon": "mdi:blinds-horizontal",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.set_cover_position",
+                                        "service_data": {
+                                            "entity_id": [
+                                                "cover.rs100_solar_io_attic",
+                                                "cover.rs100_solar_io_bathroom",
+                                                "cover.rs100_solar_io_bedroom",
+                                                "cover.rs100_solar_io_office",
+                                                "cover.rs100_solar_io_palace",
+                                                "cover.sunea40_solar_io_kitchen"
+                                            ],
+                                            "position": 25
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "All 50%",
+                                    "icon": "mdi:blinds-horizontal",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.set_cover_position",
+                                        "service_data": {
+                                            "entity_id": [
+                                                "cover.rs100_solar_io_attic",
+                                                "cover.rs100_solar_io_bathroom",
+                                                "cover.rs100_solar_io_bedroom",
+                                                "cover.rs100_solar_io_office",
+                                                "cover.rs100_solar_io_palace",
+                                                "cover.sunea40_solar_io_kitchen"
+                                            ],
+                                            "position": 50
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "All 75%",
+                                    "icon": "mdi:blinds-horizontal",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.set_cover_position",
+                                        "service_data": {
+                                            "entity_id": [
+                                                "cover.rs100_solar_io_attic",
+                                                "cover.rs100_solar_io_bathroom",
+                                                "cover.rs100_solar_io_bedroom",
+                                                "cover.rs100_solar_io_office",
+                                                "cover.rs100_solar_io_palace",
+                                                "cover.sunea40_solar_io_kitchen"
+                                            ],
+                                            "position": 75
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "heading",
+                                    "heading": "East Side",
+                                    "heading_style": "subtitle",
+                                    "icon": "mdi:weather-sunset-up"
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "East Open",
+                                    "icon": "mdi:blinds-open",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.open_cover",
+                                        "service_data": {
+                                            "entity_id": [
+                                                "cover.rs100_solar_io_palace",
+                                                "cover.rs100_solar_io_bathroom",
+                                                "cover.sunea40_solar_io_kitchen"
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "East Close",
+                                    "icon": "mdi:blinds",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.close_cover",
+                                        "service_data": {
+                                            "entity_id": [
+                                                "cover.rs100_solar_io_palace",
+                                                "cover.rs100_solar_io_bathroom",
+                                                "cover.sunea40_solar_io_kitchen"
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "East 50%",
+                                    "icon": "mdi:blinds-horizontal",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.set_cover_position",
+                                        "service_data": {
+                                            "entity_id": [
+                                                "cover.rs100_solar_io_palace",
+                                                "cover.rs100_solar_io_bathroom",
+                                                "cover.sunea40_solar_io_kitchen"
+                                            ],
+                                            "position": 50
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "heading",
+                                    "heading": "West Side",
+                                    "heading_style": "subtitle",
+                                    "icon": "mdi:weather-sunset-down"
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "West Open",
+                                    "icon": "mdi:blinds-open",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.open_cover",
+                                        "service_data": {
+                                            "entity_id": [
+                                                "cover.rs100_solar_io_bedroom",
+                                                "cover.rs100_solar_io_office",
+                                                "cover.rs100_solar_io_attic"
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "West Close",
+                                    "icon": "mdi:blinds",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.close_cover",
+                                        "service_data": {
+                                            "entity_id": [
+                                                "cover.rs100_solar_io_bedroom",
+                                                "cover.rs100_solar_io_office",
+                                                "cover.rs100_solar_io_attic"
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "button",
+                                    "name": "West 50%",
+                                    "icon": "mdi:blinds-horizontal",
+                                    "show_state": false,
+                                    "tap_action": {
+                                        "action": "call-service",
+                                        "service": "cover.set_cover_position",
+                                        "service_data": {
+                                            "entity_id": [
+                                                "cover.rs100_solar_io_bedroom",
+                                                "cover.rs100_solar_io_office",
+                                                "cover.rs100_solar_io_attic"
+                                            ],
+                                            "position": 50
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Individual Curtains & Blinds",
+                                    "heading_style": "title",
+                                    "icon": "mdi:window-shutter"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "cover.rs100_solar_io_attic",
+                                    "name": "Attic",
+                                    "features": [
+                                        {
+                                            "type": "cover-open-close"
+                                        },
+                                        {
+                                            "type": "cover-position"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "cover.rs100_solar_io_bathroom",
+                                    "name": "Bathroom",
+                                    "features": [
+                                        {
+                                            "type": "cover-open-close"
+                                        },
+                                        {
+                                            "type": "cover-position"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "cover.rs100_solar_io_bedroom",
+                                    "name": "Bedroom",
+                                    "features": [
+                                        {
+                                            "type": "cover-open-close"
+                                        },
+                                        {
+                                            "type": "cover-position"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "cover.rs100_solar_io_office",
+                                    "name": "Office",
+                                    "features": [
+                                        {
+                                            "type": "cover-open-close"
+                                        },
+                                        {
+                                            "type": "cover-position"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "cover.rs100_solar_io_palace",
+                                    "name": "Palace",
+                                    "features": [
+                                        {
+                                            "type": "cover-open-close"
+                                        },
+                                        {
+                                            "type": "cover-position"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "cover.sunea40_solar_io_kitchen",
+                                    "name": "Kitchen",
+                                    "features": [
+                                        {
+                                            "type": "cover-open-close"
+                                        },
+                                        {
+                                            "type": "cover-position"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "cards": [
+                                {
+                                    "type": "heading",
+                                    "heading": "Blind Automation Presets",
+                                    "heading_style": "title",
+                                    "icon": "mdi:tune-variant"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "input_boolean.morning_blinds",
+                                    "name": "Morning Blinds"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "input_boolean.evening_blinds",
+                                    "name": "Evening Blinds"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "input_boolean.sun_blinds",
+                                    "name": "Sun Tracking"
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "input_number.evening_blinds_bedroom_position",
+                                    "name": "Bedroom Evening Position",
+                                    "features": [
+                                        {
+                                            "type": "numeric-input",
+                                            "style": "slider"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "input_number.blinds_east_sunny_position",
+                                    "name": "East Sunny Position",
+                                    "features": [
+                                        {
+                                            "type": "numeric-input",
+                                            "style": "slider"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "input_number.blinds_east_shaded_position",
+                                    "name": "East Shaded Position",
+                                    "features": [
+                                        {
+                                            "type": "numeric-input",
+                                            "style": "slider"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "input_number.blinds_west_sunny_position",
+                                    "name": "West Sunny Position",
+                                    "features": [
+                                        {
+                                            "type": "numeric-input",
+                                            "style": "slider"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "tile",
+                                    "entity": "input_number.blinds_west_shaded_position",
+                                    "name": "West Shaded Position",
+                                    "features": [
+                                        {
+                                            "type": "numeric-input",
+                                            "style": "slider"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
