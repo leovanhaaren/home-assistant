@@ -181,6 +181,21 @@ input_datetime:
     name: Prenatal Vitamin Time 4
     has_date: false
     has_time: true
+  hallway_dim_start:
+    name: Hallway Dim Start
+    has_date: false
+    has_time: true
+    initial: "19:00"
+  hallway_dim_end:
+    name: Hallway Dim End
+    has_date: false
+    has_time: true
+    initial: "20:00"
+  hallway_bright_from:
+    name: Hallway Bright From
+    has_date: false
+    has_time: true
+    initial: "06:00"
   bedtime_start:
     name: Bedtime Start
     has_date: false

@@ -173,6 +173,11 @@
                 },
                 {
                   "type": "tile",
+                  "entity": "input_boolean.hallway_auto_lights",
+                  "name": "Hallway Auto Lights"
+                },
+                {
+                  "type": "tile",
                   "entity": "input_boolean.staircase_transitional_light",
                   "name": "Staircase Transitional"
                 },
@@ -226,6 +231,32 @@
                   "type": "tile",
                   "entity": "input_datetime.bedtime_reminder_late",
                   "name": "Reminder (Late)"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Hallway Light Schedule",
+                  "heading_style": "title",
+                  "icon": "mdi:stairs"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.hallway_bright_from",
+                  "name": "Bright From (80%)"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.hallway_dim_start",
+                  "name": "Dim Start"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.hallway_dim_end",
+                  "name": "Dim End (25%)"
                 }
               ]
             },

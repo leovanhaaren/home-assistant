@@ -77,6 +77,10 @@ toilet_auto_lights:
   name: "Toilet Auto Lights"
   icon: mdi:toilet
 
+hallway_auto_lights:
+  name: "Hallway Auto Lights"
+  icon: mdi:stairs
+
 staircase_transitional_light:
   name: "Staircase Transitional Light"
   icon: mdi:stairs

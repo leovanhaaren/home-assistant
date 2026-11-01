@@ -109,6 +109,59 @@
   mode: single
 
 # -----------------------------------------------------------------------------
+# Hallway Auto Lights
+# Staircase light follows hallway presence (sensor 256B).
+# Brightness: 80% from "bright from" until dim start, ramps down to 25% by dim
+# end, stays 25% until "bright from" the next morning.
+# Toggle: input_boolean.hallway_auto_lights
+# -----------------------------------------------------------------------------
+- id: hallway_auto_lights
+  alias: Hallway Auto Lights
+  description: Turn staircase light on/off based on hallway presence, dimming in the evening
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.presence_sensor_256b_occupancy
+      to: "on"
+      id: presence_on
+    - trigger: state
+      entity_id: binary_sensor.presence_sensor_256b_occupancy
+      to: "off"
+      id: presence_off
+  conditions:
+    - condition: state
+      entity_id: input_boolean.hallway_auto_lights
+      state: "on"
+  actions:
+    - choose:
+        - conditions:
+            - condition: trigger
+              id: presence_on
+          sequence:
+            - action: light.turn_on
+              target:
+                entity_id: light.staircase
+              data:
+                brightness_pct: >
+                  {% set start = today_at(states('input_datetime.hallway_dim_start')) %}
+                  {% set end = today_at(states('input_datetime.hallway_dim_end')) %}
+                  {% set morning = today_at(states('input_datetime.hallway_bright_from')) %}
+                  {% if now() < morning or now() >= end %}
+                    25
+                  {% elif now() < start %}
+                    80
+                  {% else %}
+                    {{ (80 - 55 * (now() - start) / (end - start)) | round(0) | int }}
+                  {% endif %}
+        - conditions:
+            - condition: trigger
+              id: presence_off
+          sequence:
+            - action: light.turn_off
+              target:
+                entity_id: light.staircase
+  mode: single
+
+# -----------------------------------------------------------------------------
 # Arrived Home Trackers (Blueprint-based)
 # Uses custom/arrived_home_tracker blueprint
 # -----------------------------------------------------------------------------
