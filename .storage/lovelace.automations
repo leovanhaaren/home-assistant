@@ -16,124 +16,24 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "Sun Schedule",
+                  "heading": "Modes",
                   "heading_style": "title",
-                  "icon": "mdi:weather-sunset"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.next_sunrise",
-                  "name": "Next Sunrise",
-                  "color": "amber"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_number.sunrise_offset",
-                  "name": "Sunrise Offset",
-                  "features": [
-                    {
-                      "type": "numeric-input",
-                      "style": "slider"
-                    }
-                  ]
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.next_sunset",
-                  "name": "Next Sunset",
-                  "color": "orange"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_number.sunset_offset",
-                  "name": "Sunset Offset",
-                  "features": [
-                    {
-                      "type": "numeric-input",
-                      "style": "slider"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Brightness",
-                  "heading_style": "title",
-                  "icon": "mdi:brightness-auto"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.auto_brightness_high",
-                  "name": "High",
-                  "color": "yellow"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.auto_brightness_medium",
-                  "name": "Medium",
-                  "color": "orange"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.auto_brightness_low",
-                  "name": "Low",
-                  "color": "red"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Color Temperature",
-                  "heading_style": "title",
-                  "icon": "mdi:sun-thermometer"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.auto_kelvin_high",
-                  "name": "High",
-                  "color": "blue"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.auto_kelvin_medium",
-                  "name": "Medium",
-                  "color": "orange"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.auto_kelvin_low",
-                  "name": "Low",
-                  "color": "red"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Special Modes",
-                  "heading_style": "title",
-                  "icon": "mdi:home-switch"
+                  "icon": "mdi:tune"
                 },
                 {
                   "type": "tile",
                   "entity": "input_boolean.vacation_mode",
-                  "name": "Vacation Mode",
-                  "color": "amber"
+                  "name": "Vacation Mode"
                 },
                 {
                   "type": "tile",
                   "entity": "input_boolean.guest_mode",
-                  "name": "Guest Mode",
-                  "color": "cyan"
+                  "name": "Guest Mode"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.presence_tracking",
+                  "name": "Presence Tracking"
                 }
               ]
             },
@@ -142,44 +42,63 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "Lighting Automations",
+                  "heading": "Lighting",
                   "heading_style": "title",
-                  "icon": "mdi:lightbulb-auto"
+                  "icon": "mdi:lightbulb-group"
                 },
                 {
                   "type": "tile",
                   "entity": "input_boolean.kitchen_auto_lights",
-                  "name": "Kitchen Auto Lights"
+                  "name": "Kitchen Auto Lights",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/kitchen_auto_lights"
+                  }
                 },
                 {
                   "type": "tile",
                   "entity": "input_boolean.office_auto_lights",
-                  "name": "Office Auto Lights"
+                  "name": "Office Auto Lights",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/office_auto_lights"
+                  }
                 },
                 {
                   "type": "tile",
                   "entity": "input_boolean.palace_auto_lights",
-                  "name": "Palace Auto Lights"
+                  "name": "Palace Auto Lights",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/palace_auto_lights"
+                  }
                 },
                 {
                   "type": "tile",
                   "entity": "input_boolean.bedroom_auto_lights",
-                  "name": "Bedroom Auto Lights"
+                  "name": "Bedroom Auto Lights",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/bedroom_auto_lights"
+                  }
                 },
                 {
                   "type": "tile",
                   "entity": "input_boolean.toilet_auto_lights",
-                  "name": "Toilet Auto Lights"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.hallway_auto_lights",
-                  "name": "Hallway Auto Lights"
+                  "name": "Toilet Auto Lights",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/toilet_auto_lights"
+                  }
                 },
                 {
                   "type": "tile",
                   "entity": "input_boolean.staircase_transitional_light",
-                  "name": "Staircase Transitional"
+                  "name": "Staircase Transitional",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/staircase_transitional_light"
+                  }
                 },
                 {
                   "type": "tile",
@@ -194,7 +113,29 @@
                 {
                   "type": "tile",
                   "entity": "input_boolean.tv_movie_mode",
-                  "name": "TV Movie Mode"
+                  "name": "TV Movie Mode",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/tv_movie_mode"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.welcome_home_lights",
+                  "name": "Welcome Home Lights",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/welcome_home_lights"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.goodbye_all_off",
+                  "name": "Goodbye - All Off",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/goodbye_all_off"
+                  }
                 }
               ]
             },
@@ -203,45 +144,18 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "Bedtime Schedule",
-                  "heading_style": "title",
-                  "icon": "mdi:bed-clock"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_datetime.bedtime_start",
-                  "name": "Bedtime Start"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_datetime.bedtime_end",
-                  "name": "Bedtime End"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.bedtime_reminders",
-                  "name": "Bedtime Reminders"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_datetime.bedtime_reminder_early",
-                  "name": "Reminder (Early)"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_datetime.bedtime_reminder_late",
-                  "name": "Reminder (Late)"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Hallway Light Schedule",
+                  "heading": "Hallway Light",
                   "heading_style": "title",
                   "icon": "mdi:stairs"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.hallway_auto_lights",
+                  "name": "Hallway Auto Lights",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/hallway_auto_lights"
+                  }
                 },
                 {
                   "type": "tile",
@@ -296,39 +210,34 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "Home & Away",
+                  "heading": "Bedtime",
                   "heading_style": "title",
-                  "icon": "mdi:home-account"
+                  "icon": "mdi:bed-clock"
                 },
                 {
                   "type": "tile",
-                  "entity": "input_boolean.welcome_home_lights",
-                  "name": "Welcome Home Lights"
+                  "entity": "input_boolean.bedtime_reminders",
+                  "name": "Bedtime Reminders"
                 },
                 {
                   "type": "tile",
-                  "entity": "input_boolean.goodbye_all_off",
-                  "name": "Goodbye - All Off"
+                  "entity": "input_datetime.bedtime_start",
+                  "name": "Bedtime Start"
                 },
                 {
                   "type": "tile",
-                  "entity": "input_boolean.morning_blinds",
-                  "name": "Morning Blinds"
+                  "entity": "input_datetime.bedtime_end",
+                  "name": "Bedtime End"
                 },
                 {
                   "type": "tile",
-                  "entity": "input_boolean.evening_blinds",
-                  "name": "Evening Blinds"
+                  "entity": "input_datetime.bedtime_reminder_early",
+                  "name": "Reminder (Early)"
                 },
                 {
                   "type": "tile",
-                  "entity": "input_boolean.sun_blinds",
-                  "name": "Sun-Tracking Blinds"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.presence_tracking",
-                  "name": "Presence Tracking"
+                  "entity": "input_datetime.bedtime_reminder_late",
+                  "name": "Reminder (Late)"
                 }
               ]
             },
@@ -337,171 +246,18 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "Blinds Schedule",
+                  "heading": "Vitamins",
                   "heading_style": "title",
-                  "icon": "mdi:blinds"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_datetime.morning_blinds_open_time",
-                  "name": "Morning Open"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_datetime.weekend_blinds_open_time",
-                  "name": "Weekend Open"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_datetime.evening_blinds_close_time",
-                  "name": "Evening Close"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_number.evening_blinds_bedroom_position",
-                  "name": "Bedroom Position",
-                  "features": [
-                    {
-                      "type": "numeric-input",
-                      "style": "slider"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Sun-Tracking Blinds",
-                  "heading_style": "title",
-                  "icon": "mdi:weather-sunny"
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.east_side_sunny",
-                  "name": "East Sunny",
-                  "color": "amber"
-                },
-                {
-                  "type": "tile",
-                  "entity": "binary_sensor.west_side_sunny",
-                  "name": "West Sunny",
-                  "color": "orange"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_number.blinds_luminance_threshold",
-                  "name": "Luminance Threshold",
-                  "features": [
-                    {
-                      "type": "numeric-input",
-                      "style": "slider"
-                    }
-                  ]
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_number.blinds_east_sunny_position",
-                  "name": "East — Sunny %",
-                  "features": [
-                    {
-                      "type": "numeric-input",
-                      "style": "slider"
-                    }
-                  ]
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_number.blinds_east_shaded_position",
-                  "name": "East — Shaded %",
-                  "features": [
-                    {
-                      "type": "numeric-input",
-                      "style": "slider"
-                    }
-                  ]
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_number.blinds_west_sunny_position",
-                  "name": "West — Sunny %",
-                  "features": [
-                    {
-                      "type": "numeric-input",
-                      "style": "slider"
-                    }
-                  ]
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_number.blinds_west_shaded_position",
-                  "name": "West — Shaded %",
-                  "features": [
-                    {
-                      "type": "numeric-input",
-                      "style": "slider"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Vacuum Automations",
-                  "heading_style": "title",
-                  "icon": "mdi:robot-vacuum"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.daily_vacuum",
-                  "name": "Daily Vacuum"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.vacuum_notifications",
-                  "name": "Vacuum Notifications"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Notifications",
-                  "heading_style": "title",
-                  "icon": "mdi:bell"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.laundry_notifications",
-                  "name": "Laundry Notifications"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.phone_battery_alert",
-                  "name": "Phone Battery Alert"
+                  "icon": "mdi:pill"
                 },
                 {
                   "type": "tile",
                   "entity": "input_boolean.prenatal_vitamin_reminder",
-                  "name": "Prenatal Vitamin Reminder"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Vitamin Schedule",
-                  "heading_style": "title",
-                  "icon": "mdi:pill"
+                  "name": "Prenatal Vitamin Reminder",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/prenatal_vitamin_reminder"
+                  }
                 },
                 {
                   "type": "tile",
@@ -530,288 +286,24 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "BILRESA Buttons",
-                  "heading_style": "title",
-                  "icon": "mdi:remote"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.bilresa_red_toggle_red_lights",
-                  "name": "Red: Toggle Red Lights"
-                },
-                {
-                  "type": "tile",
-                  "entity": "input_boolean.bilresa_red_brightness_controls",
-                  "name": "Red: Brightness Controls"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Automation Status",
-          "type": "sections",
-          "max_columns": 4,
-          "icon": "mdi:list-status",
-          "path": "status",
-          "sections": [
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Kitchen Automations",
-                  "heading_style": "title",
-                  "icon": "mdi:countertop"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.kitchen_auto_lights_on",
-                  "name": "Kitchen Lights On"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.kitchen_auto_lights_off",
-                  "name": "Kitchen Lights Off"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Office Automations",
-                  "heading_style": "title",
-                  "icon": "mdi:desk"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.office_desk_presence",
-                  "name": "Office Lights On"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.office_desk_no_presence",
-                  "name": "Office Lights Off"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.office_ceiling_evening_dimming",
-                  "name": "Ceiling Evening Dim"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Palace Automations",
-                  "heading_style": "title",
-                  "icon": "mdi:floor-lamp"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.palace_auto_lights_on",
-                  "name": "Palace Lights On"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.palace_auto_lights_off",
-                  "name": "Palace Lights Off"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Bedroom Automations",
-                  "heading_style": "title",
-                  "icon": "mdi:bed"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.bedroom_auto_lights_on",
-                  "name": "Bedroom Lights On"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.bedroom_auto_lights_off",
-                  "name": "Bedroom Lights Off"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Adaptive Lighting",
-                  "heading_style": "title",
-                  "icon": "mdi:theme-light-dark"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.adaptive_lighting_morning_warm_up",
-                  "name": "Morning Warm Up"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.adaptive_lighting_evening_wind_down",
-                  "name": "Evening Wind Down"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.adaptive_lighting_night_mode",
-                  "name": "Night Mode"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Home & Away",
-                  "heading_style": "title",
-                  "icon": "mdi:home-account"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.welcome_home_lights_on",
-                  "name": "Welcome Home"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.goodbye_all_off",
-                  "name": "Goodbye All Off"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.morning_open_blinds",
-                  "name": "Morning Blinds"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.evening_blinds_close",
-                  "name": "Evening Blinds"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.blinds_east_side_sun_tracking",
-                  "name": "East Sun Tracking"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.blinds_west_side_sun_tracking",
-                  "name": "West Sun Tracking"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Staircase & Outdoor",
-                  "heading_style": "title",
-                  "icon": "mdi:stairs"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.staircase_transitional_light",
-                  "name": "Staircase Light"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.outdoor_lights_sunset",
-                  "name": "Outdoor Sunset"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.outdoor_lights_off_at_night",
-                  "name": "Outdoor Night Off"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "TV & Movie Mode",
-                  "heading_style": "title",
-                  "icon": "mdi:television"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.tv_movie_mode",
-                  "name": "TV Movie Mode"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.tv_pause_brighten_lights",
-                  "name": "TV Pause Brighten"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
-                  "heading": "Vacuum Automations",
-                  "heading_style": "title",
-                  "icon": "mdi:robot-vacuum"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.daily_vacuum_when_away",
-                  "name": "Daily Vacuum"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.vacuum_error_notification",
-                  "name": "Vacuum Error"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.vacuum_maintenance_reminder",
-                  "name": "Vacuum Maintenance"
-                }
-              ]
-            },
-            {
-              "type": "grid",
-              "cards": [
-                {
-                  "type": "heading",
                   "heading": "Notifications",
                   "heading_style": "title",
                   "icon": "mdi:bell"
                 },
                 {
                   "type": "tile",
-                  "entity": "automation.laundry_washer_finished",
-                  "name": "Washer Done"
+                  "entity": "input_boolean.laundry_notifications",
+                  "name": "Laundry Notifications"
                 },
                 {
                   "type": "tile",
-                  "entity": "automation.laundry_dryer_finished",
-                  "name": "Dryer Done"
+                  "entity": "input_boolean.phone_battery_alert",
+                  "name": "Phone Battery Alert"
                 },
                 {
                   "type": "tile",
-                  "entity": "automation.low_phone_battery_alert",
-                  "name": "Low Battery"
-                },
-                {
-                  "type": "tile",
-                  "entity": "automation.prenatal_vitamin_reminder",
-                  "name": "Vitamin Reminder"
+                  "entity": "input_boolean.device_health_alerts",
+                  "name": "Device Health Alerts"
                 }
               ]
             },
@@ -820,19 +312,264 @@
               "cards": [
                 {
                   "type": "heading",
-                  "heading": "Presence Tracking",
+                  "heading": "Vacuum",
                   "heading_style": "title",
-                  "icon": "mdi:home-clock"
+                  "icon": "mdi:robot-vacuum"
                 },
                 {
                   "type": "tile",
-                  "entity": "automation.leo_arrived_home_tracker",
-                  "name": "Leo Arrival"
+                  "entity": "input_boolean.daily_vacuum",
+                  "name": "Daily Vacuum"
                 },
                 {
                   "type": "tile",
-                  "entity": "automation.kardi_arrived_home_tracker",
-                  "name": "Kardi Arrival"
+                  "entity": "input_boolean.vacuum_notifications",
+                  "name": "Vacuum Notifications"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Blinds",
+                  "heading_style": "title",
+                  "icon": "mdi:blinds"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.morning_blinds",
+                  "name": "Morning Blinds"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.evening_blinds",
+                  "name": "Evening Blinds"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.morning_blinds_open_time",
+                  "name": "Morning Open"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.weekend_blinds_open_time",
+                  "name": "Weekend Open"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_datetime.evening_blinds_close_time",
+                  "name": "Evening Close"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.evening_blinds_bedroom_position",
+                  "name": "Bedroom Position",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ],
+                  "features_position": "inline"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Sun-Tracking Blinds",
+                  "heading_style": "title",
+                  "icon": "mdi:weather-sunny"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.sun_blinds",
+                  "name": "Sun-Tracking Blinds"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.east_side_sunny",
+                  "name": "East Sunny"
+                },
+                {
+                  "type": "tile",
+                  "entity": "binary_sensor.west_side_sunny",
+                  "name": "West Sunny"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.blinds_luminance_threshold",
+                  "name": "Luminance Threshold",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ],
+                  "features_position": "inline"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.blinds_east_sunny_position",
+                  "name": "East — Sunny %",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ],
+                  "features_position": "inline"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.blinds_east_shaded_position",
+                  "name": "East — Shaded %",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ],
+                  "features_position": "inline"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.blinds_west_sunny_position",
+                  "name": "West — Sunny %",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ],
+                  "features_position": "inline"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.blinds_west_shaded_position",
+                  "name": "West — Shaded %",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ],
+                  "features_position": "inline"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Sun Schedule",
+                  "heading_style": "title",
+                  "icon": "mdi:weather-sunset"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.next_sunrise",
+                  "name": "Next Sunrise"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.next_sunset",
+                  "name": "Next Sunset"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.sunrise_offset",
+                  "name": "Sunrise Offset",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ],
+                  "features_position": "inline"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_number.sunset_offset",
+                  "name": "Sunset Offset",
+                  "features": [
+                    {
+                      "type": "numeric-input",
+                      "style": "slider"
+                    }
+                  ],
+                  "features_position": "inline"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "Adaptive Values",
+                  "heading_style": "title",
+                  "icon": "mdi:brightness-6"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.auto_brightness_high",
+                  "name": "Brightness High"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.auto_brightness_medium",
+                  "name": "Brightness Medium"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.auto_brightness_low",
+                  "name": "Brightness Low"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.auto_kelvin_high",
+                  "name": "Colour temp High"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.auto_kelvin_medium",
+                  "name": "Colour temp Medium"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.auto_kelvin_low",
+                  "name": "Colour temp Low"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "BILRESA Buttons",
+                  "heading_style": "title",
+                  "icon": "mdi:gesture-tap-button"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.bilresa_red_toggle_red_lights",
+                  "name": "Red: Toggle Red Lights",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/bilresa_red_toggle_red_lights"
+                  }
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.bilresa_red_brightness_controls",
+                  "name": "Red: Brightness Controls"
                 }
               ]
             }
