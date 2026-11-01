@@ -33,7 +33,10 @@
                 {
                   "type": "tile",
                   "entity": "input_boolean.presence_tracking",
-                  "name": "Presence Tracking"
+                  "name": "Presence Tracking",
+                  "grid_options": {
+                    "columns": "full"
+                  }
                 }
               ]
             },
@@ -135,6 +138,9 @@
                   "hold_action": {
                     "action": "navigate",
                     "navigation_path": "/config/automation/edit/goodbye_all_off"
+                  },
+                  "grid_options": {
+                    "columns": "full"
                   }
                 }
               ]
@@ -237,7 +243,10 @@
                 {
                   "type": "tile",
                   "entity": "input_datetime.bedtime_reminder_late",
-                  "name": "Reminder (Late)"
+                  "name": "Reminder (Late)",
+                  "grid_options": {
+                    "columns": "full"
+                  }
                 }
               ]
             },
@@ -277,7 +286,10 @@
                 {
                   "type": "tile",
                   "entity": "input_datetime.prenatal_vitamin_time_4",
-                  "name": "Reminder 4"
+                  "name": "Reminder 4",
+                  "grid_options": {
+                    "columns": "full"
+                  }
                 }
               ]
             },
@@ -303,7 +315,10 @@
                 {
                   "type": "tile",
                   "entity": "input_boolean.device_health_alerts",
-                  "name": "Device Health Alerts"
+                  "name": "Device Health Alerts",
+                  "grid_options": {
+                    "columns": "full"
+                  }
                 }
               ]
             },
@@ -360,7 +375,10 @@
                 {
                   "type": "tile",
                   "entity": "input_datetime.evening_blinds_close_time",
-                  "name": "Evening Close"
+                  "name": "Evening Close",
+                  "grid_options": {
+                    "columns": "full"
+                  }
                 },
                 {
                   "type": "tile",
@@ -388,7 +406,10 @@
                 {
                   "type": "tile",
                   "entity": "input_boolean.sun_blinds",
-                  "name": "Sun-Tracking Blinds"
+                  "name": "Sun-Tracking Blinds",
+                  "grid_options": {
+                    "columns": "full"
+                  }
                 },
                 {
                   "type": "tile",
@@ -523,23 +544,23 @@
                 },
                 {
                   "type": "tile",
-                  "entity": "sensor.auto_brightness_medium",
-                  "name": "Brightness Medium"
-                },
-                {
-                  "type": "tile",
-                  "entity": "sensor.auto_brightness_low",
-                  "name": "Brightness Low"
-                },
-                {
-                  "type": "tile",
                   "entity": "sensor.auto_kelvin_high",
                   "name": "Colour temp High"
                 },
                 {
                   "type": "tile",
+                  "entity": "sensor.auto_brightness_medium",
+                  "name": "Brightness Medium"
+                },
+                {
+                  "type": "tile",
                   "entity": "sensor.auto_kelvin_medium",
                   "name": "Colour temp Medium"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.auto_brightness_low",
+                  "name": "Brightness Low"
                 },
                 {
                   "type": "tile",
