@@ -164,6 +164,10 @@ bilresa_red_brightness_controls:
   name: "BILRESA Red: Brightness Controls"
   icon: mdi:brightness-6
 
+bilresa_dual_palace_bedtime:
+  name: "BILRESA Dual: Palace Bedtime"
+  icon: mdi:bed
+
 # -----------------------------------------------------------------------------
 # Baby Monitoring
 # -----------------------------------------------------------------------------

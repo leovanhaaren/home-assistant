@@ -591,6 +591,15 @@
                   "type": "tile",
                   "entity": "input_boolean.bilresa_red_brightness_controls",
                   "name": "Red: Brightness Controls"
+                },
+                {
+                  "type": "tile",
+                  "entity": "input_boolean.bilresa_dual_palace_bedtime",
+                  "name": "Dual: Palace Bedtime / Wake Up",
+                  "hold_action": {
+                    "action": "navigate",
+                    "navigation_path": "/config/automation/edit/bilresa_dual_bedtime_on"
+                  }
                 }
               ]
             }
