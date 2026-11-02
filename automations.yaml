@@ -1099,6 +1099,10 @@
       state: "on"
     - condition: template
       value_template: "{{ trigger.to_state.attributes.event_type == 'multi_press_1' }}"
+    # Button 2 presses also emit a button 1 event; let wake-up win
+    - condition: template
+      value_template: >
+        {{ (now() - states.event.bilresa_dual_button_button_2.last_changed).total_seconds() > 2 }}
   actions:
     - action: scene.turn_on
       target:
