@@ -185,7 +185,7 @@ input_datetime:
     name: Hallway Dim Start
     has_date: false
     has_time: true
-    initial: "19:00"
+    initial: "18:00"
   hallway_dim_end:
     name: Hallway Dim End
     has_date: false
