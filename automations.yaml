@@ -111,8 +111,8 @@
 # -----------------------------------------------------------------------------
 # Hallway Auto Lights
 # Staircase light follows hallway presence (sensor 256B).
-# Brightness: 80% from "bright from" until dim start, ramps down to 25% by dim
-# end, stays 25% until "bright from" the next morning.
+# Brightness: 75% from "bright from" until dim start, ramps down to 10% by dim
+# end, stays 10% until "bright from" the next morning.
 # Toggle: input_boolean.hallway_auto_lights
 # -----------------------------------------------------------------------------
 - id: hallway_auto_lights
@@ -146,11 +146,11 @@
                   {% set end = today_at(states('input_datetime.hallway_dim_end')) %}
                   {% set morning = today_at(states('input_datetime.hallway_bright_from')) %}
                   {% if now() < morning or now() >= end %}
-                    25
+                    10
                   {% elif now() < start %}
-                    80
+                    75
                   {% else %}
-                    {{ (80 - 55 * (now() - start) / (end - start)) | round(0) | int }}
+                    {{ (75 - 65 * (now() - start) / (end - start)) | round(0) | int }}
                   {% endif %}
         - conditions:
             - condition: trigger
